@@ -82,16 +82,18 @@ body{
 
 
 .card{
-    width: 400px;
+    width: 350px;
     min-height: 300px;
     float: left;
-    border: 1px solid;
+    /* border: 1px solid; */
+    background-color: white;
+    color: rgb(54, 54, 54);
+    border-radius: 14px;
 }
 .cardTitle{
     width: 100%;
     min-height: 100px;
     float: left;
-    background-color: antiquewhite;
     position: relative;
     padding: 20px;
     box-sizing: border-box;
@@ -99,6 +101,8 @@ body{
 .cardTitle h2{
     margin: 0;
     text-align: left;
+    font-size: 38px;
+    color: black;
 }
 .cardTitle p{
     margin: 0;
@@ -113,8 +117,7 @@ body{
     min-height: 20px;
     height: fit-content;
     float: left;
-    border: 1px solid;
-    margin-top: 10px;
+
     flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
@@ -133,15 +136,29 @@ body{
     height: fit-content;
     width: fit-content;
     float: left;
-    background-color: green;
+
+}
+.typeName p{
+    color: black;
+    margin: 0;
+    font-weight: 700;
+    font-size: 20px;
 }
 .cardImage{
-    width: 50px;
-    height: 50px;
+    width: 300px;
+    height: 300px;
     position: absolute;
-    top: -10px;
-    border: 1px solid;
-    right: 20px;
+    top: -115px;
+    /* border: 1px solid; */
+    right: -37px;
+    image-rendering: pixelated;
+  image-rendering: crisp-edges; 
+    background-image: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png");
+    background-size: cover; /* or 'contain' depending on layout */
+    background-repeat: no-repeat;
+    background-position: center;
+
+
 }
 
 
@@ -152,12 +169,11 @@ body{
     width: 100%;
     min-height: fit-content;
     float: left;
-    background-color: peru;
     display: flex
 ;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 20px;
@@ -167,8 +183,33 @@ body{
 .cardInfo{
     width: fit-content;
     height: fit-content;
+    width: 60px;
 }
+.cardInfoTitle{
+    width: 100%;
+    height: fit-content;
+    float: left;
+}
+.cardInfoTitle p{
+    font-size: 12px;
+    color: #bcbc1d;
+    font-weight: 500;
+}
+.cardInfoContent{
+    width: 100%;
+    height: fit-content;
+    float: left;
 
+}
+.cardInfoContent p{
+    font-size: 20px;
+    color: rgb(78 78 78);
+    font-weight: 700;
+}
+.cardInfo p{
+    margin: 0;
+    text-align: left;
+}
 
 
 
@@ -183,8 +224,14 @@ body{
     padding-right: 20px;
     box-sizing: border-box;
     background-color: white;
+    padding-bottom: 20px;
 }
-
+.cardDescription p{
+    text-align: left;
+    margin: 0;
+    font-weight: 600;
+    color: rgb(140 140 140);
+}
 
 .cardStats{
     float: left;
@@ -192,6 +239,6 @@ body{
     min-height: 100px;
     padding-left: 20px;
     padding-right: 20px;
+    padding-bottom: 20px;
     box-sizing: border-box;
-    background-color: red;
 }

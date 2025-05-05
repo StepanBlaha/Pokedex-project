@@ -32,20 +32,54 @@ export default function MainPage(){
                             <h2>Pikachu</h2>
                             <div className="cardType">
                                 <div className="typeImage"></div>
-                                <div className="typeName">Electric</div>
+                                <div className="typeName">
+                                    <p>Electric</p>
+                                </div>
                             </div>
                             <div className="cardImage"></div>
                         </div>
 
                         <div className="cardInformations">
-                            <div className="cardInfo">info</div>
-                            <div className="cardInfo">info</div>
-                            <div className="cardInfo">info</div>
-                            <div className="cardInfo">info</div>
+
+                            <div className="cardInfo">
+                                <div className="cardInfoTitle">
+                                    <p>Height</p>
+                                </div>
+                                <div className="cardInfoContent">
+                                    <p>1"04</p>
+                                </div>
+                            </div>
+
+                            <div className="cardInfo">
+                                <div className="cardInfoTitle">
+                                    <p>Weight</p>
+                                </div>
+                                <div className="cardInfoContent">
+                                    <p>13.2lbs</p>
+                                </div>
+                            </div>
+
+                            <div className="cardInfo">
+                                <div className="cardInfoTitle">
+                                    <p>Category</p>
+                                </div>
+                                <div className="cardInfoContent">
+                                    <p>Mouse</p>
+                                </div>
+                            </div>
+
+                            <div className="cardInfo">
+                                <div className="cardInfoTitle">
+                                    <p>Ability</p>
+                                </div>
+                                <div className="cardInfoContent">
+                                    <p>Static</p>
+                                </div>
+                            </div>
                         </div>
 
                         <div className="cardDescription">
-                            <p>descsfd sfsf boneca ambalabu</p>
+                            <p>Whenever PIKACHU comes across something new, it blasts it with a jolt of electricity. If you come across a blackened berry, it’s evidence that this POKéMON mistook the intensity of its charge.</p>
                         </div>
 
                         <div className="cardStats">

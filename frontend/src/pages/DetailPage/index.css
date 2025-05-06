@@ -197,7 +197,7 @@ body{
 }
 .cardInfoTitle p{
     font-size: 12px;
-    color: #bcbc1d;
+    /*color: #bcbc1d;*/
     font-weight: 500;
 }
 .cardInfoContent{

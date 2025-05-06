@@ -10,7 +10,6 @@ import { useQuery } from '@tanstack/react-query';
 const fetchPokemon = async()=>{
     const randomId = Math.floor(Math.random() * 898) + 1;
     const response = await fetch(`http://localhost:5000/api/pokemon/${randomId}`);
-    
     const pokemon = await response.json();
     return{
         name: pokemon.data.name,
@@ -40,7 +39,27 @@ export default function DetailPage(){
     const height = data?.height || "";
     const weight = data?.weight || "";
     const ability = data?.ability || "";
-
+    const pokemonTypeColors : { [key: string]: string } = {
+        normal: "#A8A77A",
+        fire: "#EE8130",
+        water: "#6390F0",
+        electric: "#F7D02C",
+        grass: "#7AC74C",
+        ice: "#96D9D6",
+        fighting: "#C22E28",
+        poison: "#A33EA1",
+        ground: "#E2BF65",
+        flying: "#A98FF3",
+        psychic: "#F95587",
+        bug: "#A6B91A",
+        rock: "#B6A136",
+        ghost: "#735797",
+        dragon: "#6F35FC",
+        dark: "#705746",
+        steel: "#B7B7CE",
+        fairy: "#D685AD"
+      };
+      
     
 
 
@@ -70,7 +89,7 @@ export default function DetailPage(){
                         <div className="cardInformations">
 
                             <div className="cardInfo">
-                                <div className="cardInfoTitle">
+                                <div className="cardInfoTitle"  style={{ color: `${pokemonTypeColors[type]} ` }}>
                                     <p>Height</p>
                                 </div>
                                 <div className="cardInfoContent">
@@ -79,7 +98,7 @@ export default function DetailPage(){
                             </div>
 
                             <div className="cardInfo">
-                                <div className="cardInfoTitle">
+                                <div className="cardInfoTitle" style={{ color: `${pokemonTypeColors[type]} ` }}>
                                     <p>Weight</p>
                                 </div>
                                 <div className="cardInfoContent">
@@ -88,7 +107,7 @@ export default function DetailPage(){
                             </div>
 
                             <div className="cardInfo">
-                                <div className="cardInfoTitle">
+                                <div className="cardInfoTitle" style={{ color: `${pokemonTypeColors[type]} ` }}>
                                     <p>Category</p>
                                 </div>
                                 <div className="cardInfoContent">
@@ -97,7 +116,7 @@ export default function DetailPage(){
                             </div>
 
                             <div className="cardInfo">
-                                <div className="cardInfoTitle">
+                                <div className="cardInfoTitle" style={{ color: `${pokemonTypeColors[type]} ` }}>
                                     <p>Ability</p>
                                 </div>
                                 <div className="cardInfoContent">

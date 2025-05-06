@@ -3,10 +3,17 @@ import Button from "../../components/Button";
 import styles from "./index.module.css"
 import React, { useEffect, useState } from 'react';
 import "./index.css"
+import { url } from "inspector";
 
 
 export default function MainPage(){
     const [pokemonName, setPokemonName] = useState("")
+    const [pokemonImage, setPokemonImage] = useState("")
+    const [pokemonType, setPokemonType] = useState("")
+    const [pokemonHeight, setPokemonHeight] = useState("")
+    const [pokemonWeight, setPokemonWeight] = useState("")
+    const [pokemonCategory, setPokemonCategory] = useState("")
+    const [pokemonAbility, setPokemonAbility] = useState("")
     useEffect(()=>{
         fetch('http://localhost:5000/api/randompokemon')
         .then((response) => response.json())
@@ -14,8 +21,18 @@ export default function MainPage(){
             console.log(pokemon)
             console.log(pokemon.pokemon.name)
             setPokemonName(pokemon.pokemon.name)
+            setPokemonImage(pokemon.pokemon.sprites.front_default)
+            setPokemonType(pokemon.pokemon.types[0].type.name)
+            setPokemonHeight(pokemon.pokemon.height)
+            setPokemonWeight(pokemon.pokemon.weight)
+            setPokemonCategory(pokemon.pokemon.species.name)
+            setPokemonAbility(pokemon.pokemon.abilities[0].ability.name)
         }); 
-    },[])
+    }, [])
+    
+
+
+
     return(
         <>
         
@@ -29,14 +46,14 @@ export default function MainPage(){
                     <div className="card">
 
                         <div className="cardTitle">
-                            <h2>Pikachu</h2>
+                                <h2>{pokemonName}</h2>
                             <div className="cardType">
                                 <div className="typeImage"></div>
                                 <div className="typeName">
-                                    <p>Electric</p>
+                                    <p>{pokemonType}</p>
                                 </div>
                             </div>
-                            <div className="cardImage"></div>
+                                <div className="cardImage" style={{ backgroundImage: `url(${pokemonImage})` }}></div>
                         </div>
 
                         <div className="cardInformations">
@@ -46,7 +63,7 @@ export default function MainPage(){
                                     <p>Height</p>
                                 </div>
                                 <div className="cardInfoContent">
-                                    <p>1"04</p>
+                                    <p>{pokemonHeight} cm</p>
                                 </div>
                             </div>
 
@@ -55,7 +72,7 @@ export default function MainPage(){
                                     <p>Weight</p>
                                 </div>
                                 <div className="cardInfoContent">
-                                    <p>13.2lbs</p>
+                                    <p>{pokemonWeight} g</p>
                                 </div>
                             </div>
 
@@ -64,7 +81,7 @@ export default function MainPage(){
                                     <p>Category</p>
                                 </div>
                                 <div className="cardInfoContent">
-                                    <p>Mouse</p>
+                                    <p>{pokemonCategory}</p>
                                 </div>
                             </div>
 
@@ -73,7 +90,7 @@ export default function MainPage(){
                                     <p>Ability</p>
                                 </div>
                                 <div className="cardInfoContent">
-                                    <p>Static</p>
+                                    <p>{pokemonAbility}</p>
                                 </div>
                             </div>
                         </div>

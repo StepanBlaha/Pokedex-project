@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { getPokemonData, getPokemonDescription } from '../services/pokemonService';
 
-export const getRandomPokemon = async (req: Request, res: Response) => {
+export const getPokemon = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
     const data = await getPokemonData(id);

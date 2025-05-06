@@ -150,7 +150,7 @@ body{
     position: absolute;
     top: -115px;
     /* border: 1px solid; */
-    right: -37px;
+    right: -48px;
     image-rendering: pixelated;
   image-rendering: crisp-edges; 
     background-image: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png");
@@ -173,20 +173,25 @@ body{
 ;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 20px;
     padding-right: 20px;
     box-sizing: border-box;
+    /* z-index: 2; */
+    /* position: relative; */
+    column-gap: 20px;
 }
 .cardInfo{
     width: fit-content;
     height: fit-content;
-    width: 60px;
+    /* width: 60px; */
+    display: flex;
+    flex-direction: column;
 }
 .cardInfoTitle{
-    width: 100%;
+    width: fit-content;
     height: fit-content;
     float: left;
 }
@@ -196,7 +201,7 @@ body{
     font-weight: 500;
 }
 .cardInfoContent{
-    width: 100%;
+    width: fit-content;
     height: fit-content;
     float: left;
 
@@ -209,6 +214,7 @@ body{
 .cardInfo p{
     margin: 0;
     text-align: left;
+    width: fit-content;
 }
 
 
@@ -241,4 +247,13 @@ body{
     padding-right: 20px;
     padding-bottom: 20px;
     box-sizing: border-box;
+}
+
+
+
+
+.generatePokemonButton{
+    width: 70px;
+    height: 40px;
+    background-color: red;
 }

@@ -4,36 +4,43 @@ import styles from "./index.module.css"
 import React, { useEffect, useState } from 'react';
 import "./index.css"
 import { url } from "inspector";
+import { useQuery } from '@tanstack/react-query';
 
 
-export default function MainPage(){
-    const [pokemonName, setPokemonName] = useState("")
-    const [pokemonImage, setPokemonImage] = useState("")
-    const [pokemonType, setPokemonType] = useState("")
-    const [pokemonHeight, setPokemonHeight] = useState("")
-    const [pokemonWeight, setPokemonWeight] = useState("")
-    const [pokemonCategory, setPokemonCategory] = useState("")
-    const [pokemonAbility, setPokemonAbility] = useState("")
-    useEffect(()=>{
-        const randomId = Math.floor(Math.random() * 898) + 1;
-        fetch(`http://localhost:5000/api/pokemon/${randomId}`)
-        .then((response) => response.json())
-        .then((pokemon) => {
-            const pokeDesc = pokemon.description
-            const pokeData = pokemon.data
-            console.log(pokemon)
+const fetchPokemon = async()=>{
+    const randomId = Math.floor(Math.random() * 898) + 1;
+    const response = await fetch(`http://localhost:5000/api/pokemon/${randomId}`);
+    
+    const pokemon = await response.json();
+    return{
+        name: pokemon.data.name,
+        type: pokemon.data.types[0].type.name,
+        description: pokemon.description.description,
+        category: pokemon.description.genus,
+        image: pokemon.data.sprites.front_default,
+        height: pokemon.data.height * 10,
+        weight: pokemon.data.weight / 10,
+        ability: pokemon.data.abilities[0].ability.name
+    }
+}
 
-  
-            setPokemonName(pokeData.name)
-            setPokemonImage(pokeData.sprites.front_default)
-            setPokemonType(pokeData.types[0].type.name)
-            setPokemonHeight(pokeData.height)
-            setPokemonWeight(pokeData.weight)
-            setPokemonCategory(pokeData.species.name)
-            setPokemonAbility(pokeData.abilities[0].ability.name)
-            
-        }); 
-    }, [])
+
+export default function DetailPage(){
+
+    const {data, refetch, isFetching, error} = useQuery({
+        queryKey: ["pokemon"],
+        queryFn: fetchPokemon,
+        enabled: false,
+    })
+    const name = data?.name || "";
+    const type = data?.type || "";
+    const description = data?.description || "";
+    const category = data?.category || "";
+    const image = data?.image || "";
+    const height = data?.height || "";
+    const weight = data?.weight || "";
+    const ability = data?.ability || "";
+
     
 
 
@@ -41,7 +48,6 @@ export default function MainPage(){
     return(
         <>
         
-        <div>{pokemonName}s</div>
         <div className="center">
             <div className="mainBlock">
                 <div className="mainHeader"></div>
@@ -51,14 +57,14 @@ export default function MainPage(){
                     <div className="card">
 
                         <div className="cardTitle">
-                                <h2>{pokemonName}</h2>
+                                <h2>{name}</h2>
                             <div className="cardType">
                                 <div className="typeImage"></div>
                                 <div className="typeName">
-                                    <p>{pokemonType}</p>
+                                    <p>{type}</p>
                                 </div>
                             </div>
-                                <div className="cardImage" style={{ backgroundImage: `url(${pokemonImage})` }}></div>
+                                <div className="cardImage" style={{ backgroundImage: `url(${image})` }}></div>
                         </div>
 
                         <div className="cardInformations">
@@ -68,7 +74,7 @@ export default function MainPage(){
                                     <p>Height</p>
                                 </div>
                                 <div className="cardInfoContent">
-                                    <p>{pokemonHeight} cm</p>
+                                    <p>{height} cm</p>
                                 </div>
                             </div>
 
@@ -77,7 +83,7 @@ export default function MainPage(){
                                     <p>Weight</p>
                                 </div>
                                 <div className="cardInfoContent">
-                                    <p>{pokemonWeight} g</p>
+                                    <p>{weight} kg</p>
                                 </div>
                             </div>
 
@@ -86,7 +92,7 @@ export default function MainPage(){
                                     <p>Category</p>
                                 </div>
                                 <div className="cardInfoContent">
-                                    <p>{pokemonCategory}</p>
+                                    <p>{category}</p>
                                 </div>
                             </div>
 
@@ -95,13 +101,13 @@ export default function MainPage(){
                                     <p>Ability</p>
                                 </div>
                                 <div className="cardInfoContent">
-                                    <p>{pokemonAbility}</p>
+                                    <p>{ability}</p>
                                 </div>
                             </div>
                         </div>
 
                         <div className="cardDescription">
-                            <p>Whenever PIKACHU comes across something new, it blasts it with a jolt of electricity. If you come across a blackened berry, it’s evidence that this POKéMON mistook the intensity of its charge.</p>
+                            <p>{description}</p>
                         </div>
 
                         <div className="cardStats">
@@ -109,7 +115,7 @@ export default function MainPage(){
                         </div>
 
                     </div>
-
+                    <Button className="generatePokemonButton" onClick={()=>refetch()}/>
 
 
                 </div>

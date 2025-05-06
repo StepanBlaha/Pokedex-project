@@ -15,18 +15,23 @@ export default function MainPage(){
     const [pokemonCategory, setPokemonCategory] = useState("")
     const [pokemonAbility, setPokemonAbility] = useState("")
     useEffect(()=>{
-        fetch('http://localhost:5000/api/randompokemon')
+        const randomId = Math.floor(Math.random() * 898) + 1;
+        fetch(`http://localhost:5000/api/pokemon/${randomId}`)
         .then((response) => response.json())
         .then((pokemon) => {
+            const pokeDesc = pokemon.description
+            const pokeData = pokemon.data
             console.log(pokemon)
-            console.log(pokemon.pokemon.name)
-            setPokemonName(pokemon.pokemon.name)
-            setPokemonImage(pokemon.pokemon.sprites.front_default)
-            setPokemonType(pokemon.pokemon.types[0].type.name)
-            setPokemonHeight(pokemon.pokemon.height)
-            setPokemonWeight(pokemon.pokemon.weight)
-            setPokemonCategory(pokemon.pokemon.species.name)
-            setPokemonAbility(pokemon.pokemon.abilities[0].ability.name)
+
+  
+            setPokemonName(pokeData.name)
+            setPokemonImage(pokeData.sprites.front_default)
+            setPokemonType(pokeData.types[0].type.name)
+            setPokemonHeight(pokeData.height)
+            setPokemonWeight(pokeData.weight)
+            setPokemonCategory(pokeData.species.name)
+            setPokemonAbility(pokeData.abilities[0].ability.name)
+            
         }); 
     }, [])
     

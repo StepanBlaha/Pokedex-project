@@ -1,4 +1,6 @@
 import axios from 'axios';
+
+
 export const getRandomPokemon = async () => {
     const randomId = Math.floor(Math.random() * 898) + 1;
     try {

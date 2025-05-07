@@ -1,3 +1,5 @@
 export interface CardProps{
-    name: string
+    name: string,
+    id: number,
+    type: string
 }

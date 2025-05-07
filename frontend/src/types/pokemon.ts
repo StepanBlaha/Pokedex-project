@@ -2,16 +2,16 @@
 
 
 export interface Pokemon {
-    name: string;
-    url: string;
-  }
-  
+  id: number;
+  name: string;
+  sprite: string;
+  types: string[];
+}
+
 
 export interface PokemonListResult {
-    data:{
-        results: Pokemon[];
-      };
-      page: number
+  page: number;
+  results: Pokemon[];
   }
   
   export interface PokemonListProps{

@@ -1,0 +1,29 @@
+/* From Uiverse.io by adarshpatel111 */ 
+
+  .key {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    perspective: 200px;
+    cursor: pointer;
+  }
+
+  .key-top {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*
+    box-shadow:
+      0 4px 0 #bdbdbd,
+      0 6px 10px rgba(0, 0, 0, 0.1);
+      */
+    transition: all 0.2s ease;
+    transform-style: preserve-3d;
+    transform: translateZ(0);
+    position: relative;
+  }
+
+

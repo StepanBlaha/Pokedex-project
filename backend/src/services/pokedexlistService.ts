@@ -7,3 +7,4 @@ export const getPokedexList = async(page: number, limit: number) =>{
     const res = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${limitNum}&offset=${offset}`);
     return res.data;
 }
+

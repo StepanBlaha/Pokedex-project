@@ -11,6 +11,7 @@ import { Pokemon, PokemonListResult } from "../../types/pokemon";
   // Function for fetching the pokemon
   const loadPokemon = async (page: number) =>{
     const res = await axios.get<PokemonListResult>(`http://localhost:5000/api/pokedex?page=${page}&limit=10`)
+    console.log(res.data)
     return res.data
   }
   
@@ -28,16 +29,16 @@ export default function PokedexList(){
 
   // Update state when data changes
   useEffect(() => {
-    if (data?.data.results) {
+    if (data?.results) {
       // Update Items
-      setItems((prev) => [...prev, ...data.data.results]);
+      setItems((prev) => [...prev, ...data.results]);
     }
   }, [data]);
 
   // Effect for the infinity scroll - maybe create custom hook
   useEffect(() => {
     if (!lastRef.current) return;
-    if (data?.data.results) {
+    if (data?.results) {
       const observer = new IntersectionObserver((entries) => {
         // Entries contains list of observed items
         // isInteracting is true if item is on screen

@@ -5,7 +5,7 @@ import axios from "axios";
 import "./index.css"
 import { url } from "inspector";
 import { useQuery } from '@tanstack/react-query';
-
+import List from "./components/List";
 
 export interface pPokemonListResult {
     count: number;
@@ -76,10 +76,8 @@ export default function PokedexList(){
             <div className="mainBlock">
                 <div className="mainHeader"></div>
                 <div className="mainContent">
+                    <List data={items}/>
 
-                    <div className="card">
-                        <p>sds</p>
-                    </div>
                     <Button onClick={()=>loadPokemon()}/>
 
 

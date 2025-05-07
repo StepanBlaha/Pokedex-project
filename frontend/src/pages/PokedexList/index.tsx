@@ -68,7 +68,7 @@ export default function PokedexList(){
         setPage(prev => prev + 1);
       }
     }, {
-      threshold: 0.5, // Trigger when 50% of the card is in view
+      threshold: 0.5, 
     });
 
     if (lastRef.current) {

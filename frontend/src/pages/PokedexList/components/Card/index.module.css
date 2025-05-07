@@ -6,5 +6,25 @@
     border: 1px solid;
 }
 
-
+.cardTitle{
+    height: 100%;
+    width: 70%;
+    float: left;
+    background-color: blue;
+    display: flex
+    ;
+        align-items: center;
+        padding-left: 10px;
+        box-sizing: border-box;
+}
+.cardTitle p{
+    text-transform: capitalize;
+    margin: 0;
+}
+.cardButton{
+    height: 100%;
+    width: 30%;
+    float: left;
+    background-color: red;
+}
 

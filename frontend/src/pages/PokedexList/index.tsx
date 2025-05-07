@@ -6,20 +6,7 @@ import "./index.css"
 import { url } from "inspector";
 import { useQuery } from '@tanstack/react-query';
 import List from "./components/List";
-
-
-  interface Pokemon {
-    name: string;
-    url: string;
-  }
-  
-
-  interface PokemonListResult {
-    data:{
-        results: Pokemon[];
-      };
-      page: number
-  }
+import { Pokemon, PokemonListResult } from "../../types/pokemon";
 
   // Function for fetching the pokemon
   const loadPokemon = async (page: number) =>{
@@ -49,6 +36,7 @@ export default function PokedexList(){
 
   // Effect for the infinity scroll - maybe create custom hook
   useEffect(() => {
+    if (!lastRef.current) return;
     if (data?.data.results) {
       const observer = new IntersectionObserver((entries) => {
         // Entries contains list of observed items
@@ -63,20 +51,17 @@ export default function PokedexList(){
       });
 
       // Set observer
-      if (lastRef.current) {
-        observer.observe(lastRef.current);
-      }
+      const current = lastRef.current;
+      observer.observe(current);
 
       // Cleanup observer when the component unmounts or updates
       return () => {
-        if (lastRef.current) {
-          observer.unobserve(lastRef.current);
-        }
+        if (current) observer.unobserve(current);
       };
     }
     // Run when isFetching or items changes
     // Items - to make sure it loads after the initial load
-  }, [isFetching, items]); 
+  }, [items, isFetching]); 
 
   // Load more posts when page is updated
   useEffect(() => {

@@ -72,15 +72,16 @@ export default function PokedexList(){
 
     return(
         <>
-        
-        <div className="center">
-            <div className="mainBlock">
-                <div className="mainHeader"></div>
-                <div className="mainContent">
-                    <List data={items} lastCardRef={lastRef}/>
+        <div className="App">
+          <div className="center">
+              <div className="mainBlock">
+                  <div className="mainHeader"></div>
+                  <div className="mainContent">
+                      <List data={items} lastCardRef={lastRef}/>
 
-                </div>
-            </div>
+                  </div>
+              </div>
+          </div>
         </div>
 
 

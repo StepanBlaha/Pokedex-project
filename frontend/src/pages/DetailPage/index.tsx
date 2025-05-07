@@ -2,14 +2,14 @@
 import Button from "../../components/Button";
 import styles from "./index.module.css"
 import React, { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
 import "./index.css"
 import { url } from "inspector";
 import { useQuery } from '@tanstack/react-query';
 
 
-const fetchPokemon = async()=>{
-    const randomId = Math.floor(Math.random() * 898) + 1;
-    const response = await fetch(`http://localhost:5000/api/pokemon/${randomId}`);
+const fetchPokemon = async( id : number)=>{
+    const response = await fetch(`http://localhost:5000/api/pokemon/${id}`);
     const pokemon = await response.json();
     return{
         name: pokemon.data.name,
@@ -25,11 +25,11 @@ const fetchPokemon = async()=>{
 
 
 export default function DetailPage(){
-
+    const { id } = useParams();
     const {data, refetch, isFetching, error} = useQuery({
         queryKey: ["pokemon"],
-        queryFn: fetchPokemon,
-        enabled: false,
+        queryFn:()=> fetchPokemon(Number(id)),
+
     })
     const name = data?.name || "";
     const type = data?.type || "";
@@ -66,7 +66,7 @@ export default function DetailPage(){
 
     return(
         <>
-        
+        <div className="App">
         <div className="center">
             <div className="mainBlock">
                 <div className="mainHeader"></div>
@@ -134,14 +134,13 @@ export default function DetailPage(){
                         </div>
 
                     </div>
-                    <Button className="generatePokemonButton" onClick={()=>refetch()}/>
 
 
                 </div>
             </div>
             <div className="sideBlock"></div>
         </div>
-
+        </div>
 
 
         </>

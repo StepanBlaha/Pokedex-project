@@ -11,12 +11,12 @@ import { Pokemon, PokemonListResult } from "../../types/pokemon";
   // Function for fetching the pokemon
   const loadPokemon = async (page: number) =>{
     const res = await axios.get<PokemonListResult>(`http://localhost:5000/api/pokedex?page=${page}&limit=10`)
-    console.log(res.data)
     return res.data
   }
   
 
 export default function PokedexList(){
+  // States and refs
   const [items, setItems] = useState<Pokemon[]>([]);
   const [page, setPage] = useState<number>(0)
   const lastRef = useRef<HTMLDivElement | null>(null); 
@@ -78,9 +78,6 @@ export default function PokedexList(){
                 <div className="mainHeader"></div>
                 <div className="mainContent">
                     <List data={items} lastCardRef={lastRef}/>
-
-                    <Button onClick={()=>refetch()} disabled={isFetching}/>
-
 
                 </div>
             </div>

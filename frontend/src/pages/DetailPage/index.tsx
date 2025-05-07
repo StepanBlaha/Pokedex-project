@@ -1,12 +1,16 @@
 
 import Button from "../../components/Button";
 import styles from "./index.module.css"
-import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState, Suspense, lazy } from 'react';
+import { Link, useParams } from "react-router-dom";
 import "./index.css"
 import { url } from "inspector";
 import { useQuery } from '@tanstack/react-query';
+import Spinner from "../../components/Spinner";
 
+
+
+const Card = lazy(() => import('./components/Card'));
 
 const fetchPokemon = async( id : number)=>{
     const response = await fetch(`http://localhost:5000/api/pokemon/${id}`);
@@ -29,7 +33,6 @@ export default function DetailPage(){
     const {data, refetch, isFetching, error} = useQuery({
         queryKey: ["pokemon"],
         queryFn:()=> fetchPokemon(Number(id)),
-
     })
     const name = data?.name || "";
     const type = data?.type || "";
@@ -39,30 +42,9 @@ export default function DetailPage(){
     const height = data?.height || "";
     const weight = data?.weight || "";
     const ability = data?.ability || "";
-    const pokemonTypeColors : { [key: string]: string } = {
-        normal: "#A8A77A",
-        fire: "#EE8130",
-        water: "#6390F0",
-        electric: "#F7D02C",
-        grass: "#7AC74C",
-        ice: "#96D9D6",
-        fighting: "#C22E28",
-        poison: "#A33EA1",
-        ground: "#E2BF65",
-        flying: "#A98FF3",
-        psychic: "#F95587",
-        bug: "#A6B91A",
-        rock: "#B6A136",
-        ghost: "#735797",
-        dragon: "#6F35FC",
-        dark: "#705746",
-        steel: "#B7B7CE",
-        fairy: "#D685AD"
-      };
-      
-    
 
 
+    if (isFetching) return <Spinner />;
 
     return(
         <>
@@ -72,70 +54,13 @@ export default function DetailPage(){
                 <div className="mainHeader"></div>
                 <div className="mainContent">
 
+                <Suspense fallback={<Spinner />}>
+                    {data && <Card data={data} />}
+                </Suspense>
 
-                    <div className="card">
-
-                        <div className="cardTitle">
-                                <h2>{name}</h2>
-                            <div className="cardType">
-                                <div className="typeImage"></div>
-                                <div className="typeName">
-                                    <p>{type}</p>
-                                </div>
-                            </div>
-                                <div className="cardImage" style={{ backgroundImage: `url(${image})` }}></div>
-                        </div>
-
-                        <div className="cardInformations">
-
-                            <div className="cardInfo">
-                                <div className="cardInfoTitle"  style={{ color: `${pokemonTypeColors[type]} ` }}>
-                                    <p>Height</p>
-                                </div>
-                                <div className="cardInfoContent">
-                                    <p>{height} cm</p>
-                                </div>
-                            </div>
-
-                            <div className="cardInfo">
-                                <div className="cardInfoTitle" style={{ color: `${pokemonTypeColors[type]} ` }}>
-                                    <p>Weight</p>
-                                </div>
-                                <div className="cardInfoContent">
-                                    <p>{weight} kg</p>
-                                </div>
-                            </div>
-
-                            <div className="cardInfo">
-                                <div className="cardInfoTitle" style={{ color: `${pokemonTypeColors[type]} ` }}>
-                                    <p>Category</p>
-                                </div>
-                                <div className="cardInfoContent">
-                                    <p>{category}</p>
-                                </div>
-                            </div>
-
-                            <div className="cardInfo">
-                                <div className="cardInfoTitle" style={{ color: `${pokemonTypeColors[type]} ` }}>
-                                    <p>Ability</p>
-                                </div>
-                                <div className="cardInfoContent">
-                                    <p>{ability}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="cardDescription">
-                            <p>{description}</p>
-                        </div>
-
-                        <div className="cardStats">
-                            <div className="statGraph"></div>
-                        </div>
-
-                    </div>
-
-
+                <Link to={"/"}>
+                    <Button />
+                </Link>
                 </div>
             </div>
             <div className="sideBlock"></div>

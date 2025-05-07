@@ -18,3 +18,19 @@ export interface PokemonListResult {
     data: Pokemon[];
     lastCardRef: React.RefObject<HTMLDivElement | null>; 
 }
+
+
+export interface PokemonDetailData {
+  name: string;
+  type: string;
+  description: string;
+  category: string;
+  image: string;
+  height: number;
+  weight: number;
+  ability: string;
+}
+
+export interface PokemonDetailCardProps {
+  data: PokemonDetailData;
+}

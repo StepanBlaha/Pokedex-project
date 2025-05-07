@@ -2,7 +2,6 @@ import Button from "../../components/Button";
 import styles from "./index.module.css"
 import React, { useEffect, useState, useRef } from 'react';
 import axios from "axios";
-import "./index.css"
 import { url } from "inspector";
 import { useQuery } from '@tanstack/react-query';
 import List from "./components/List";
@@ -72,11 +71,11 @@ export default function PokedexList(){
 
     return(
         <>
-        <div className="App">
-          <div className="center">
-              <div className="mainBlock">
-                  <div className="mainHeader"></div>
-                  <div className="mainContent">
+        <div className={styles.App}>
+          <div className={styles.center}>
+              <div className={styles.mainBlock}>
+                  <div className={styles.mainHeader}></div>
+                  <div className={styles.mainContent}>
                       <List data={items} lastCardRef={lastRef}/>
 
                   </div>

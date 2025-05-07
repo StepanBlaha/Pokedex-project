@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, forwardRef  } from 'react';
 import axios from "axios";
 import styles from "./index.module.css"
 import { url } from "inspector";
@@ -9,11 +9,12 @@ interface CardProps{
     name: string
 }
 
-
-export default function Card({name}: CardProps){
+const Card = forwardRef<HTMLDivElement, CardProps>(({ name }, ref)=>{
     return(
-    <div className={styles.card}>
+    <div className={styles.card} ref={ref}>
         <p>{name}</p>
     </div>
     )
-}
+})
+
+export default Card;

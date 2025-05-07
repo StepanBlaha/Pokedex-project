@@ -1,24 +1,11 @@
 import Button from "../../components/Button";
 import styles from "./index.module.css"
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from "axios";
 import "./index.css"
 import { url } from "inspector";
 import { useQuery } from '@tanstack/react-query';
 import List from "./components/List";
-
-export interface pPokemonListResult {
-    count: number;
-    next: string | null;
-    previous: string | null;
-    results: {
-      name: string;
-      url: string;
-    }[];
-    page?: number; 
-  }
-
-
 
 
   interface Pokemon {
@@ -31,42 +18,73 @@ export interface pPokemonListResult {
   interface PokemonListResult {
     data:{
         results: Pokemon[];
-        page: number
-    };
+      };
+      page: number
+  }
+
+  // Function for fetching the pokemon
+  const loadPokemon = async (page: number) =>{
+      const res = await axios.get<PokemonListResult>(`http://localhost:5000/api/pokedex?page=${page}&limit=10`)
+      return res.data
   }
   
 
 export default function PokedexList(){
-    const [items, setItems] = useState<Pokemon[]>([]);
-    const [page, setPage] = useState<number>(1)
+  const [items, setItems] = useState<Pokemon[]>([]);
+  const [page, setPage] = useState<number>(0)
+
+  const lastRef = useRef<HTMLDivElement | null>(null); 
+
+  const {data, refetch, isFetching, error} = useQuery({
+    queryKey: ["pokemon", page],
+    queryFn:()=> loadPokemon(page),
+    enabled: false,
+  })
 
 
-    const loadPokemon = async () =>{
-        const res = await axios.get<PokemonListResult>(`http://localhost:5000/api/pokedex?page=${page}&limit=10`)
-        console.log(res.data)
-        console.log(page)
-        console.log(res.data.data.results)
 
-        if (items.length >0) {
-            setItems([...items, ...res.data.data.results]);
-          } else {
-            setItems(res.data.data.results);
-          }
-      
 
-          // if the page isnt set update it based on the page in state
-          if (res.data.data.page) {
-            setPage(res.data.data.page);
-          } else {
-            setPage(prev => prev + 1);
-          }
+  // Update state when data changes
+  useEffect(() => {
+    if (data?.data.results) {
+      // Update Items
+      setItems((prev) => [...prev, ...data.data.results]);
+      // Update page if needed
+      /*if (data.page !== undefined) {
+        setPage(data.page + 1);
+      }
+        */
+    }
+  }, [data]);
+
+
+
+
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !isFetching) {
+        console.log("sigma");
+        setPage(prev => prev + 1);
+      }
+    }, {
+      threshold: 0.5, // Trigger when 50% of the card is in view
+    });
+
+    if (lastRef.current) {
+      observer.observe(lastRef.current);
     }
 
-
-
-    useEffect(()=>{
-        loadPokemon()
-    },[])
+    // Cleanup observer when the component unmounts or updates
+    return () => {
+      if (lastRef.current) {
+        observer.unobserve(lastRef.current);
+      }
+    };
+  }, [isFetching]);
+  useEffect(() => {
+    refetch()
+  }, [page]);
 
 
     return(
@@ -76,9 +94,9 @@ export default function PokedexList(){
             <div className="mainBlock">
                 <div className="mainHeader"></div>
                 <div className="mainContent">
-                    <List data={items}/>
+                    <List data={items} lastCardRef={lastRef}/>
 
-                    <Button onClick={()=>loadPokemon()}/>
+                    <Button onClick={()=>refetch()} disabled={isFetching}/>
 
 
                 </div>

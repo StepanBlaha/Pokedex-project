@@ -13,8 +13,7 @@ import List from "./components/List";
     url: string;
   }
   
-  // Type for the response structure from the API (only interested in results here)
-  // Type for the response structure from the API (only interested in results here)
+
   interface PokemonListResult {
     data:{
         results: Pokemon[];
@@ -24,15 +23,14 @@ import List from "./components/List";
 
   // Function for fetching the pokemon
   const loadPokemon = async (page: number) =>{
-      const res = await axios.get<PokemonListResult>(`http://localhost:5000/api/pokedex?page=${page}&limit=10`)
-      return res.data
+    const res = await axios.get<PokemonListResult>(`http://localhost:5000/api/pokedex?page=${page}&limit=10`)
+    return res.data
   }
   
 
 export default function PokedexList(){
   const [items, setItems] = useState<Pokemon[]>([]);
   const [page, setPage] = useState<number>(0)
-
   const lastRef = useRef<HTMLDivElement | null>(null); 
 
   const {data, refetch, isFetching, error} = useQuery({
@@ -41,47 +39,46 @@ export default function PokedexList(){
     enabled: false,
   })
 
-
-
-
   // Update state when data changes
   useEffect(() => {
     if (data?.data.results) {
       // Update Items
       setItems((prev) => [...prev, ...data.data.results]);
-      // Update page if needed
-      /*if (data.page !== undefined) {
-        setPage(data.page + 1);
-      }
-        */
     }
   }, [data]);
 
-
-
-
-
+  // Effect for the infinity scroll - maybe create custom hook
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !isFetching) {
-        console.log("sigma");
-        setPage(prev => prev + 1);
-      }
-    }, {
-      threshold: 0.5, 
-    });
+    if (data?.data.results) {
+      const observer = new IntersectionObserver((entries) => {
+        // Entries contains list of observed items
+        // isInteracting is true if item is on screen
+        if (entries[0].isIntersecting && !isFetching) {
+          console.log('Fetching more data...');
+          setPage((prev) => prev + 1); 
+        }
+      },
+      {
+        threshold: 0.5, 
+      });
 
-    if (lastRef.current) {
-      observer.observe(lastRef.current);
-    }
-
-    // Cleanup observer when the component unmounts or updates
-    return () => {
+      // Set observer
       if (lastRef.current) {
-        observer.unobserve(lastRef.current);
+        observer.observe(lastRef.current);
       }
-    };
-  }, [isFetching]);
+
+      // Cleanup observer when the component unmounts or updates
+      return () => {
+        if (lastRef.current) {
+          observer.unobserve(lastRef.current);
+        }
+      };
+    }
+    // Run when isFetching or items changes
+    // Items - to make sure it loads after the initial load
+  }, [isFetching, items]); 
+
+  // Load more posts when page is updated
   useEffect(() => {
     refetch()
   }, [page]);

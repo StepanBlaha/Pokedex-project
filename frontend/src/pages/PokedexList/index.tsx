@@ -10,6 +10,7 @@ import { Pokemon, PokemonListResult } from "../../types/pokemon";
   // Function for fetching the pokemon
   const loadPokemon = async (page: number) =>{
     const res = await axios.get<PokemonListResult>(`http://localhost:5000/api/pokedex?page=${page}&limit=10`)
+    console.log(res.data)
     return res.data
   }
   
@@ -29,8 +30,8 @@ export default function PokedexList(){
   // Update state when data changes
   useEffect(() => {
     if (data?.results) {
-      // Update Items
-      setItems((prev) => [...prev, ...data.results]);
+      // Update Items - only add the not existing ones
+      setItems((prev) => [...prev, ...data.results.filter(p => !prev.some(existing => existing.id === p.id))]);
     }
   }, [data]);
 

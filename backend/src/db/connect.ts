@@ -8,7 +8,7 @@ const connectDB = async (): Promise<void> => {
       throw new Error('MONGODB_URI is not defined in the environment variables');
     }
     await mongoose.connect(process.env.MONGODB_URI, {
-      dbName: 'PokemonDB', // or your actual db name
+      dbName: 'PokemonDB',
     });
     console.log('✅ Connected to MongoDB');
   } catch (err) {

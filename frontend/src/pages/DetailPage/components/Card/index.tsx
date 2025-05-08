@@ -32,9 +32,11 @@ export default function Card({data}: PokemonDetailCardProps){
                 <h2>{data.name}</h2>
             <div className="cardType">
                 <div className="typeImage"  style={{ backgroundImage: `url(/assets/typeBanners/${data.type}.png` }}></div>
-                <div className="typeName">
+                
+                {/*<div className="typeName">
                     <p>{data.type}</p>
                 </div>
+                */}
             </div>
                 <div className="cardImage" style={{ backgroundImage: `url(${data.image})` }}></div>
         </div>

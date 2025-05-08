@@ -123,12 +123,16 @@ body{
     flex-wrap: wrap;
 }
 .typeImage{
-    min-width: 20px;
+    min-width: 90px;
     min-height: 20px;
     height: fit-content;
     width: fit-content;
     float: left;
-    background-color: blue;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .typeName{
     min-width: 20px;

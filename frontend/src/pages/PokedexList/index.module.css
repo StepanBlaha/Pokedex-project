@@ -2,11 +2,13 @@ html{
     width: 100%;
     height: 100%;
     float: left;
+    zoom: 1.8; 
 }
 body{
     width: 100%;
     height: 100%;
     float: left;
+
 }
 #root{
     width: 100%;
@@ -22,37 +24,583 @@ body{
 
 .center{
     width: 100%;
-    height: 100%;
+    width: 100%;
+    height: fit-content;
     float: left;
     border: 1px solid;
     display: flex
 ;
     flex-wrap: wrap;
-    padding: 10px;
+    /* padding: 10px; */
     box-sizing: border-box;
     gap: 30px;
-    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+
 }
 .mainBlock{
-    width: 80%;
+    width: 90%;
     height: 100%;
    background-color: blue;
+   display: flex;
+   flex-direction: row-reverse;
+   justify-content: center;
 
 }
 .mainHeader{
-    height: 100px;
+    min-height: 100px;
     background-color: green;
     width: 100%;
     float: left;
+    height: fit-content;
+
+
+    border: 3px solid black;
+ 
+    box-shadow: 0.0em 0.2em;
 }
-.mainContent{
-    background-color: pink;
+.headerLogoPart{
+    height: 150px;
     width: 100%;
-    min-height: 800px;
+    min-width: 200px;
+    background-color: white;
+    float: left;
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 0;
+    overflow-x: clip;
+
+
+    box-shadow: 0.0em 0.2em;
+    /* border-radius: 7px; */
+    border-bottom: 4px solid black;
+}
+.headerLogo{
+    height: fit-content;
+    width: fit-content;
+    border: 1px solid;
+    padding: 15px;
+    background-color: white;
+    border: 4px solid black;
+    box-shadow: 0.0em 0.2em;
+    border-radius: 7px;
+    border-bottom: 4px solid black;
+    z-index: 2;
+}
+.headerLogo h1{
+    margin: 0;
+    font-weight: 900;
+    font-size: 35px;
+}
+
+.headerCharizard{
+    z-index: 1;
+    background-size: cover;
+    top: 22px;
+    right: 101px;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png);
+}
+.headerVenusaur{
+    z-index: 1;
+    background-size: cover;
+    top: 32px;
+    left: 101px;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png);
+}
+.headerBlastoise{
+    z-index: 1;
+    background-size: cover;
+    top: 35px;
+    right: 32px;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png);
+}
+
+.headerGyarados{
+    z-index: 0;
+    background-size: cover;
+    top: -36px;
+    left: 79px;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/130.png);
+}
+
+.headerSnorlax{
+    z-index: 0;
+    background-size: cover;
+    top: 35px;
+    left: 15px;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png);
+}
+
+.headerTyranitar{
+    z-index: 0;
+    background-size: cover;
+    top: -13px;
+    right: 36px;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/248.png);
+}
+.headerSwampert{
+    z-index: 1;
+    background-size: cover;
+    top: 41px;
+    right: 245px;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/260.png);
+}
+.headerLucario{
+    z-index: 0;
+    background-size: cover;
+    top: 25px;
+    right: 170px;
+    height: 160px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/448.png);
+}
+.headerBidoof{
+    z-index: 0;
+    background-size: cover;
+    top: 67px;
+    left: 44px;
+    height: 130px;
+    width: 130px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/399.png);
+}
+.headerEmpoleon{
+    z-index: -1;
+    background-size: cover;
+    top: -14px;
+    left: 8px;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/395.png);
+}
+.headerEevee{
+    z-index: 1;
+    background-size: cover;
+    top: 68px;
+    right: 86px;
+    height: 130px;
+    width: 130px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png);
+}
+.headerElectivire{
+    z-index: -1;
+    background-size: cover;
+    top: -22px;
+    right: 103px;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/466.png);
+}
+.headerZacian{
+    z-index: 1;
+    background-size: cover;
+    top: 20px;
+    right: -43px;
+
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/888.png);
+}
+.headerConkeldurr{
+    z-index: 0;
+    background-size: cover;
+    top: -13px;
+    right: -23px;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/534.png);
+}
+
+.headerMimikyu{
+    z-index: 1;
+    background-size: cover;
+    top: 45px;
+    left: 146px;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/778.png);
+}
+
+.headerMeltan{
+    z-index: 1;
+    background-size: cover;
+    top: 52px;
+    left: 173px;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/808.png);
+}
+
+.headerPansage{
+    z-index: 1;
+    background-size: cover;
+    top: 51px;
+    right: 191px;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/511.png);
+}
+
+.headerHaxorus{
+    z-index: 0;
+    background-size: cover;
+    top: -2px;
+    left: 174px;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/612.png);
+}
+
+.headerRayquaza{
+    z-index: -1;
+    background-size: cover;
+    top: -14px;
+    right: 151px;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/384.png);
+}
+.headerRotom{
+    z-index: -1;
+    background-size: cover;
+    top: -39px;
+    left: 210px;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/479.png);
+}
+.headerRegirock{
+    z-index: -1;
+    background-size: cover;
+    top: 34px;
+    left: -33px;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/377.png);
+}
+.headerArticuno{
+    z-index: -2;
+    background-size: cover;
+    top: -17px;
+    right: 230px;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/144.png);
+}
+.headerHooh{
+    z-index: -2;
+    background-size: cover;
+    top: -58px;
+    left: -13px;
+
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/250.png);
+}
+.headerBreloom{
+    z-index: 0;
+    background-size: cover;
+    top: 39px;
+    left: 214px;
+
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/286.png);
+}
+.headerButterfree{
+    z-index: -2;
+    background-size: cover;
+    top: -58px;
+    right: 7px;
+
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png);
+}
+.headerDitto{
+    z-index: 1;
+    background-size: cover;
+    top: 65px;
+    left: 214px;
+
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png);
+}
+.headerCombee{
+    z-index: -2;
+    background-size: cover;
+    top: -59px;
+    right: -56px;
+
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/415.png);
+}
+.headerGengar{
+    z-index: 0;
+    background-size: cover;
+    top: 39px;
+    left: 256px;
+
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png);
+}
+
+
+.headerCombee{
+    z-index: -2;
+    background-size: cover;
+    top: -59px;
+    right: -56px;
+
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/415.png);
+}
+
+
+.headerCombee{
+    z-index: -2;
+    background-size: cover;
+    top: -59px;
+    right: -56px;
+
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/415.png);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.headerContentPart{
+    height: 100px;
+    width: 100%;
+    min-width: 200px;
+    background-color: blue;
     float: left;
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mainContent{
+    background-color: pink;
+    width: 70%;
+    min-height: 800px;
+    float: left;
+    min-width: 360px;
+    flex: 0 0 70%;
+    background-color: #d0f0c0;
+    padding: 20px;
+}
+.sideContent{
+    background-color: yellow;
+    min-height: 70px;
+    float: left;
+
+    flex: 0 0 30%;
+    background-color: #f0d0c0;
+    padding: 20px;
+
+}
+@media (max-width: 768px) {
+    .mainBlock {
+      flex-direction: column;
+    }
+  
+    .mainContent,
+    .sideContent {
+      flex: 0 0 100%;
+    }
+  }
 
 
 

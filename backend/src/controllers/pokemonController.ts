@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { getPokemonData, getPokemonDescription } from '../services/pokemonService';
 import Pokemon from '../models/Pokemon';
+import Pokedex from '../models/Pokedex';
 
 export const getPokemon = async (req: Request, res: Response) => {
   try {
@@ -17,8 +18,7 @@ export const getPokemon = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to fetch Pokémon data.' });
   }
 };
-
-
+/*  legacy
 export const getAllPokemon = async (req: Request, res: Response): Promise<void> => {
   try {
     const data = await Pokemon.find();
@@ -34,3 +34,4 @@ export const createPokemon =  async (req: Request, res: Response) => {
   await newPokemon.save();
   res.status(201).json(newPokemon);
 };
+*/

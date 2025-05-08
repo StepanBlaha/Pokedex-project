@@ -34,19 +34,8 @@ export default function DetailPage(){
         queryKey: ["pokemon"],
         queryFn:()=> fetchPokemon(Number(id)),
     })
-    const name = data?.name || "";
-    const type = data?.type || "";
-    const description = data?.description || "";
-    const category = data?.category || "";
-    const image = data?.image || "";
-    const height = data?.height || "";
-    const weight = data?.weight || "";
-    const ability = data?.ability || "";
-
-
     if (isFetching) return <Spinner />;
 
-    
 
 
     return(

@@ -8,7 +8,7 @@ import { url } from "inspector";
 import { useQuery } from '@tanstack/react-query';
 import Spinner from "../../components/Spinner";
 import axios from 'axios';
-
+import BarChart from "../../components/Charts/BarChart";
 
 const Card = lazy(() => import('./components/Card'));
 
@@ -38,6 +38,7 @@ export default function DetailPage(){
 
 
 
+
     return(
         <>
         <div className="App">
@@ -55,7 +56,6 @@ export default function DetailPage(){
                 </Link>
                 </div>
             </div>
-            <div className="sideBlock"></div>
         </div>
         </div>
 

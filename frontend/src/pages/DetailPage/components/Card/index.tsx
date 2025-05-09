@@ -1,8 +1,8 @@
 import {PokemonDetailCardProps} from "../../../../types/pokemon"
-
-  
+import BarChart from "../../../../components/Charts/BarChart";
+import { ChartData, scales } from 'chart.js';
+import styles from "./index.module.css"
 export default function Card({data}: PokemonDetailCardProps){
- 
     const pokemonTypeColors : { [key: string]: string } = {
         normal: "#A8A77A",
         fire: "#EE8130",
@@ -23,6 +23,39 @@ export default function Card({data}: PokemonDetailCardProps){
         steel: "#B7B7CE",
         fairy: "#D685AD"
       };
+
+
+    // Define the data for the bar chart and the setup
+    const barData: ChartData<'bar'> = {
+        labels: ['Exercise', 'Reading', 'Meditation', 'Sleep'],
+        datasets: [
+            {
+            label: 'Pokemon Stats',
+            data: [80, 65, 75, 90],
+            backgroundColor: `${pokemonTypeColors[data.type]}`,
+            },
+        ],
+    };
+    
+    const barOptions = {
+        responsive: true,
+        maintainAspectRatio: false, // Optional: helps with layout scaling
+        devicePixelRatio: window.devicePixelRatio || 1,
+        scales: {
+            y: {
+                display: false, 
+                grid: {
+                  display: false
+                }
+              },
+              x: {
+                grid: {
+                  display: false 
+                }
+              }
+        }
+    };
+  
       
     console.log(`url(../../../assets/typeBanners/${data.type}.png` )
     return(
@@ -85,7 +118,23 @@ export default function Card({data}: PokemonDetailCardProps){
         </div>
 
         <div className="cardStats">
-            <div className="statGraph"></div>
+            <div className={styles.statGraph}>
+                <BarChart data={barData} options={{
+                ...barOptions,
+                plugins: {
+                    datalabels: {
+                    anchor: 'start', 
+                    align: 'end',    
+                    color: 'black',  
+                    font: {
+                        size: 14, 
+                        weight: 'bold'
+                    },
+                    formatter: (value) => value 
+                    }
+                }
+                }}/>
+            </div>
         </div>
 
     </div>

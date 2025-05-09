@@ -3,7 +3,8 @@ import mongoose, { Schema, Document } from 'mongoose';
 export interface IPokedexEntry extends Document {
     id: number;
     name: string;
-    type: string[];
+    sprite: string;
+    types: string[];
   }
 
 

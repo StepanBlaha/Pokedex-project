@@ -1,7 +1,8 @@
-import { Request, Response } from 'express';
+
 import { getPokedexList } from '../services/pokedexlistService';
 import { getPokemonData } from '../services/pokemonService';
 import Pokedex from '../models/Pokedex';
+import { Request, Response } from 'express';
 
 export const getPokedex = async (req: Request, res: Response) => {
   try {
@@ -47,6 +48,7 @@ export const createPokedexEntries  =  async (req: Request, res: Response) => {
     const page = parseInt("0");
     const limit = parseInt("100000");
     const data = await getPokedexList(page, limit) as { results: { name: string, url: string }[] };
+
 
     // Load the unregistered ones into db
     const detailedData = await Promise.all(data.results.map(async (pokemon: {name: string, url: string})=>{
@@ -105,3 +107,30 @@ export const getPokedexCount = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to count Pokedex entries.' });
   }
 };
+
+
+
+export const getSearchedPokemon = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { search } = req.body;
+
+    if (!search) {
+      res.status(400).json({ error: 'Missing search string' });
+      return
+    }
+
+    const searchedPokemon = await Pokedex.find({ name: new RegExp('^' + search, 'i') });
+    
+    if (!searchedPokemon.length) {
+      res.status(404).json({ message: 'No Pokémon found' });
+      return
+    }
+
+    res.json({ searchedPokemon });
+  } catch (error) {
+    console.error('Error searching Pokedex entries:', error);
+    res.status(500).json({ error: 'Failed to search Pokedex entries.' });
+  }
+}
+
+

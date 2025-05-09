@@ -29,8 +29,18 @@ export interface PokemonDetailData {
   height: number;
   weight: number;
   ability: string;
+  stats?: PokemonStat[]; 
 }
 
+export interface PokemonStat {
+  base_stat: number;
+  effort: number;
+  stat: StatInfo;
+}
+interface StatInfo {
+  name: string;
+  url: string;
+}
 export interface PokemonDetailCardProps {
   data: PokemonDetailData;
 }

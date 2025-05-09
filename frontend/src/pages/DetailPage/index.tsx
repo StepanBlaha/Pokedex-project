@@ -16,6 +16,8 @@ const Card = lazy(() => import('./components/Card'));
 const fetchPokemon = async (id: number) => {
     const response = await fetch(`http://localhost:5000/api/pokemon/${id}`);
     const pokemon = await response.json();
+    console.log(pokemon)
+    console.log(pokemon.data.stats)
     return {
       name: pokemon.data.name,
       type: pokemon.data.types[0].type.name,
@@ -24,7 +26,8 @@ const fetchPokemon = async (id: number) => {
       image: pokemon.data.sprites.front_default,
       height: pokemon.data.height * 10,
       weight: pokemon.data.weight / 10,
-      ability: pokemon.data.abilities[0].ability.name
+      ability: pokemon.data.abilities[0].ability.name,
+      stats: pokemon.data.stats
     };
   };
 
@@ -36,7 +39,7 @@ export default function DetailPage(){
     })
     if (isFetching) return <Spinner />;
 
-
+ 
 
 
     return(

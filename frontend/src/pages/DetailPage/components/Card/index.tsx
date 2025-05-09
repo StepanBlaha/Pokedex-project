@@ -2,7 +2,12 @@ import {PokemonDetailCardProps} from "../../../../types/pokemon"
 import BarChart from "../../../../components/Charts/BarChart";
 import { ChartData, scales } from 'chart.js';
 import styles from "./index.module.css"
+import React, { useEffect, useState, Suspense, lazy } from 'react';
+
+
 export default function Card({data}: PokemonDetailCardProps){
+    const [statLabels, setStatLabels] = useState<string[]>([])
+    const [statValues, setStatValues] = useState<number[]>([])
     const pokemonTypeColors : { [key: string]: string } = {
         normal: "#A8A77A",
         fire: "#EE8130",
@@ -24,14 +29,22 @@ export default function Card({data}: PokemonDetailCardProps){
         fairy: "#D685AD"
       };
 
-
+    useEffect(()=>{
+        if(data?.stats){
+            console.log(data.stats)
+            const statNames = data.stats?.map(stat => stat.stat.name)
+            setStatLabels(statNames)
+            const statVals = data.stats?.map(stat => stat.base_stat)
+            setStatValues(statVals)
+        }
+    },[data])
     // Define the data for the bar chart and the setup
     const barData: ChartData<'bar'> = {
-        labels: ['Exercise', 'Reading', 'Meditation', 'Sleep'],
+        labels: statLabels,
         datasets: [
             {
-            label: 'Pokemon Stats',
-            data: [80, 65, 75, 90],
+            label: '',
+            data: statValues,
             backgroundColor: `${pokemonTypeColors[data.type]}`,
             },
         ],
@@ -39,8 +52,16 @@ export default function Card({data}: PokemonDetailCardProps){
     
     const barOptions = {
         responsive: true,
-        maintainAspectRatio: false, // Optional: helps with layout scaling
-        devicePixelRatio: window.devicePixelRatio || 1,
+        maintainAspectRatio: false,
+        devicePixelRatio: 3,
+        plugins: {
+            title: {
+            display: false
+            },
+            legend: {
+            display: false,
+            },
+        },
         scales: {
             y: {
                 display: false, 
@@ -118,10 +139,11 @@ export default function Card({data}: PokemonDetailCardProps){
         </div>
 
         <div className="cardStats">
-            <div className={styles.statGraph}>
+            <div className={styles.statGraph} >
                 <BarChart data={barData} options={{
                 ...barOptions,
                 plugins: {
+                    ...barOptions.plugins,
                     datalabels: {
                     anchor: 'start', 
                     align: 'end',    

@@ -34,3 +34,19 @@ export interface PokemonDetailData {
 export interface PokemonDetailCardProps {
   data: PokemonDetailData;
 }
+
+
+
+
+
+
+export interface SearchedPokemon{
+  types: string[],
+  _id: string,
+  id: number,
+  name: string,
+  sprite: string
+}
+export interface SearchedPokemonList{
+  searchedPokemon: SearchedPokemon[]
+}

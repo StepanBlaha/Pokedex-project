@@ -5,7 +5,7 @@ import axios from "axios";
 import { url } from "inspector";
 import { useQuery } from '@tanstack/react-query';
 import List from "./components/List";
-import { Pokemon, PokemonListResult } from "../../types/pokemon";
+import { Pokemon, PokemonListResult, SearchedPokemon, SearchedPokemonList } from "../../types/pokemon";
 
   // Function for fetching the pokemon
   const loadPokemon = async (page: number) =>{
@@ -14,23 +14,12 @@ import { Pokemon, PokemonListResult } from "../../types/pokemon";
     return res.data
   }
 
-  interface SearchedPokemon{
-    types: string[],
-    _id: string,
-    id: number,
-    name: string,
-    sprite: string
-  }
-  interface SearchedPokemonList{
-    searchedPokemon: SearchedPokemon[]
-  }
-
+  // Function for fetching searched pokemon
   const loadSearch = async(search: string) => {
     try {
       const res = await axios.post<SearchedPokemonList>("http://localhost:5000/api/searchPokedex", {
         search: search
       });;
-      console.log(res.data.searchedPokemon)
       return res.data;
     } catch (error) {
       console.error('Error in loadSearch:', error);
@@ -64,7 +53,10 @@ export default function PokedexList(){
       // Update Items - only add the not existing ones
       setItems((prev) => [...prev, ...data.results.filter(p => !prev.some(existing => existing.id === p.id))]);
     }
-  }, [data]);
+    if(searchedPokemon?.searchedPokemon){
+      setItems(searchedPokemon.searchedPokemon);
+    }
+  }, [data, searchedPokemon]);
 
   // Effect for the infinity scroll - maybe create custom hook
   useEffect(() => {
@@ -97,17 +89,23 @@ export default function PokedexList(){
 
   // Load more posts when page is updated
   useEffect(() => {
-    refetch()
+    if (inputValue === "") {
+      refetch();
+    }
   }, [page]);
 
 // This is for the search ----------------------------------------------------------
-  async function handleInput(e: React.ChangeEvent<HTMLInputElement>){
-    setInputValue(e.target.value)
-    console.log(e.target.value)
-  }
   useEffect(() => {
     if (inputValue !== "") {
-      searchPokemon()
+      searchPokemon();
+      // For searching purposes
+      setPage(1);   
+    } else {
+      // Reset the search
+      if(page !== 0){
+        setItems([]);    
+        setPage(0);        
+      }
     }
   }, [inputValue]);
 // This is for the search ----------------------------------------------------------
@@ -171,7 +169,7 @@ export default function PokedexList(){
                     <input 
                     type="text" 
                     value={inputValue}
-                    onChange={(e)=> handleInput(e)}
+                    onChange={(e)=> setInputValue(e.target.value)}
                     />
 
                   </div>

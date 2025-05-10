@@ -46,6 +46,12 @@
     font-weight: 900;
     font-size: 35px;
 }
+.headerLogoPart div{
+    transition: transform 0.3s ease, scale 0.3s ease;
+}
+.headerLogoPart div:hover{
+ transform: translateY(-6px) scale(1.05);
+}
 
 .headerCharizard{
     z-index: 1;

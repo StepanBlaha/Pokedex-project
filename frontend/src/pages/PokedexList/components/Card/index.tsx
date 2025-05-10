@@ -10,6 +10,8 @@ import { Link } from 'react-router-dom';
 
 
 const Card = forwardRef<HTMLDivElement, CardProps>(({ name, id, type }, ref)=>{
+    const [isHovering, setIsHovering] = useState(false)
+    const [hoverBgUrl, setHoverBgUrl] = useState("")
     const pokemonTypeColors : { [key: string]: string } = {
         normal: "#A8A77A",
         fire: "#EE8130",
@@ -32,8 +34,28 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({ name, id, type }, ref)=>{
       };
       
     const spriteUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+    // Make sure the hover url exists
+    useEffect(() => {
+        const testUrl = `https://play.pokemonshowdown.com/sprites/gen5ani/${name.toLowerCase()}.gif`;
+        const img = new Image();
+        // Set listeners
+        img.onload = () => {
+            setHoverBgUrl(testUrl); // Exists
+        };
+        img.onerror = () => {
+            setHoverBgUrl(spriteUrl); // Doenst exist
+        };
+        // Test
+        img.src = testUrl;
+    }, [name, spriteUrl]);
+
+
     return(
-    <div className={styles.card} ref={ref}  style={{ backgroundImage: `url(${spriteUrl})` }}>
+    <div className={styles.card} ref={ref}  
+    onMouseEnter={()=>setIsHovering(true)}
+    onMouseLeave={()=>setIsHovering(false)}
+    >
+        <div className={styles.sprite} style={{ backgroundImage: `url(${isHovering? hoverBgUrl: spriteUrl})` }}></div>
         <div className={styles.cardTitle}>
             <p style={{ color: `${pokemonTypeColors[type]} ` }} >{name}</p>
         </div>

@@ -12,3 +12,6 @@ const animatedSprite=()=>{
         </a>
     )
 }
+// hybajici se a nehybajici se stejna sprita
+//  https://img.pokemondb.net/sprites/black-white/anim/normal/bulbasaur.gif
+//  https://img.pokemondb.net/sprites/black-white/normal/bulbasaur.png

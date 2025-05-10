@@ -65,13 +65,16 @@ body{
 .backHomeDiv a{
     margin: 0;
     text-decoration: none;
+    transition: 0.4s ease-in;
 }
 .backHome p{
     margin: 0;
     font-weight: 600;
+     transition: 0.1s ease-in;
 }
 .backHome svg{
     stroke-width: 3px;
+     transition: 0.1s ease-in;
 }
 .backHomeDiv{
     width: 100%;

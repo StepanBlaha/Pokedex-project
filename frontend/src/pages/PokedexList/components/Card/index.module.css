@@ -24,20 +24,20 @@
 }
 
 .cardTitle{
-    height: 100%;
-    width: 70%;
-    float: left;
+  height: 100%;
+  width: 70%;
+  float: left;
 
-    display: flex
-    ;
-        align-items: center;
-        padding-left: 10px;
-        box-sizing: border-box;
+  display: flex
+  ;
+  align-items: center;
+  padding-left: 10px;
+  box-sizing: border-box;
 }
 .cardTitle p{
-    text-transform: capitalize;
-    margin: 0;
-    font-weight: 700;
+  text-transform: capitalize;
+  margin: 0;
+  font-weight: 700;
 }
 .cardButton{
     height: 100%;
@@ -53,6 +53,20 @@
     border-top-right-radius: 3px;
     padding: 4px;
 
+}
+.cardButton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0); /* No darkening initially */
+  transition: background-color 0.3s ease;
+  pointer-events: none;
+  border-bottom-left-radius: 10px;
+    border-top-right-radius: 3px;
+}
+
+.cardButton:hover::after {
+  background-color: rgba(0, 0, 0, 0.2); /* Slightly dark overlay */
 }
 
 

@@ -134,6 +134,7 @@ body{
     border-radius: 0.4em;
     box-shadow: 0.2em 0.2em;
     transition: ease 0.25s;
+    height: 20px;
 }
 
 .searchInput::placeholder {

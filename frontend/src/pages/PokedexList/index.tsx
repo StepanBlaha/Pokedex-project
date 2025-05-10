@@ -124,6 +124,7 @@ export default function PokedexList(){
                     value={inputValue}
                     onChange={(e)=> setInputValue(e.target.value)}
                     className={styles.searchInput}
+                    placeholder="Charizard..."
                     />
 
                   </div>

@@ -9,6 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import Spinner from "../../components/Spinner";
 import axios from 'axios';
 import BarChart from "../../components/Charts/BarChart";
+import Header from "../../components/Header";
 
 const Card = lazy(() => import('./components/Card'));
 
@@ -47,7 +48,7 @@ export default function DetailPage(){
         <div className="App">
         <div className="center">
             <div className="mainBlock">
-                <div className="mainHeader"></div>
+                <Header/>
                 <div className="mainContent">
 
                 <Suspense fallback={<Spinner />}>

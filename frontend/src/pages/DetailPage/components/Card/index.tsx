@@ -80,65 +80,65 @@ export default function Card({data}: PokemonDetailCardProps){
       
     console.log(`url(../../../assets/typeBanners/${data.type}.png` )
     return(
-        <div className="card">
+        <div className={styles.card}>
 
-        <div className="cardTitle">
+        <div className={styles.cardTitle}>
                 <h2>{data.name}</h2>
-            <div className="cardType">
-                <div className="typeImage"  style={{ backgroundImage: `url(/assets/typeBanners/${data.type}.png` }}></div>
+            <div className={styles.cardType}>
+                <div className={styles.typeImage}  style={{ backgroundImage: `url(/assets/typeBanners/${data.type}.png` }}></div>
                 
                 {/*<div className="typeName">
                     <p>{data.type}</p>
                 </div>
                 */}
             </div>
-                <div className="cardImage" style={{ backgroundImage: `url(${data.image})` }}></div>
+                <div className={styles.cardImage} style={{ backgroundImage: `url(${data.image})` }}></div>
         </div>
 
-        <div className="cardInformations">
+        <div className={styles.cardInformations}>
 
-            <div className="cardInfo">
-                <div className="cardInfoTitle"  style={{ color: `${pokemonTypeColors[data.type]} ` }}>
+            <div className={styles.cardInfo}>
+                <div className={styles.cardInfoTitle}  style={{ color: `${pokemonTypeColors[data.type]} ` }}>
                     <p>Height</p>
                 </div>
-                <div className="cardInfoContent">
+                <div className={styles.cardInfoContent}>
                     <p>{data.height} cm</p>
                 </div>
             </div>
 
-            <div className="cardInfo">
-                <div className="cardInfoTitle" style={{ color: `${pokemonTypeColors[data.type]} ` }}>
+            <div className={styles.cardInfo}>
+                <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
                     <p>Weight</p>
                 </div>
-                <div className="cardInfoContent">
+                <div className={styles.cardInfoContent}>
                     <p>{data.weight} kg</p>
                 </div>
             </div>
 
-            <div className="cardInfo">
-                <div className="cardInfoTitle" style={{ color: `${pokemonTypeColors[data.type]} ` }}>
+            <div className={styles.cardInfo}>
+                <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
                     <p>Category</p>
                 </div>
-                <div className="cardInfoContent">
+                <div className={styles.cardInfoContent}>
                     <p>{data.category}</p>
                 </div>
             </div>
 
-            <div className="cardInfo">
-                <div className="cardInfoTitle" style={{ color: `${pokemonTypeColors[data.type]} ` }}>
+            <div className={styles.cardInfo}>
+                <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
                     <p>Ability</p>
                 </div>
-                <div className="cardInfoContent">
+                <div className={styles.cardInfoContent}>
                     <p>{data.ability}</p>
                 </div>
             </div>
         </div>
 
-        <div className="cardDescription">
+        <div className={styles.cardDescription}>
             <p>{data.description}</p>
         </div>
 
-        <div className="cardStats">
+        <div className={styles.cardStats}>
             <div className={styles.statGraph} >
                 <BarChart data={barData} options={{
                 ...barOptions,

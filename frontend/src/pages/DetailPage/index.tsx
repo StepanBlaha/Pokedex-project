@@ -3,7 +3,6 @@ import Button from "../../components/Button";
 import styles from "./index.module.css"
 import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { Link, useParams } from "react-router-dom";
-import "./index.css"
 import { url } from "inspector";
 import { useQuery } from '@tanstack/react-query';
 import Spinner from "../../components/Spinner";
@@ -45,19 +44,22 @@ export default function DetailPage(){
 
     return(
         <>
-        <div className="App">
-        <div className="center">
-            <div className="mainBlock">
-                <Header/>
-                <div className="mainContent">
+        <div className={styles.App}>
+        <div className={styles.center}>
+            <Header/>
+            <div className={styles.mainBlock}>
+                <div className={styles.mainContent}>
+                    <div className={styles.backHomeDiv}>
 
-                <Suspense fallback={<Spinner />}>
-                    {data && <Card data={data} />}
-                </Suspense>
+                    <Link to={"/"}>
+                        <Button />
+                    </Link>
+                    </div>
 
-                <Link to={"/"}>
-                    <Button />
-                </Link>
+                    <Suspense fallback={<Spinner />}>
+                        {data && <Card data={data} />}
+                    </Suspense>
+
                 </div>
             </div>
         </div>

@@ -314,13 +314,12 @@
 .cardPower,
 .cardAccuracy,
 .cardPP {
-  flex: 1 1 100px;
+  flex: 1 1 0px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  padding: 5px;
 }
 
 /* Specific background colors for visual feedback */
@@ -368,5 +367,5 @@
     background-position: center;
     position: absolute;
     bottom: -10px;
-    left: 26px;
+    left: 22px;
 }

@@ -53,7 +53,7 @@ const Card = forwardRef<HTMLDivElement, MoveCardprops>(({ name, id, type, accura
 
         <div className={styles.cardPower}>
             <p>Power</p>
-            <p style={{ color: `${pokemonTypeColors[type]} ` }}>{power}</p>
+            <p style={{ color: `${pokemonTypeColors[type]} ` }}>{power ? power : 0}</p>
         </div>
         <div className={styles.divider}></div>
 

@@ -2,6 +2,8 @@ import styles from "./index.module.css"
 import { Link } from "react-router-dom"
 
 export default function Header(){
+   const pathname = window.location.pathname;
+   
     return(
         <div className={styles.mainHeader}>
                 <div className={styles.headerLogoPart}>
@@ -59,7 +61,8 @@ export default function Header(){
                     <div className={styles.link}>
                       <div className={`${styles.pokeradarItem} ${styles.item}`}></div>
                       <div className={`${styles.pikachuItem} ${styles.item}`}></div>
-                      <Link to="/">Pokedex</Link>
+                      {/*absolutne jeste nefunguje*/}
+                      <Link to="/" className={pathname==="/" ? `${styles.link} ${styles.active}`: styles.link}>Pokedex</Link>
                     </div>
                     <div className={styles.link}>
                       <div className={`${styles.pokeballItem} ${styles.item}`}></div>

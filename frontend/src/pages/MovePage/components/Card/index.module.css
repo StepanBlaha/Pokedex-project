@@ -303,7 +303,7 @@
 
 /* Divider (used inline in JSX) */
 .divider {
-  width: 1px;
+  width: 2px;
   background-color: black;
   align-self: stretch;
 }

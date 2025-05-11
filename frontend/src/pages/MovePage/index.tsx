@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import List from "./components/List";
 import { Pokemon, PokemonListResult, SearchedPokemon, SearchedPokemonList } from "../../types/pokemon";
 import Header from "../../components/Header";
+import { Moves } from "../../types/moves";
 
   // Function for fetching the pokemon
   const loadPokemon = async (page: number) =>{
@@ -14,6 +15,12 @@ import Header from "../../components/Header";
     console.log(res.data)
     return res.data
   }
+
+  const loadMoves = async (page: number) =>{
+      const res = await axios.get<Moves>(`http://localhost:5000/api/moves?page=${page}&limit=10`)
+      console.log(res.data)
+      return res.data
+    }
 
 
 
@@ -30,7 +37,7 @@ import Header from "../../components/Header";
   }
   
 
-export default function PokedexList(){
+export default function MovePage(){
   // States and refs
   const [inputValue, setInputValue] = useState("")
   const [items, setItems] = useState<Pokemon[]>([]);
@@ -48,67 +55,11 @@ export default function PokedexList(){
     queryFn:()=> loadSearch(inputValue),
     enabled: false,
   })
-  // Update state when data changes
-  useEffect(() => {
-    if (data?.results) {
-      // Update Items - only add the not existing ones
-      setItems((prev) => [...prev, ...data.results.filter(p => !prev.some(existing => existing.id === p.id))]);
-    }
-    if(searchedPokemon?.searchedPokemon){
-      setItems(searchedPokemon.searchedPokemon);
-    }
-  }, [data, searchedPokemon]);
+  useEffect(()=>{
+    loadMoves(1)
+  },[])
 
-  // Effect for the infinity scroll - maybe create custom hook
-  useEffect(() => {
-    if (!lastRef.current) return;
-    if (data?.results) {
-      const observer = new IntersectionObserver((entries) => {
-        // Entries contains list of observed items
-        // isInteracting is true if item is on screen
-        if (entries[0].isIntersecting && !isFetching) {
-          console.log('Fetching more data...');
-          setPage((prev) => prev + 1); 
-        }
-      },
-      {
-        threshold: 0.5, 
-      });
 
-      // Set observer
-      const current = lastRef.current;
-      observer.observe(current);
-
-      // Cleanup observer when the component unmounts or updates
-      return () => {
-        if (current) observer.unobserve(current);
-      };
-    }
-    // Run when isFetching or items changes
-    // Items - to make sure it loads after the initial load
-  }, [items, isFetching]); 
-
-  // Load more posts when page is updated
-  useEffect(() => {
-    if (inputValue === "") {
-      refetch();
-    }
-  }, [page]);
-
-// This is for the search ----------------------------------------------------------
-  useEffect(() => {
-    if (inputValue !== "") {
-      searchPokemon();
-      // For searching purposes
-      setPage(1);   
-    } else {
-      // Reset the search
-      if(page !== 0){
-        setItems([]);    
-        setPage(0);        
-      }
-    }
-  }, [inputValue]);
 // This is for the search ----------------------------------------------------------
     return(
         <>
@@ -129,7 +80,7 @@ export default function PokedexList(){
 
                   </div>
                   <div className={styles.mainContent}>
-                      <List data={items} lastCardRef={lastRef}/>
+                    <List data={items} lastCardRef={lastRef}/>
 
                   </div>
 

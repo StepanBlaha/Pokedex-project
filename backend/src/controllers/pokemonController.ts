@@ -5,7 +5,7 @@ import Pokedex from '../models/Pokedex';
 
 export const getPokemon = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id);
+    const id = parseInt(req.params.id); 
     const data = await getPokemonData(id);
     const description = await getPokemonDescription(id);
 

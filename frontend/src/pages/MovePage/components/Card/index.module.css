@@ -1,0 +1,151 @@
+
+/*
+.card{
+    height: 55px;
+    width: 200px;
+    background: #f5f5f5;
+    padding: 10px;
+    box-shadow: 0 4px 0 #bdbdbd,;
+    border-radius: 8px;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: auto;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-position-x: 94px;
+
+
+
+
+    border: 3px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.2em 0.2em;
+
+    transition: transform 0.3s ease, scale 0.3s ease;
+
+
+    
+
+
+    height: 55px;
+    width: 200px;
+    background: #f5f5f5;
+    padding: 10px;
+    box-shadow: 0 4px 0 #bdbdbd,;
+    border-radius: 8px;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: auto;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-position-x: 94px;
+    border: 3px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.2em 0.2em;
+   
+    transition: transform 0.3s ease, scale 0.3s ease;
+
+
+    background-position-x: 94px;
+
+    
+}
+    */
+.card:hover{
+  transform: translateY(-6px) scale(1.05);
+    background-position: bottom; 
+    background-position-x: 100px;
+}
+.card {
+  position: relative;
+  width: 200px;
+  height: 55px;
+  padding: 10px;
+  background: #f5f5f5;
+  border: 3px solid black;
+  border-radius: 0.4em;
+  box-shadow: 0.2em 0.2em;
+  transition: transform 0.3s ease, scale 0.3s ease;
+  overflow: hidden;
+}
+
+.sprite {
+    position: absolute;
+    right: 25px;
+    top: 2px;
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    image-rendering: pixelated;
+    transition: background-image 0.3s ease;
+    background-position: center;
+}
+.cardTitle{
+  height: 100%;
+  width: 70%;
+  float: left;
+
+  display: flex
+  ;
+  align-items: center;
+  padding-left: 10px;
+  box-sizing: border-box;
+}
+.cardTitle p{
+  text-transform: capitalize;
+  margin: 0;
+  font-weight: 700;
+}
+.cardButton{
+    height: 100%;
+    width: 30%;
+    float: left;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-color: green;
+    height: 30px;
+    width: 30px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 3px;
+    padding: 4px;
+
+}
+.cardButton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0); /* No darkening initially */
+  transition: background-color 0.3s ease;
+  pointer-events: none;
+  border-bottom-left-radius: 10px;
+    border-top-right-radius: 3px;
+}
+
+.cardButton:hover::after {
+  background-color: rgba(0, 0, 0, 0.2); /* Slightly dark overlay */
+}
+
+
+  .buttonCenter {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*
+    box-shadow:
+      0 4px 0 #bdbdbd,
+      0 6px 10px rgba(0, 0, 0, 0.1);
+      */
+    transition: all 0.2s ease;
+    transform-style: preserve-3d;
+    transform: translateZ(0);
+    position: relative;
+  }
+  .buttonCenter svg{
+    color: black;
+  }
+

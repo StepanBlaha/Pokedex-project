@@ -2,12 +2,14 @@ import React, { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import PokedexList from './pages/PokedexList';
 import Spinner from './components/Spinner';
+import MovePage from './pages/MovePage';
 const DetailPage = lazy(() => import('./pages/DetailPage'));
 const AppRoutes = () => {
     return(
         <Suspense fallback={<Spinner />}>
             <Routes>
                 <Route path='/' element={<PokedexList/>}/>
+                <Route path='items' element={<MovePage/>}/>
                 <Route path='pokemon/:id' element={<DetailPage/>}/>
             </Routes>
         </Suspense>

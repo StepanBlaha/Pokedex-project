@@ -39,18 +39,35 @@ const Card = forwardRef<HTMLDivElement, MoveCardprops>(({ name, id, type, accura
     onMouseEnter={()=>setIsHovering(true)}
     onMouseLeave={()=>setIsHovering(false)}
     >
-        <div className={styles.sprite} ></div>
+        
+        <div className={styles.typeImage}  style={{ backgroundImage: `url(/assets/typeBanners/${type}.png` }}></div>
         <div className={styles.cardTitle}>
             <p style={{ color: `${pokemonTypeColors[type]} ` }} >{name}</p>
         </div>
-        <Link to={`pokemon/${id}`}>
-            <div className={styles.cardButton} style={{ backgroundColor: `${pokemonTypeColors[type]} ` }}>
-                <div className={styles.buttonCenter}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-big-right-icon lucide-arrow-big-right"><path d="M6 9h6V5l7 7-7 7v-4H6V9z"/></svg>                
-                </div>
-            </div>
-        </Link>
+        <div className={styles.divider}></div>
+        <div className={styles.cardCategory}>
+            <p>Category</p>
+            <p style={{ color: `${pokemonTypeColors[type]} ` }}>{category}</p>
+        </div>
+        <div className={styles.divider}></div>
 
+        <div className={styles.cardPower}>
+            <p>Power</p>
+            <p style={{ color: `${pokemonTypeColors[type]} ` }}>{power}</p>
+        </div>
+        <div className={styles.divider}></div>
+
+        <div className={styles.cardAccuracy}>
+            <p>Accuracy</p>
+            <p style={{ color: `${pokemonTypeColors[type]} ` }}>{accuracy}</p>
+        </div>
+        <div className={styles.divider}></div>
+        <div className={styles.cardPP}>
+            <p>PP</p>
+            <p style={{ color: `${pokemonTypeColors[type]} ` }}>{pp}</p>
+        </div>
+
+        
     </div>
     )
 })

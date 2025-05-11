@@ -5,68 +5,78 @@ import axios from "axios";
 import { url } from "inspector";
 import { useQuery } from '@tanstack/react-query';
 import List from "./components/List";
-import { Pokemon, PokemonListResult, SearchedPokemon, SearchedPokemonList } from "../../types/pokemon";
 import Header from "../../components/Header";
-import { Moves } from "../../types/moves";
+import { Moves, MoveListResult } from "../../types/moves";
 
-  // Function for fetching the pokemon
-  const loadPokemon = async (page: number) =>{
-    const res = await axios.get<PokemonListResult>(`http://localhost:5000/api/pokedex?page=${page}&limit=10`)
-    console.log(res.data)
-    return res.data
-  }
+
 
   const loadMoves = async (page: number) =>{
-      const res = await axios.get<Moves>(`http://localhost:5000/api/moves?page=${page}&limit=10`)
+      const res = await axios.get<MoveListResult>(`http://localhost:5000/api/moves?page=${page}&limit=10`)
       console.log(res.data)
       return res.data
     }
 
 
 
-  // Function for fetching searched pokemon
-  const loadSearch = async(search: string) => {
-    try {
-      const res = await axios.post<SearchedPokemonList>("http://localhost:5000/api/searchPokedex", {
-        search: search
-      });;
-      return res.data;
-    } catch (error) {
-      console.error('Error in loadSearch:', error);
-    }
-  }
-  
+
 
 export default function MovePage(){
   // States and refs
   const [inputValue, setInputValue] = useState("")
-  const [items, setItems] = useState<Pokemon[]>([]);
+  const [items, setItems] = useState<Moves[]>([]);
   const [page, setPage] = useState<number>(0)
   const lastRef = useRef<HTMLDivElement | null>(null); 
 
   const {data, refetch, isFetching, error} = useQuery({
-    queryKey: ["pokemon", page],
-    queryFn:()=> loadPokemon(page),
+    queryKey: ["moves", page],
+    queryFn:()=> loadMoves(page),
     enabled: false,
   })
-
-  const {data: searchedPokemon, refetch: searchPokemon, isFetching: isSearching, error: searchError} = useQuery({
-    queryKey: ["pokemonSearch", inputValue],
-    queryFn:()=> loadSearch(inputValue),
-    enabled: false,
-  })
-  useEffect(()=>{
-    loadMoves(1)
-  },[])
+ // Load more posts when page is updated
+  useEffect(() => {
+    if (inputValue === "") {
+      refetch();
+    }
+  }, [page]);
 
 
-// This is for the search ----------------------------------------------------------
+  // Update state when data changes
+  useEffect(() => {
+    if (data?.results) {
+      setItems((prev) => [...prev, ...data.results.filter(p => !prev.some(existing => existing.id === p.id))]);
+    }
+  }, [data]);
+
+  // Effect for the infinity scroll - maybe create custom hook
+  useEffect(() => {
+    if (!lastRef.current) return;
+    if (data?.results) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && !isFetching) {
+          console.log('Fetching more data...');
+          setPage((prev) => prev + 1); 
+        }
+      },
+      {
+        threshold: 0.5, 
+      });
+
+      // Set observer
+      const current = lastRef.current;
+      observer.observe(current);
+
+      // Cleanup observer when the component unmounts or updates
+      return () => {
+        if (current) observer.unobserve(current);
+      };
+    }
+  }, [items, isFetching]); 
+
     return(
         <>
         <div className={styles.App}>
           <div className={styles.center}>
               <Header/>
-
 
               <div className={styles.mainBlock}>
                   <div className={styles.sideContent}>
@@ -75,17 +85,13 @@ export default function MovePage(){
                     value={inputValue}
                     onChange={(e)=> setInputValue(e.target.value)}
                     className={styles.searchInput}
-                    placeholder="Charizard..."
+                    placeholder="Tackle..."
                     />
 
                   </div>
                   <div className={styles.mainContent}>
                     <List data={items} lastCardRef={lastRef}/>
-
-                  </div>
-
-
-                  
+                  </div>   
               </div>
 
 

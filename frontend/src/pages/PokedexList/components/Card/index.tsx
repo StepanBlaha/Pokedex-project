@@ -72,3 +72,5 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({ name, id, type }, ref)=>{
 })
  
 export default Card;
+
+

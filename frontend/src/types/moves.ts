@@ -11,3 +11,13 @@ export interface Moves {
     pp: number;
     type: string
 }
+export interface MoveListResult {
+  page: number;
+  results: Moves[];
+  }
+
+  
+  export interface MoveListProps{
+    data: Moves[];
+    lastCardRef: React.RefObject<HTMLDivElement | null>; 
+}

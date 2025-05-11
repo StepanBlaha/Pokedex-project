@@ -4,12 +4,12 @@ import axios from "axios";
 import styles from "./index.module.css"
 import { url } from "inspector";
 import { useQuery } from '@tanstack/react-query';
-import { CardProps } from '../../../../types/card';
+import { MoveCardprops } from '../../../../types/card';
 import { extractIdFromUrl } from '../../../../utils/url';
 import { Link } from 'react-router-dom';
 
 
-const Card = forwardRef<HTMLDivElement, CardProps>(({ name, id, type }, ref)=>{
+const Card = forwardRef<HTMLDivElement, MoveCardprops>(({ name, id, type, accuracy, pp, class_name, category, power }, ref)=>{
     const [isHovering, setIsHovering] = useState(false)
     const [hoverBgUrl, setHoverBgUrl] = useState("")
     const pokemonTypeColors : { [key: string]: string } = {
@@ -33,29 +33,13 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({ name, id, type }, ref)=>{
         fairy: "#D685AD"
       };
       
-    const spriteUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
-    // Make sure the hover url exists
-    useEffect(() => {
-        const testUrl = `https://play.pokemonshowdown.com/sprites/gen5ani/${name.toLowerCase()}.gif`;
-        const img = new Image();
-        // Set listeners
-        img.onload = () => {
-            setHoverBgUrl(testUrl); // Exists
-        };
-        img.onerror = () => {
-            setHoverBgUrl(spriteUrl); // Doenst exist
-        };
-        // Test
-        img.src = testUrl;
-    }, [name, spriteUrl]);
-
 
     return(
     <div className={styles.card} ref={ref}  
     onMouseEnter={()=>setIsHovering(true)}
     onMouseLeave={()=>setIsHovering(false)}
     >
-        <div className={styles.sprite} style={{ backgroundImage: `url(${isHovering? hoverBgUrl: spriteUrl})` }}></div>
+        <div className={styles.sprite} ></div>
         <div className={styles.cardTitle}>
             <p style={{ color: `${pokemonTypeColors[type]} ` }} >{name}</p>
         </div>

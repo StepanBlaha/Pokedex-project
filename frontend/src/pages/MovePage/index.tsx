@@ -6,16 +6,28 @@ import { url } from "inspector";
 import { useQuery } from '@tanstack/react-query';
 import List from "./components/List";
 import Header from "../../components/Header";
-import { Moves, MoveListResult } from "../../types/moves";
+import { Moves, MoveListResult, SearchedMoveList } from "../../types/moves";
 
 
 
   const loadMoves = async (page: number) =>{
-      const res = await axios.get<MoveListResult>(`http://localhost:5000/api/moves?page=${page}&limit=10`)
-      console.log(res.data)
-      return res.data
+    const res = await axios.get<MoveListResult>(`http://localhost:5000/api/moves?page=${page}&limit=10`)
+    console.log(res.data)
+    return res.data
     }
 
+  // Function for fetching searched moves
+  const loadSearch = async(search: string) => {
+    try {
+      const res = await axios.post<SearchedMoveList>("http://localhost:5000/api/searchMoves", {
+        search: search
+      });;
+      return res.data;
+    } catch (error) {
+      console.error('Error in loadSearch:', error);
+    }
+  }
+  
 
 
 
@@ -32,20 +44,23 @@ export default function MovePage(){
     queryFn:()=> loadMoves(page),
     enabled: false,
   })
- // Load more posts when page is updated
-  useEffect(() => {
-    if (inputValue === "") {
-      refetch();
-    }
-  }, [page]);
 
+  const {data: searchedMoves, refetch: searchMoves, isFetching: isSearching, error: searchError} = useQuery({
+    queryKey: ["moveSearch", inputValue],
+    queryFn:()=> loadSearch(inputValue),
+    enabled: false,
+  })
 
   // Update state when data changes
   useEffect(() => {
     if (data?.results) {
+      // Update Items - only add the not existing ones
       setItems((prev) => [...prev, ...data.results.filter(p => !prev.some(existing => existing.id === p.id))]);
     }
-  }, [data]);
+    if(searchedMoves?.searchedMoves){
+      setItems(searchedMoves.searchedMoves);
+    }
+  }, [data, searchedMoves]);
 
   // Effect for the infinity scroll - maybe create custom hook
   useEffect(() => {
@@ -72,6 +87,28 @@ export default function MovePage(){
     }
   }, [items, isFetching]); 
 
+  // Load more posts when page is updated
+  useEffect(() => {
+    if (inputValue === "") {
+      refetch();
+    }
+  }, [page]);
+
+// This is for the search ----------------------------------------------------------
+  useEffect(() => {
+    if (inputValue !== "") {
+      searchMoves();
+      // For searching purposes
+      setPage(1);   
+    } else {
+      // Reset the search
+      if(page !== 0){
+        setItems([]);    
+        setPage(0);        
+      }
+    }
+  }, [inputValue]);
+// This is for the search ----------------------------------------------------------
     return(
         <>
         <div className={styles.App}>

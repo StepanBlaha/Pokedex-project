@@ -80,8 +80,7 @@ export default function Card({data, backData}: PokemonDetailCardProps){
         }
     };
   
-      
-    console.log(`url(../../../assets/typeBanners/${data.type}.png` )
+    
     return(
         <div className={`${styles.card} ${flipped ? styles.flipped : ""}`}>
 

@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
-import { getPokemonData, getPokemonDescription, getExtraPokemonData } from '../services/pokemonService';
+import { getPokemonData, getPokemonDescription, getExtraPokemonData, getEvolutionChainData } from '../services/pokemonService';
 import Pokemon from '../models/Pokemon';
 import Pokedex from '../models/Pokedex';
+import { EvoChainLink, EvoChain } from '../types/evolutionTypes';
 
 export const getPokemon = async (req: Request, res: Response) => {
   try {
@@ -53,6 +54,12 @@ export const getExtraPokemonCardData = async (req: Request, res: Response) => {
       base_experience: Number,
       forms: [{name:String, url:String}]
     }
+    const evoData = await getEvolutionChainData(id)
+    
+
+
+
+
     const ExtraData = {
       generation: data.generation.name,
       shape: data.shape.name,
@@ -67,6 +74,19 @@ export const getExtraPokemonCardData = async (req: Request, res: Response) => {
     }
     res.json({
       data:ExtraData
+    });
+  } catch (error) {
+    console.error('Error fetching Pokémon:', error);
+    res.status(500).json({ error: 'Failed to fetch Pokémon data.' });
+  }
+};
+
+export const getEvolutionChain = async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id); 
+    const data = getEvolutionChainData(id)
+    res.json({
+      data
     });
   } catch (error) {
     console.error('Error fetching Pokémon:', error);

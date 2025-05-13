@@ -36,7 +36,7 @@ const fetchPokemon = async (id: number) => {
   const fetchPokemonBackData = async (id: number) => {
     const response = await fetch(`http://localhost:5000/api/pokemon/back/${id}`);
     const data = await response.json();
-    console.log(data)
+    console.log(data.data.forms)
     return {
       generation: data.data.generation,
       shape: data.data.shape,

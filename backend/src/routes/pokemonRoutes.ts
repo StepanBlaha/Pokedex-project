@@ -1,5 +1,5 @@
 import express from 'express';
-import { getPokemon, getExtraPokemonCardData} from '../controllers/pokemonController';
+import { getPokemon, getExtraPokemonCardData, getEvolutionChain} from '../controllers/pokemonController';
 import { createPokedexEntries, getPokedexCount } from '../controllers/pokedexlistController';
 
 const router = express.Router();

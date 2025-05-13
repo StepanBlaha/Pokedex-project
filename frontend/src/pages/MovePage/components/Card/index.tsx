@@ -1,17 +1,9 @@
-
 import React, { useEffect, useState, forwardRef  } from 'react';
-import axios from "axios";
 import styles from "./index.module.css"
-import { url } from "inspector";
-import { useQuery } from '@tanstack/react-query';
 import { MoveCardprops } from '../../../../types/card';
-import { extractIdFromUrl } from '../../../../utils/url';
-import { Link } from 'react-router-dom';
 
 
 const Card = forwardRef<HTMLDivElement, MoveCardprops>(({ name, id, type, accuracy, pp, class_name, category, power }, ref)=>{
-    const [isHovering, setIsHovering] = useState(false)
-    const [hoverBgUrl, setHoverBgUrl] = useState("")
     const pokemonTypeColors : { [key: string]: string } = {
         normal: "#A8A77A",
         fire: "#EE8130",
@@ -35,10 +27,7 @@ const Card = forwardRef<HTMLDivElement, MoveCardprops>(({ name, id, type, accura
       
 
     return(
-    <div className={styles.card} ref={ref}  
-    onMouseEnter={()=>setIsHovering(true)}
-    onMouseLeave={()=>setIsHovering(false)}
-    >
+    <div className={styles.card} ref={ref}  >
         
         <div className={styles.typeImage}  style={{ backgroundImage: `url(/assets/typeBanners/${type}.png` }}></div>
         <div className={styles.cardTitle}>
@@ -67,7 +56,6 @@ const Card = forwardRef<HTMLDivElement, MoveCardprops>(({ name, id, type, accura
             <p style={{ color: `${pokemonTypeColors[type]} ` }}>{pp}</p>
         </div>
 
-        
     </div>
     )
 })

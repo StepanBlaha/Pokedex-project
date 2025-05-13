@@ -61,18 +61,20 @@ export default function Header(){
                     <div className={styles.link}>
                       <div className={`${styles.pokeradarItem} ${styles.item}`}></div>
                       <div className={`${styles.pikachuItem} ${styles.item}`}></div>
-                      {/*absolutne jeste nefunguje*/}
+                      {/*absolutne jeste nefunguje
                       <Link to="/" className={pathname==="/" ? `${styles.link} ${styles.active}`: styles.link}>Pokedex</Link>
+                      */}
+                      <Link to="/">Pokedex</Link>
                     </div>
                     <div className={styles.link}>
                       <div className={`${styles.pokeballItem} ${styles.item}`}></div>
                       <div className={`${styles.potionItem} ${styles.item}`}></div>
-                      <Link to="items">Items</Link>
+                      <Link to="/">Items</Link>
                     </div>
                     <div className={styles.link}>
                       <div className={`${styles.tmWaterItem} ${styles.item}`}></div>
                       <div className={`${styles.tmGrassItem} ${styles.item}`}></div>
-                      <Link to="/">Moves</Link>
+                      <Link to="/moves">Moves</Link>
                     </div>
 
                   </div>

@@ -1,8 +1,5 @@
 import { Request, Response } from 'express';
 import { getPokemonData, getPokemonDescription, getExtraPokemonData, getEvolutionChainData } from '../services/pokemonService';
-import Pokemon from '../models/Pokemon';
-import Pokedex from '../models/Pokedex';
-import { EvoChainLink, EvoChain } from '../types/evolutionTypes';
 import { traverseChain } from '../utils/evolutionChain';
 
 export const getPokemon = async (req: Request, res: Response) => {

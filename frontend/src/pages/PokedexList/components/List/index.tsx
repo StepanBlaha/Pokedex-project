@@ -1,12 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
-import axios from "axios";
 import styles from "./index.module.css"
-import { url } from "inspector";
-import { useQuery } from '@tanstack/react-query';
 import Card from '../Card';
 import { PokemonListProps } from '../../../../types/pokemon';
-
-
 
 export default function List({ data, lastCardRef }: PokemonListProps){
     // Load the cards

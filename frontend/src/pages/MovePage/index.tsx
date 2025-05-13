@@ -1,18 +1,14 @@
-import Button from "../../components/Button";
 import styles from "./index.module.css"
 import React, { useEffect, useState, useRef } from 'react';
 import axios from "axios";
-import { url } from "inspector";
 import { useQuery } from '@tanstack/react-query';
 import List from "./components/List";
 import Header from "../../components/Header";
 import { Moves, MoveListResult, SearchedMoveList } from "../../types/moves";
 
-
-
+  // Function for fetching all moves
   const loadMoves = async (page: number) =>{
     const res = await axios.get<MoveListResult>(`http://localhost:5000/api/moves?page=${page}&limit=10`)
-    console.log(res.data)
     return res.data
     }
 
@@ -28,9 +24,6 @@ import { Moves, MoveListResult, SearchedMoveList } from "../../types/moves";
     }
   }
   
-
-
-
 
 export default function MovePage(){
   // States and refs
@@ -116,6 +109,7 @@ export default function MovePage(){
               <Header/>
 
               <div className={styles.mainBlock}>
+                
                   <div className={styles.sideContent}>
                     <input 
                     type="text" 
@@ -124,19 +118,15 @@ export default function MovePage(){
                     className={styles.searchInput}
                     placeholder="Tackle..."
                     />
-
                   </div>
+
                   <div className={styles.mainContent}>
                     <List data={items} lastCardRef={lastRef}/>
                   </div>   
+
               </div>
-
-
           </div>
         </div>
-
-
-
         </>
     )
 }

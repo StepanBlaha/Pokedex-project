@@ -1,13 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
-import axios from "axios";
 import styles from "./index.module.css"
-import { url } from "inspector";
-import { useQuery } from '@tanstack/react-query';
 import Card from '../Card';
-
 import { MoveListProps } from '../../../../types/moves';
-
-
 
 export default function List({ data, lastCardRef }: MoveListProps){
     // Load the cards

@@ -120,10 +120,8 @@ export const getSearchedPokemon = async (req: Request, res: Response): Promise<v
     }
 
     const searchedPokemon = await Pokedex.find({ name: new RegExp('^' + search, 'i') });
-    
-    
-
     res.json({ searchedPokemon });
+    
   } catch (error) {
     console.error('Error searching Pokedex entries:', error);
     res.status(500).json({ error: 'Failed to search Pokedex entries.' });

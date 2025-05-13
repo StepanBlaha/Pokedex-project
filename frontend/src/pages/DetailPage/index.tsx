@@ -1,25 +1,15 @@
-
-import Button from "../../components/Button";
 import styles from "./index.module.css"
 import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { Link, useParams } from "react-router-dom";
-import { url } from "inspector";
 import { useQuery } from '@tanstack/react-query';
 import Spinner from "../../components/Spinner";
-import axios from 'axios';
-import BarChart from "../../components/Charts/BarChart";
 import Header from "../../components/Header";
-import { PokemonBackDetailData } from "../../types/pokemon";
-
-
 const Card = lazy(() => import('./components/Card'));
 
-
+// Get the pokemon data
 const fetchPokemon = async (id: number) => {
     const response = await fetch(`http://localhost:5000/api/pokemon/${id}`);
     const pokemon = await response.json();
-    console.log(pokemon)
-    console.log(pokemon.data.stats)
     return {
       name: pokemon.data.name,
       type: pokemon.data.types[0].type.name,
@@ -32,11 +22,10 @@ const fetchPokemon = async (id: number) => {
       stats: pokemon.data.stats
     };
   };
-
+// Get the extra data for back side of the pokemon card
   const fetchPokemonBackData = async (id: number) => {
     const response = await fetch(`http://localhost:5000/api/pokemon/back/${id}`);
     const data = await response.json();
-    console.log(data.data.evolution_chain)
     return {
       generation: data.data.generation,
       shape: data.data.shape,
@@ -53,7 +42,6 @@ const fetchPokemon = async (id: number) => {
   };
 
 export default function DetailPage(){
-    
     const { id } = useParams();
     const {data, refetch, isFetching, error} = useQuery({
         queryKey: ["pokemon"],
@@ -76,13 +64,14 @@ export default function DetailPage(){
             <Header/>
             <div className={styles.mainBlock}>
                 <div className={styles.mainContent}>
+
                     <div className={styles.backHomeDiv}>
                         <Link to={"/"}>
                             <div className={styles.backHome}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-move-left-icon lucide-move-left"><path d="M6 8L2 12L6 16"/><path d="M2 12H22"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-move-left-icon lucide-move-left"><path d="M6 8L2 12L6 16"/><path d="M2 12H22"/></svg>
                                 <p>Back</p>
                             </div>
-                     </Link>
+                        </Link>
                     </div>
 
                     <Suspense fallback={<Spinner />}>
@@ -90,9 +79,7 @@ export default function DetailPage(){
                     </Suspense>
 
                     
-                    
                     </div>
-
                 </div>
             </div>
         </div>

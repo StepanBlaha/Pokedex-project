@@ -9,7 +9,7 @@ const AppRoutes = () => {
         <Suspense fallback={<Spinner />}>
             <Routes>
                 <Route path='/' element={<PokedexList/>}/>
-                <Route path='items' element={<MovePage/>}/>
+                <Route path='moves' element={<MovePage/>}/>
                 <Route path='pokemon/:id' element={<DetailPage/>}/>
             </Routes>
         </Suspense>

@@ -45,7 +45,6 @@ export default function Card({data, backData}: PokemonDetailCardProps){
 
     useEffect(()=>{
         if(data?.stats){
-            console.log(data.stats)
             const statNames = data.stats?.map(stat => stat.stat.name)
             setStatLabels(statNames)
             const statVals = data.stats?.map(stat => stat.base_stat)
@@ -107,13 +106,8 @@ export default function Card({data, backData}: PokemonDetailCardProps){
                             <h2>{data.name}</h2>
                         <div className={styles.cardType}>
                             <div className={styles.typeImage}  style={{ backgroundImage: `url(/assets/typeBanners/${data.type}.png` }}></div>
-                            
-                            {/*<div className="typeName">
-                                <p>{data.type}</p>
-                            </div>
-                            */}
                         </div>
-                            <div className={styles.cardImage} style={{ backgroundImage: `url(${data.image})` }}></div>
+                        <div className={styles.cardImage} style={{ backgroundImage: `url(${data.image})` }}></div>
                     </div>
 
                     <div className={styles.cardInformations}>
@@ -180,39 +174,14 @@ export default function Card({data, backData}: PokemonDetailCardProps){
                         </div>
                     </div>
                 </div>
+
                 <div className={styles.back}>
-                    {/*
-                    back ideas:
-                    pokemon-species
-                    "base_happiness"
-                    "capture_rate"
-                    maybe "evolution_chain"
-                    "shape": {
-        "name": "quadruped",
-        "url": "https://pokeapi.co/api/v2/pokemon-shape/8/"
-    },
-    "generation": {
-        "name": "generation-i",
-        "url": "https://pokeapi.co/api/v2/generation/1/"
-    },
-
-
-
-    pokemon
-    "base_experience"
-                    "sprites": {
-        "back_default": "",
-                     */}
                     
                     <div className={styles.cardTitle}>
                             <h2>{data.name}</h2>
                         <div className={styles.cardType}>
                             <div className={styles.typeImage}  style={{ backgroundImage: `url(/assets/typeBanners/${data.type}.png` }}></div>
-                            
-                            {/*<div className="typeName">
-                                <p>{data.type}</p>
-                            </div>
-                            */}
+
                         </div>
                             <div className={styles.cardImage} style={{ backgroundImage: `url(${backData.back_sprite})` }}></div>
                     </div>
@@ -273,30 +242,17 @@ export default function Card({data, backData}: PokemonDetailCardProps){
                             </div>
                         </div>
 
-
-
-
-
                     </div>
 
                     <div className={styles.cardEvolutions}>
                         <EvolutionList evolutions={backData.evolution_chain} title_color={pokemonTypeColors[data.type]}/>
-
                     </div>
-
-
-
-
 
                 </div>
             
-
-
             <Button onClick={()=>setFlipped(!flipped)} className={styles.flipButton}   style={{ backgroundColor: `${pokemonTypeColors[data.type]} ` }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right-left-icon lucide-arrow-right-left"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></svg>
             </Button>
         </div>
-
-
     )
 }

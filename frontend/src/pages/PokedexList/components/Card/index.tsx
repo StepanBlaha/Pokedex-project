@@ -1,11 +1,6 @@
-
 import React, { useEffect, useState, forwardRef  } from 'react';
-import axios from "axios";
 import styles from "./index.module.css"
-import { url } from "inspector";
-import { useQuery } from '@tanstack/react-query';
 import { CardProps } from '../../../../types/card';
-import { extractIdFromUrl } from '../../../../utils/url';
 import { Link } from 'react-router-dom';
 
 
@@ -59,6 +54,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({ name, id, type }, ref)=>{
         <div className={styles.cardTitle}>
             <p style={{ color: `${pokemonTypeColors[type]} ` }} >{name}</p>
         </div>
+        
         <Link to={`pokemon/${id}`}>
             <div className={styles.cardButton} style={{ backgroundColor: `${pokemonTypeColors[type]} ` }}>
                 <div className={styles.buttonCenter}>

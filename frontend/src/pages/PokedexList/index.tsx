@@ -1,8 +1,6 @@
-import Button from "../../components/Button";
 import styles from "./index.module.css"
 import React, { useEffect, useState, useRef } from 'react';
 import axios from "axios";
-import { url } from "inspector";
 import { useQuery } from '@tanstack/react-query';
 import List from "./components/List";
 import { Pokemon, PokemonListResult, SearchedPokemon, SearchedPokemonList } from "../../types/pokemon";
@@ -11,11 +9,8 @@ import Header from "../../components/Header";
   // Function for fetching the pokemon
   const loadPokemon = async (page: number) =>{
     const res = await axios.get<PokemonListResult>(`http://localhost:5000/api/pokedex?page=${page}&limit=10`)
-    console.log(res.data)
     return res.data
   }
-
-
 
   // Function for fetching searched pokemon
   const loadSearch = async(search: string) => {
@@ -118,6 +113,7 @@ export default function PokedexList(){
 
 
               <div className={styles.mainBlock}>
+
                   <div className={styles.sideContent}>
                     <input 
                     type="text" 
@@ -126,23 +122,15 @@ export default function PokedexList(){
                     className={styles.searchInput}
                     placeholder="Charizard..."
                     />
-
                   </div>
+
                   <div className={styles.mainContent}>
                       <List data={items} lastCardRef={lastRef}/>
-
                   </div>
 
-
-                  
               </div>
-
-
           </div>
         </div>
-
-
-
         </>
     )
 }

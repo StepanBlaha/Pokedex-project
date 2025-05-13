@@ -31,6 +31,17 @@ export default function Card({data, backData}: PokemonDetailCardProps){
         steel: "#B7B7CE",
         fairy: "#D685AD"
       };
+    const generationMap: {[key:string]:number} = {
+        "generation-i": 1,
+        "generation-ii": 2,
+        "generation-iii": 3,
+        "generation-iv": 4,
+        "generation-v": 5,
+        "generation-vi": 6,
+        "generation-vii": 7,
+        "generation-viii": 8,
+        "generation-ix": 9
+    };
 
     useEffect(()=>{
         if(data?.stats){
@@ -216,7 +227,7 @@ export default function Card({data, backData}: PokemonDetailCardProps){
                                 <p>Color</p>
                             </div>
                             <div className={styles.cardInfoContent}>
-                                <p>{backData.color} kg</p>
+                                <p>{backData.color}</p>
                             </div>
                         </div>
 
@@ -225,7 +236,7 @@ export default function Card({data, backData}: PokemonDetailCardProps){
                                 <p>Generation</p>
                             </div>
                             <div className={styles.cardInfoContent}>
-                                <p>{backData.generation}</p>
+                                <p>{generationMap[backData.generation]}</p>
                             </div>
                         </div>
 
@@ -256,44 +267,18 @@ export default function Card({data, backData}: PokemonDetailCardProps){
                             </div>
                         </div>
 
-                        <div className={styles.cardInfo}>
-                            <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
-                                <p>Ability</p>
-                            </div>
-                            <div className={styles.cardInfoContent}>
-                                <p>{data.ability}</p>
-                            </div>
-                        </div>
+
 
 
 
                     </div>
 
-                    <div className={styles.cardDescription}>
-                        <EvolutionList evolutions={backData.evolution_chain}/>
-                        <p>{data.description}</p>
+                    <div className={styles.cardEvolutions}>
+                        <EvolutionList evolutions={backData.evolution_chain} title_color={pokemonTypeColors[data.type]}/>
+
                     </div>
 
-                    <div className={styles.cardStats}>
-                        <div className={styles.statGraph} >
-                            <BarChart data={barData} options={{
-                            ...barOptions,
-                            plugins: {
-                                ...barOptions.plugins,
-                                datalabels: {
-                                anchor: 'start', 
-                                align: 'end',    
-                                color: 'black',  
-                                font: {
-                                    size: 14, 
-                                    weight: 'bold'
-                                },
-                                formatter: (value) => value 
-                                }
-                            }
-                            }}/>
-                        </div>
-                    </div>
+
 
 
 

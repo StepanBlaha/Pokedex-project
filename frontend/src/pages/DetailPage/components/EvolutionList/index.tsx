@@ -1,15 +1,21 @@
-
+import styles from "./index.module.css"
 interface EvolutionProps{
-    evolutions: string[]
+    evolutions: string[],
+    title_color: string
 }
 
 
-export default function EvolutionList({ evolutions} : EvolutionProps ){
+export default function EvolutionList({ evolutions, title_color} : EvolutionProps ){
     const evolutionList = evolutions.map(evolution => {
-        return <li key={evolution}>{evolution}</li>;
+        return <div key={evolution} className={styles.Item}><p>{evolution}</p></div>;
     });
 
     return(
-        <ul>{evolutionList}</ul>
+        <>
+        <div className={styles.Title}>
+            <p style={{ color: `${title_color} ` }}>Evolution Line</p>
+        </div>
+        {evolutionList}
+        </>
     )
 }

@@ -1,269 +1,172 @@
-html{
-    width: 100%;
-    height: 100%;
-    float: left;
-}
-body{
-    width: 100%;
-    height: 100%;
-    float: left;
-}
-#root{
-    width: 100%;
-    height: 100%;
-    float: left;
-}
-.App{
-    width: 100%;
-    height: 100%;
-    float: left;
+/* From Uiverse.io by ElSombrero2 */ 
+.cardTurn {
+  overflow: visible;
+  width: 190px;
+  height: 254px;
 }
 
-
-.center{
-    width: 100%;
-    height: 100%;
-    float: left;
-    border: 1px solid;
-    display: flex
-;
-    flex-wrap: wrap;
-    padding: 10px;
-    box-sizing: border-box;
-    gap: 30px;
-}
-.mainBlock{
-    width: 70%;
-    height: 100%;
-   background-color: blue;
-    width: 1400px;
-}
-.mainHeader{
-    height: 100px;
-    background-color: green;
-    width: 100%;
-    float: left;
-}
-.mainContent{
-    height: 1000px;
-    background-color: pink;
-    width: 100%;
-    float: left;
+.content {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 300ms;
+  box-shadow: 0px 0px 10px 1px #000000ee;
+  border-radius: 5px;
 }
 
-
-
-.sideBlock{
-    width: 30%;
-    height: 100%;
-    background-color: red;
-    width: 570px;
+.front, .back {
+  background-color: #151515;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.card{
-    width: 350px;
-    min-height: 300px;
-    float: left;
-    /* border: 1px solid; */
-    background-color: white;
-    color: rgb(54, 54, 54);
-    border-radius: 14px;
-
-
-    border: 4px solid black;
-    border-radius: 0.4em;
-    box-shadow: 0.2em 0.2em;
-}
-.cardTitle{
-    width: 100%;
-    min-height: 100px;
-    float: left;
-    position: relative;
-    padding: 20px;
-    box-sizing: border-box;
-    padding-bottom: 10px;
-}
-.cardTitle h2{
-    margin: 0;
-    text-align: left;
-    font-size: 38px;
-    color: black;
-}
-.cardTitle p{
-    margin: 0;
-    text-align: left;
+.back {
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }
 
-
-.cardType{
-    display: flex
-;
-    min-width: 100px;
-    min-height: 20px;
-    height: fit-content;
-    float: left;
-
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
-}
-.typeImage{
-    min-width: 90px;
-    min-height: 20px;
-    height: fit-content;
-    width: fit-content;
-    float: left;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.typeName{
-    min-width: 20px;
-    min-height: 20px;
-    height: fit-content;
-    width: fit-content;
-    float: left;
-
-}
-.typeName p{
-    color: black;
-    margin: 0;
-    font-weight: 700;
-    font-size: 20px;
-}
-.cardImage{
-    width: 300px;
-    height: 300px;
-    position: absolute;
-    top: -115px;
-    /* border: 1px solid; */
-    right: -48px;
-    image-rendering: pixelated;
-  image-rendering: crisp-edges; 
-    background-image: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png");
-    background-size: cover; /* or 'contain' depending on layout */
-    background-repeat: no-repeat;
-    background-position: center;
-
-
+.back::before {
+  position: absolute;
+  content: ' ';
+  display: block;
+  width: 160px;
+  height: 160%;
+  background: linear-gradient(90deg, transparent, #ff9966, #ff9966, #ff9966, #ff9966, transparent);
+  animation: rotation_481 5000ms infinite linear;
 }
 
-
-
-
-
-.cardInformations{
-    width: 100%;
-    min-height: fit-content;
-    float: left;
-    display: flex
-;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: flex-start;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    box-sizing: border-box;
-    /* z-index: 2; */
-    /* position: relative; */
-    column-gap: 20px;
-}
-.cardInfo{
-    width: fit-content;
-    height: fit-content;
-    /* width: 60px; */
-    display: flex;
-    flex-direction: column;
-}
-.cardInfoTitle{
-    width: fit-content;
-    height: fit-content;
-    float: left;
-}
-.cardInfoTitle p{
-    font-size: 12px;
-    /*color: #bcbc1d;*/
-    font-weight: 500;
-}
-.cardInfoContent{
-    width: fit-content;
-    height: fit-content;
-    float: left;
-
-}
-.cardInfoContent p{
-    font-size: 20px;
-    color: rgb(78 78 78);
-    font-weight: 700;
-}
-.cardInfo p{
-    margin: 0;
-    text-align: left;
-    width: fit-content;
+.back-content {
+  position: absolute;
+  width: 99%;
+  height: 99%;
+  background-color: #151515;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
 }
 
-
-
-
-
-
-.cardDescription{
-    float: left;
-    width: 100%;
-    min-height: 100px;
-    padding-left: 20px;
-    padding-right: 20px;
-    box-sizing: border-box;
-    background-color: white;
-    padding-bottom: 20px;
-}
-.cardDescription p{
-    text-align: left;
-    margin: 0;
-    font-weight: 600;
-    color: rgb(140 140 140);
+.cardTurn.flipped .content {
+  transform: rotateY(180deg);
 }
 
-.cardStats{
-    float: left;
-    width: 100%;
-    min-height: 100px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
-    box-sizing: border-box;
+@keyframes rotation_481 {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  0% {
+    transform: rotateZ(360deg);
+  }
 }
 
+.front {
+  transform: rotateY(180deg);
+  color: white;
+}
 
+.front .front-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
+.front-content .badge {
+  background-color: #00000055;
+  padding: 2px 10px;
+  border-radius: 10px;
+  backdrop-filter: blur(2px);
+  width: fit-content;
+}
 
-.generatePokemonButton{
-    width: 70px;
-    height: 40px;
-    background-color: red;
+.description {
+  box-shadow: 0px 0px 10px 5px #00000088;
+  width: 100%;
+  padding: 10px;
+  background-color: #00000099;
+  backdrop-filter: blur(5px);
+  border-radius: 5px;
+}
+
+.title {
+  font-size: 11px;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title p {
+  width: 50%;
+}
+
+.card-footer {
+  color: #ffffff88;
+  margin-top: 5px;
+  font-size: 8px;
+}
+
+.front .img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: #ffbb66;
+  position: relative;
+  filter: blur(15px);
+  animation: floating 2600ms infinite linear;
+}
+
+#bottom {
+  background-color: #ff8866;
+  left: 50px;
+  top: 0px;
+  width: 150px;
+  height: 150px;
+  animation-delay: -800ms;
+}
+
+#right {
+  background-color: #ff2233;
+  left: 160px;
+  top: -80px;
+  width: 30px;
+  height: 30px;
+  animation-delay: -1800ms;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
 }

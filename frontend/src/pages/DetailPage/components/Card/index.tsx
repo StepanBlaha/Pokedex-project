@@ -3,9 +3,11 @@ import BarChart from "../../../../components/Charts/BarChart";
 import { ChartData, scales } from 'chart.js';
 import styles from "./index.module.css"
 import React, { useEffect, useState, Suspense, lazy } from 'react';
+import Button from "../../../../components/Button";
 
 
-export default function Card({data}: PokemonDetailCardProps){
+export default function Card({data, backData}: PokemonDetailCardProps){
+    const [flipped, setFlipped] = useState(false)
     const [statLabels, setStatLabels] = useState<string[]>([])
     const [statValues, setStatValues] = useState<number[]>([])
     const pokemonTypeColors : { [key: string]: string } = {
@@ -37,6 +39,7 @@ export default function Card({data}: PokemonDetailCardProps){
             const statVals = data.stats?.map(stat => stat.base_stat)
             setStatValues(statVals)
         }
+        
     },[data])
     // Define the data for the bar chart and the setup
     const barData: ChartData<'bar'> = {
@@ -80,85 +83,226 @@ export default function Card({data}: PokemonDetailCardProps){
       
     console.log(`url(../../../assets/typeBanners/${data.type}.png` )
     return(
-        <div className={styles.card}>
+        <div className={`${styles.card} ${flipped ? styles.flipped : ""}`}>
 
-        <div className={styles.cardTitle}>
-                <h2>{data.name}</h2>
-            <div className={styles.cardType}>
-                <div className={styles.typeImage}  style={{ backgroundImage: `url(/assets/typeBanners/${data.type}.png` }}></div>
-                
-                {/*<div className="typeName">
-                    <p>{data.type}</p>
+                <div className={styles.front}>
+                    <div className={styles.cardTitle}>
+                            <h2>{data.name}</h2>
+                        <div className={styles.cardType}>
+                            <div className={styles.typeImage}  style={{ backgroundImage: `url(/assets/typeBanners/${data.type}.png` }}></div>
+                            
+                            {/*<div className="typeName">
+                                <p>{data.type}</p>
+                            </div>
+                            */}
+                        </div>
+                            <div className={styles.cardImage} style={{ backgroundImage: `url(${data.image})` }}></div>
+                    </div>
+
+                    <div className={styles.cardInformations}>
+
+                        <div className={styles.cardInfo}>
+                            <div className={styles.cardInfoTitle}  style={{ color: `${pokemonTypeColors[data.type]} ` }}>
+                                <p>Height</p>
+                            </div>
+                            <div className={styles.cardInfoContent}>
+                                <p>{data.height} cm</p>
+                            </div>
+                        </div>
+
+                        <div className={styles.cardInfo}>
+                            <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
+                                <p>Weight</p>
+                            </div>
+                            <div className={styles.cardInfoContent}>
+                                <p>{data.weight} kg</p>
+                            </div>
+                        </div>
+
+                        <div className={styles.cardInfo}>
+                            <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
+                                <p>Category</p>
+                            </div>
+                            <div className={styles.cardInfoContent}>
+                                <p>{data.category}</p>
+                            </div>
+                        </div>
+
+                        <div className={styles.cardInfo}>
+                            <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
+                                <p>Ability</p>
+                            </div>
+                            <div className={styles.cardInfoContent}>
+                                <p>{data.ability}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={styles.cardDescription}>
+                        <p>{data.description}</p>
+                    </div>
+
+                    <div className={styles.cardStats}>
+                        <div className={styles.statGraph} >
+                            <BarChart data={barData} options={{
+                            ...barOptions,
+                            plugins: {
+                                ...barOptions.plugins,
+                                datalabels: {
+                                anchor: 'start', 
+                                align: 'end',    
+                                color: 'black',  
+                                font: {
+                                    size: 14, 
+                                    weight: 'bold'
+                                },
+                                formatter: (value) => value 
+                                }
+                            }
+                            }}/>
+                        </div>
+                    </div>
                 </div>
-                */}
-            </div>
-                <div className={styles.cardImage} style={{ backgroundImage: `url(${data.image})` }}></div>
+                <div className={styles.back}>
+                    {/*
+                    back ideas:
+                    pokemon-species
+                    "base_happiness"
+                    "capture_rate"
+                    maybe "evolution_chain"
+                    "shape": {
+        "name": "quadruped",
+        "url": "https://pokeapi.co/api/v2/pokemon-shape/8/"
+    },
+    "generation": {
+        "name": "generation-i",
+        "url": "https://pokeapi.co/api/v2/generation/1/"
+    },
+
+
+
+    pokemon
+    "base_experience"
+                    "sprites": {
+        "back_default": "",
+                     */}
+                    
+                    <div className={styles.cardTitle}>
+                            <h2>{data.name}</h2>
+                        <div className={styles.cardType}>
+                            <div className={styles.typeImage}  style={{ backgroundImage: `url(/assets/typeBanners/${data.type}.png` }}></div>
+                            
+                            {/*<div className="typeName">
+                                <p>{data.type}</p>
+                            </div>
+                            */}
+                        </div>
+                            <div className={styles.cardImage} style={{ backgroundImage: `url(${backData.back_sprite})` }}></div>
+                    </div>
+
+                    <div className={styles.cardInformationsBack}>
+
+                        <div className={styles.cardInfo}>
+                            <div className={styles.cardInfoTitle}  style={{ color: `${pokemonTypeColors[data.type]} ` }}>
+                                <p>Shape</p>
+                            </div>
+                            <div className={styles.cardInfoContent}>
+                                <p>{backData.shape}</p>
+                            </div>
+                        </div>
+
+                        <div className={styles.cardInfo}>
+                            <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
+                                <p>Color</p>
+                            </div>
+                            <div className={styles.cardInfoContent}>
+                                <p>{backData.color} kg</p>
+                            </div>
+                        </div>
+
+                        <div className={styles.cardInfo}>
+                            <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
+                                <p>Generation</p>
+                            </div>
+                            <div className={styles.cardInfoContent}>
+                                <p>{backData.generation}</p>
+                            </div>
+                        </div>
+
+                        <div className={styles.cardInfo}>
+                            <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
+                                <p>Base Happiness</p>
+                            </div>
+                            <div className={styles.cardInfoContent}>
+                                <p>{backData.happiness}</p>
+                            </div>
+                        </div>
+
+                        <div className={styles.cardInfo}>
+                            <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
+                                <p>Capture rate</p>
+                            </div>
+                            <div className={styles.cardInfoContent}>
+                                <p>{backData.capture_rate}</p>
+                            </div>
+                        </div>
+
+                        <div className={styles.cardInfo}>
+                            <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
+                                <p>Species</p>
+                            </div>
+                            <div className={styles.cardInfoContent}>
+                                <p>{backData.species}</p>
+                            </div>
+                        </div>
+
+                        <div className={styles.cardInfo}>
+                            <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
+                                <p>Ability</p>
+                            </div>
+                            <div className={styles.cardInfoContent}>
+                                <p>{data.ability}</p>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <div className={styles.cardDescription}>
+                        <p>{data.description}</p>
+                    </div>
+
+                    <div className={styles.cardStats}>
+                        <div className={styles.statGraph} >
+                            <BarChart data={barData} options={{
+                            ...barOptions,
+                            plugins: {
+                                ...barOptions.plugins,
+                                datalabels: {
+                                anchor: 'start', 
+                                align: 'end',    
+                                color: 'black',  
+                                font: {
+                                    size: 14, 
+                                    weight: 'bold'
+                                },
+                                formatter: (value) => value 
+                                }
+                            }
+                            }}/>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            
+
+
+            <Button onClick={()=>setFlipped(!flipped)} className={styles.flipButton}/>
         </div>
 
-        <div className={styles.cardInformations}>
 
-            <div className={styles.cardInfo}>
-                <div className={styles.cardInfoTitle}  style={{ color: `${pokemonTypeColors[data.type]} ` }}>
-                    <p>Height</p>
-                </div>
-                <div className={styles.cardInfoContent}>
-                    <p>{data.height} cm</p>
-                </div>
-            </div>
-
-            <div className={styles.cardInfo}>
-                <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
-                    <p>Weight</p>
-                </div>
-                <div className={styles.cardInfoContent}>
-                    <p>{data.weight} kg</p>
-                </div>
-            </div>
-
-            <div className={styles.cardInfo}>
-                <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
-                    <p>Category</p>
-                </div>
-                <div className={styles.cardInfoContent}>
-                    <p>{data.category}</p>
-                </div>
-            </div>
-
-            <div className={styles.cardInfo}>
-                <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
-                    <p>Ability</p>
-                </div>
-                <div className={styles.cardInfoContent}>
-                    <p>{data.ability}</p>
-                </div>
-            </div>
-        </div>
-
-        <div className={styles.cardDescription}>
-            <p>{data.description}</p>
-        </div>
-
-        <div className={styles.cardStats}>
-            <div className={styles.statGraph} >
-                <BarChart data={barData} options={{
-                ...barOptions,
-                plugins: {
-                    ...barOptions.plugins,
-                    datalabels: {
-                    anchor: 'start', 
-                    align: 'end',    
-                    color: 'black',  
-                    font: {
-                        size: 14, 
-                        weight: 'bold'
-                    },
-                    formatter: (value) => value 
-                    }
-                }
-                }}/>
-            </div>
-        </div>
-
-    </div>
     )
 }

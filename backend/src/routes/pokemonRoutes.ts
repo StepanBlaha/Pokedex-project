@@ -1,10 +1,12 @@
 import express from 'express';
-import { getPokemon} from '../controllers/pokemonController';
+import { getPokemon, getExtraPokemonCardData} from '../controllers/pokemonController';
 import { createPokedexEntries, getPokedexCount } from '../controllers/pokedexlistController';
 
 const router = express.Router();
 // Get pokemon data by id
 router.get('/pokemon/:id', getPokemon);
+// Extra data fr back of pokemon card
+router.get('/pokemon/back/:id', getExtraPokemonCardData);
 // Insert from api to own db !!!use only once!!!
 router.post('/pokedb/entry', createPokedexEntries);
 // Count number of pokemon in the pokedex db

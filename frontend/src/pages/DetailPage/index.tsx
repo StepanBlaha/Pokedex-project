@@ -9,6 +9,8 @@ import Spinner from "../../components/Spinner";
 import axios from 'axios';
 import BarChart from "../../components/Charts/BarChart";
 import Header from "../../components/Header";
+import { PokemonBackDetailData } from "../../types/pokemon";
+
 
 const Card = lazy(() => import('./components/Card'));
 
@@ -31,15 +33,39 @@ const fetchPokemon = async (id: number) => {
     };
   };
 
+  const fetchPokemonBackData = async (id: number) => {
+    const response = await fetch(`http://localhost:5000/api/pokemon/back/${id}`);
+    const data = await response.json();
+    console.log(data)
+    return {
+      generation: data.data.generation,
+      shape: data.data.shape,
+      gender_rate: data.data.gender_rate,
+      color: data.data.color,
+      happiness: data.data.happiness,
+      capture_rate: data.data.capture_rate,
+      back_sprite: data.data.back_sprite,
+      species: data.data.species,
+      base_xp: data.data.base_xp,
+      forms: data.data.forms
+    };
+  };
+
 export default function DetailPage(){
+    
     const { id } = useParams();
     const {data, refetch, isFetching, error} = useQuery({
         queryKey: ["pokemon"],
         queryFn:()=> fetchPokemon(Number(id)),
     })
-    if (isFetching) return <Spinner />;
+    const {data: backData, refetch: backFetch, isFetching: isFetchingBack, error: backError} = useQuery({
+        queryKey: ["pokemon_extra"],
+        queryFn:()=> fetchPokemonBackData(Number(id)),
+    })
 
- 
+    if (isFetching) return <Spinner />;
+    
+
 
 
     return(
@@ -59,13 +85,17 @@ export default function DetailPage(){
                     </div>
 
                     <Suspense fallback={<Spinner />}>
-                        {data && <Card data={data} />}
+                        {data && backData && <Card data={data} backData={backData}/>}
                     </Suspense>
+
+                    
+                    
+                    </div>
 
                 </div>
             </div>
         </div>
-        </div>
+        
 
 
         </>

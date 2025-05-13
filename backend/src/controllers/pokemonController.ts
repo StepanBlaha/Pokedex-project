@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getPokemonData, getPokemonDescription } from '../services/pokemonService';
+import { getPokemonData, getPokemonDescription, getExtraPokemonData } from '../services/pokemonService';
 import Pokemon from '../models/Pokemon';
 import Pokedex from '../models/Pokedex';
 
@@ -35,3 +35,41 @@ export const createPokemon =  async (req: Request, res: Response) => {
   res.status(201).json(newPokemon);
 };
 */
+
+export const getExtraPokemonCardData = async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id); 
+    const data = await getExtraPokemonData(id) as {
+      generation: {name:String},
+      shape: {name:String},
+      gender_rate:Number,
+      color: {name:String},
+      base_happiness:Number,
+      capture_rate:Number
+    }
+    const additionalData = await getPokemonData(id) as {
+      sprites: {back_default:String},
+      species: {name:String},
+      base_experience: Number,
+      forms: [{name:String, url:String}]
+    }
+    const ExtraData = {
+      generation: data.generation.name,
+      shape: data.shape.name,
+      gender_rate:data.gender_rate,
+      color: data.color.name,
+      happiness: data.base_happiness,
+      capture_rate: data.capture_rate,
+      back_sprite: additionalData.sprites.back_default,
+      species: additionalData.species.name,
+      base_xp: additionalData.base_experience,
+      forms: additionalData.forms,
+    }
+    res.json({
+      data:ExtraData
+    });
+  } catch (error) {
+    console.error('Error fetching Pokémon:', error);
+    res.status(500).json({ error: 'Failed to fetch Pokémon data.' });
+  }
+};

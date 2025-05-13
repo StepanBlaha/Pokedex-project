@@ -43,9 +43,26 @@ interface StatInfo {
 }
 export interface PokemonDetailCardProps {
   data: PokemonDetailData;
+  backData:PokemonBackDetailData
 }
 
 
+export interface PokemonBackDetailData{
+  generation: string,
+  shape: string,
+  gender_rate: number,
+  color: string,
+  happiness: number,
+  capture_rate: number,
+  back_sprite: string,
+  species: string,
+  base_xp: number,
+  forms: PokemonForm[]
+}
+export interface PokemonForm{
+  name: string,
+  url: string
+}
 
 
 

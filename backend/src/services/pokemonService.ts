@@ -23,3 +23,10 @@ export const getPokemonData = async (id: number) => {
       genus: genusEntry ? genusEntry.genus : 'No category found', 
     };
 };
+
+export const getExtraPokemonData = async (id: number) => {
+    const res = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
+    console.log(res.data)
+    return res.data;
+  };
+  

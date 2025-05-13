@@ -6,16 +6,18 @@ interface EvolutionProps{
 
 
 export default function EvolutionList({ evolutions, title_color} : EvolutionProps ){
-    const evolutionList = evolutions.map(evolution => {
-        return <div key={evolution} className={styles.Item}><p>{evolution}</p></div>;
-    });
-
     return(
         <>
         <div className={styles.Title}>
-            <p style={{ color: `${title_color} ` }}>Evolution Line</p>
+            <p style={{ color: title_color }}>Evolution Line</p>
         </div>
-        {evolutionList}
+        <ul className={styles.List}>
+            {evolutions.map((evolution) => (
+            <li key={evolution} className={styles.Item}>
+                {evolution}
+            </li>
+            ))}
+        </ul>
         </>
     )
 }

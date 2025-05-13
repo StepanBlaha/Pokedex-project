@@ -165,6 +165,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     row-gap: 10px;
+    text-transform: capitalize;
 }
 @media (max-width: 600px) {
   .cardInformationsBack {
@@ -238,7 +239,7 @@
     padding-right: 20px;
     box-sizing: border-box;
     background-color: white;
-    padding-bottom: 45px;
+    padding-bottom: 55px;
     display: flex
 ;
     flex-direction: column;
@@ -249,7 +250,14 @@
     margin: 0;
     font-weight: 600;
     color: rgb(140 140 140);
+  }
+  .cardEvolutions li{
+    text-align: left;
+    font-weight: 600;
+    
+
 }
+
 
 .cardStats{
     float: left;
@@ -379,12 +387,37 @@
 
 .flipButton{
     position: absolute;
-    bottom: 0px;
-    left: 20px;
+    bottom: 10px;
+    left: 10px;
     width: 30px;
     height: 30px;
+    border: none;
+    
+    border-radius: 5px;
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
 }
 .card.flipped .flipButton{
-    right: 20px;
+    right: 10px;
     left: unset;
+}
+
+
+.flipButton::after {
+   content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0); /* No darkening initially */
+  transition: background-color 0.3s ease;
+  pointer-events: none;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 3px;
+  border-radius: 5px;
+
+}
+
+.flipButton:hover::after {
+  background-color: rgba(0, 0, 0, 0.2); /* Slightly dark overlay */
 }

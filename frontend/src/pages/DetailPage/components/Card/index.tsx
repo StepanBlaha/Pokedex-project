@@ -92,6 +92,12 @@ export default function Card({data, backData}: PokemonDetailCardProps){
         }
     };
   
+    // Fallback for when backsprite doesnt exist
+    useEffect(()=>{
+        if(backData.back_sprite == null){
+            backData.back_sprite = data.image
+       }
+    },[])
     
     return(
         <div className={`${styles.card} ${flipped ? styles.flipped : ""}`}>

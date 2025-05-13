@@ -1,5 +1,5 @@
 export interface EvoDetails{
-      gender: number | null;
+    gender: number | null;
     held_item: any | null;
     item: any | null;
     known_move: any | null;

@@ -3,6 +3,7 @@ import { getPokemonData, getPokemonDescription, getExtraPokemonData, getEvolutio
 import Pokemon from '../models/Pokemon';
 import Pokedex from '../models/Pokedex';
 import { EvoChainLink, EvoChain } from '../types/evolutionTypes';
+import { traverseChain } from '../utils/evolutionChain';
 
 export const getPokemon = async (req: Request, res: Response) => {
   try {
@@ -46,7 +47,8 @@ export const getExtraPokemonCardData = async (req: Request, res: Response) => {
       gender_rate:Number,
       color: {name:String},
       base_happiness:Number,
-      capture_rate:Number
+      capture_rate:Number,
+      evolution_chain:{url:string}
     }
     const additionalData = await getPokemonData(id) as {
       sprites: {back_default:String},
@@ -54,8 +56,13 @@ export const getExtraPokemonCardData = async (req: Request, res: Response) => {
       base_experience: Number,
       forms: [{name:String, url:String}]
     }
-    const evoData = await getEvolutionChainData(id)
-    
+
+    // Get evolution chain url and get the line
+    const segments = data.evolution_chain.url.split('/');
+    const evolutionChainId = parseInt(segments[segments.length - 2]);
+    const evoData = await getEvolutionChainData(evolutionChainId)
+
+    const evolutionList = traverseChain(evoData.chain)
 
 
 
@@ -71,6 +78,7 @@ export const getExtraPokemonCardData = async (req: Request, res: Response) => {
       species: additionalData.species.name,
       base_xp: additionalData.base_experience,
       forms: additionalData.forms,
+      evolution_chain: evolutionList,
     }
     res.json({
       data:ExtraData

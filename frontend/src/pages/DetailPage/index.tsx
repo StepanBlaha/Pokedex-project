@@ -36,7 +36,7 @@ const fetchPokemon = async (id: number) => {
   const fetchPokemonBackData = async (id: number) => {
     const response = await fetch(`http://localhost:5000/api/pokemon/back/${id}`);
     const data = await response.json();
-    console.log(data.data.forms)
+    console.log(data.data.evolution_chain)
     return {
       generation: data.data.generation,
       shape: data.data.shape,
@@ -47,7 +47,8 @@ const fetchPokemon = async (id: number) => {
       back_sprite: data.data.back_sprite,
       species: data.data.species,
       base_xp: data.data.base_xp,
-      forms: data.data.forms
+      forms: data.data.forms,
+      evolution_chain: data.data.evolution_chain
     };
   };
 

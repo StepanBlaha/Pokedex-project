@@ -48,16 +48,17 @@ export interface PokemonDetailCardProps {
 
 
 export interface PokemonBackDetailData{
-  generation: string,
-  shape: string,
-  gender_rate: number,
-  color: string,
-  happiness: number,
-  capture_rate: number,
-  back_sprite: string,
-  species: string,
-  base_xp: number,
-  forms: PokemonForm[]
+  generation: string;
+  shape: string;
+  gender_rate: number;
+  color: string;
+  happiness: number;
+  capture_rate: number;
+  back_sprite: string;
+  species: string;
+  base_xp: number;
+  forms: PokemonForm[];
+  evolution_chain: string[]
 }
 export interface PokemonForm{
   name: string,

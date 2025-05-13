@@ -4,6 +4,7 @@ import { ChartData, scales } from 'chart.js';
 import styles from "./index.module.css"
 import React, { useEffect, useState, Suspense, lazy } from 'react';
 import Button from "../../../../components/Button";
+import EvolutionList from "../EvolutionList";
 
 
 export default function Card({data, backData}: PokemonDetailCardProps){
@@ -269,6 +270,7 @@ export default function Card({data, backData}: PokemonDetailCardProps){
                     </div>
 
                     <div className={styles.cardDescription}>
+                        <EvolutionList evolutions={backData.evolution_chain}/>
                         <p>{data.description}</p>
                     </div>
 

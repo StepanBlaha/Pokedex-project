@@ -7,11 +7,11 @@ import Header from "../../components/Header";
 import { ItemResult, Item, ItemProps } from "../../types/items";
 
   // Function for fetching all moves
-  const loadItems = async (page: number) =>{
+const loadItems = async (page: number) =>{
     const items = await axios.get<ItemResult>(`http://localhost:5000/api/items?page=${page}&limit=10`)
     console.log(items.data)
     return items.data
-    }
+}
 
 
 
@@ -84,7 +84,7 @@ export default function ItemPage(){
                     value={inputValue}
                     onChange={(e)=> setInputValue(e.target.value)}
                     className={styles.searchInput}
-                    placeholder="Tackle..."
+                    placeholder="Great-Ball..."
                     />
                   </div>
 

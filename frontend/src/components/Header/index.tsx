@@ -69,7 +69,7 @@ export default function Header(){
                     <div className={styles.link}>
                       <div className={`${styles.pokeballItem} ${styles.item}`}></div>
                       <div className={`${styles.potionItem} ${styles.item}`}></div>
-                      <Link to="/">Items</Link>
+                      <Link to="/items">Items</Link>
                     </div>
                     <div className={styles.link}>
                       <div className={`${styles.tmWaterItem} ${styles.item}`}></div>

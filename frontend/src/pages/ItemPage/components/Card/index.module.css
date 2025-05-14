@@ -313,6 +313,7 @@
 .cardCategory,
 .cardPower,
 .cardAccuracy,
+.cardCost,
 .cardPP {
   flex: 1 1 0px;
   display: flex;
@@ -330,6 +331,7 @@
 .cardCategory p,
 .cardPower p,
 .cardAccuracy p,
+.cardCost p,
 .cardPP p {
   margin: 0;
   font-weight: 600;
@@ -369,3 +371,122 @@
     bottom: -10px;
     left: 22px;
 }
+.itemImage{
+  flex: 1 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  image-rendering: pixelated;
+  max-width: 60px;
+  min-width: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* From Uiverse.io by Siyu1017 */ 
+.tooltipContainer {
+  transition: all 0.2s;
+  font-size: 17px;
+
+  width: fit-content;
+  box-sizing: border-box;
+  min-width: 10px;
+  height: 20px;
+
+
+}
+
+.text {
+  z-index: 9;
+  color: black;
+  /* padding: 0.3em 0.3em; */
+  border-radius: 8px;
+  /* height: fit-content; */
+  cursor: pointer;
+  font-weight: 600;
+  /* box-shadow: 0 4px 16px 4px rgba(0, 0, 0, 0.15); */
+  height: fit-content;
+  width: fit-content;
+  display: flex
+;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+
+.tooltip {
+position: absolute;
+    top: calc(-1 * var(--margin));
+    /* left: 50%; */
+    transform: translateX(50%) translateY(0%) scale(0);
+    padding: 0.3em 0.6em;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s;
+    background: var(--tooltip-bg);
+    color: var(--tooltip-color);
+    border-radius: 0.5rem;
+    z-index: 9999;
+    right: 20px;
+    border: 1px solid;
+    top: -110%;
+        background: #f5f5f5;
+    border: 3px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.2em 0.2em;
+}
+
+.tooltip::before {
+  position: absolute;
+  content: "";
+  height: 0.6em;
+  width: 0.6em;
+  bottom: -0.2em;
+  left: 50%;
+  transform: translate(50%) rotate(45deg);
+  background: var(--tooltip-bg);
+  border-bottom-right-radius: 0.175rem;
+}
+
+.tooltipContainer:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-0%) translateY(-00%) scale(1);
+}
+
+
+

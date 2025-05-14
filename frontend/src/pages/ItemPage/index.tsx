@@ -84,7 +84,7 @@ export default function ItemPage(){
                     value={inputValue}
                     onChange={(e)=> setInputValue(e.target.value)}
                     className={styles.searchInput}
-                    placeholder="Great-Ball..."
+                    placeholder="Poke-Ball..."
                     />
                   </div>
 

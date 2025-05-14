@@ -1,6 +1,5 @@
 export interface Item{
-    attributes: NamedResource[];
-    baby_trigger_for: string | null;
+    attributes: NamedResource[] | null;
     category: NamedResource;
     cost: number;
     effect_entries: EffectEntry[];

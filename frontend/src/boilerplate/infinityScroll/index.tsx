@@ -15,21 +15,15 @@ const loadItems = async (page: number) =>{
  
 
 export default function InfinityScrollExample(){
-
   const [items, setItems] = useState<ItemProps[]>([]); // State containing the items (<ItemProps[]> = datatype for fetched items)
   const [page, setPage] = useState<number>(0) // State for the current page
   const lastRef = useRef<HTMLDivElement | null>(null);  // State for the last card of the page
-
   // React query for fetching items
   const {data, refetch, isFetching, error} = useQuery({
     queryKey: ["items", page], 
     queryFn:()=> loadItems(page),
     enabled: false,
   })
-
-
-
-
   // Update items when data changes
   useEffect(() => {
     if (data?.results) {

@@ -448,9 +448,7 @@
 }
 
 .tooltip {
-position: absolute;
-    top: calc(-1 * var(--margin));
-    /* left: 50%; */
+    position: absolute;
     transform: translateX(50%) translateY(0%) scale(0);
     padding: 0.3em 0.6em;
     opacity: 0;
@@ -462,11 +460,15 @@ position: absolute;
     z-index: 9999;
     right: 20px;
     border: 1px solid;
-    top: -110%;
-        background: #f5f5f5;
+    /* top: -90%; */
+    background: #f5f5f5;
     border: 3px solid black;
     border-radius: 0.4em;
     box-shadow: 0.2em 0.2em;
+    position: fixed;
+
+    right: 30px;
+    bottom: 60%;
 }
 
 .tooltip::before {
@@ -486,7 +488,17 @@ position: absolute;
   visibility: visible;
   pointer-events: auto;
   transform: translateX(-0%) translateY(-00%) scale(1);
+
 }
 
 
+.card {
+  position: relative;
+  z-index: 1;
+}
+
+.text {
+  position: absolute;
+  z-index: 2;
+}
 

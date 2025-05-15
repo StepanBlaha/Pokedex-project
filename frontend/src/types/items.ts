@@ -8,24 +8,31 @@ export interface ItemResult{
 }
 
 
-
+export interface SearchedItem{
+  _id: string,
+    category: string;
+    cost: number;
+    effect_entries: EffectEntry[] | [];
+    name: string;
+    id: number;
+    sprite: string;
+}
+export interface SearchedItemList{
+  searchedItems: SearchedItem[]
+}
 
 export interface ItemProps{
-    attributes: NamedResource[] | null;
     category: string;
     cost: number;
     effect_entries: EffectEntry[];
-    flavor_text_entries: FlavorTextEntry[];
     name: string;
     id: number;
     sprite: string;
 }
 export interface Item{
-    attributes: NamedResource[] | null;
     category: NamedResource;
     cost: number;
     effect_entries: EffectEntry[];
-    flavor_text_entries: FlavorTextEntry[];
     name: string;
     id: number;
     sprites: Sprite;

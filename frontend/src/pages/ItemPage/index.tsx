@@ -4,7 +4,7 @@ import axios from "axios";
 import { useQuery } from '@tanstack/react-query';
 import List from "./components/List";
 import Header from "../../components/Header";
-import { ItemResult, Item, ItemProps } from "../../types/items";
+import { ItemResult, Item, ItemProps,SearchedItemList } from "../../types/items";
 
   // Function for fetching all moves
 const loadItems = async (page: number) =>{
@@ -12,7 +12,18 @@ const loadItems = async (page: number) =>{
     console.log(items.data)
     return items.data
 }
-
+  // Function for fetching searched moves
+  const loadSearch = async(search: string) => {
+    try {
+      const res = await axios.post<SearchedItemList>("http://localhost:5000/api/searchItems", {
+        search: search
+      });;
+      return res.data;
+    } catch (error) {
+      console.error('Error in loadSearch:', error);
+    }
+  }
+  
  
 
 export default function ItemPage(){
@@ -28,6 +39,13 @@ export default function ItemPage(){
     enabled: false,
   })
 
+   const {data: searchedItems, refetch: searchItems, isFetching: isSearching, error: searchError} = useQuery({
+      queryKey: ["itemSearch", inputValue],
+      queryFn:()=> loadSearch(inputValue),
+      enabled: false,
+    })
+  
+
 
   // Update state when data changes
   useEffect(() => {
@@ -35,8 +53,10 @@ export default function ItemPage(){
       // Update Items - only add the not existing ones
       setItems((prev) => [...prev, ...data.results.filter(p => !prev.some(existing => existing.id === p.id))]);
     }
-
-  }, [data]);
+    if(searchedItems?.searchedItems){
+      setItems(searchedItems.searchedItems);
+    }
+  }, [data, searchedItems]);
 
   // Effect for the infinity scroll - maybe create custom hook
   useEffect(() => {
@@ -70,6 +90,22 @@ export default function ItemPage(){
     }
   }, [page]);
 
+
+  // This is for the search ----------------------------------------------------------
+    useEffect(() => {
+      if (inputValue !== "") {
+        searchItems();
+        // For searching purposes
+        setPage(1);   
+      } else {
+        // Reset the search
+        if(page !== 0){
+          setItems([]);    
+          setPage(0);        
+        }
+      }
+    }, [inputValue]);
+  // This is for the search ----------------------------------------------------------
     return(
         <>
         <div className={styles.App}>

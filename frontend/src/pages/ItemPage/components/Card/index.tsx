@@ -3,7 +3,7 @@ import styles from "./index.module.css"
 import { Item, ItemProps } from '../../../../types/items';
 
 
-const Card = forwardRef<HTMLDivElement, ItemProps>(({ name, id, attributes, category, cost, effect_entries, flavor_text_entries, sprite}, ref)=>{
+const Card = forwardRef<HTMLDivElement, ItemProps>(({ name, id, category, cost, effect_entries, sprite}, ref)=>{
     const [desc, setDesc]= useState("")
     useEffect(()=>{
         effect_entries.forEach((item) => {

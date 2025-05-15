@@ -14,7 +14,7 @@ interface FlavorTextEntry{
     version_group: NamedResource;
 
 }
-interface EffectEntry{
+export interface EffectEntry{
     effect: string;
     language: NamedResource;
     short_effect: string;

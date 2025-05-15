@@ -13,7 +13,7 @@ const loadItems = async (page: number) =>{
     return items.data
 }
 
-
+ 
 
 export default function ItemPage(){
   // States and refs

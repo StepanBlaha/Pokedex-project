@@ -560,10 +560,7 @@
 }
 .link a.active::after {
   width: 100%;
-  border: 1px solid;
-}
-.link .active{
-    border: 1px solid;
+
 }
 
 
@@ -666,5 +663,31 @@
     right: -11px;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

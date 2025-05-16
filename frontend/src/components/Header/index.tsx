@@ -56,7 +56,7 @@ export default function Header(){
                     <div className={styles.link}>
                       <div className={`${styles.mapItem} ${styles.item}`}></div>
                       <div className={`${styles.bikeItem} ${styles.item}`}></div>
-                      <Link to="/">Home</Link>
+                      <Link to="/" className={pathname === "/" ? styles.active : ""}>Home</Link>
                     </div>
                     <div className={styles.link}>
                       <div className={`${styles.pokeradarItem} ${styles.item}`}></div>
@@ -64,17 +64,17 @@ export default function Header(){
                       {/*absolutne jeste nefunguje
                       <Link to="/" className={pathname==="/" ? `${styles.link} ${styles.active}`: styles.link}>Pokedex</Link>
                       */}
-                      <Link to="/pokedex">Pokedex</Link>
+                      <Link to="/pokedex" className={pathname === "/pokedex" ? styles.active : ""}>Pokedex</Link>
                     </div>
                     <div className={styles.link}>
                       <div className={`${styles.pokeballItem} ${styles.item}`}></div>
                       <div className={`${styles.potionItem} ${styles.item}`}></div>
-                      <Link to="/items">Items</Link>
+                      <Link to="/items" className={pathname === "/items" ? styles.active : ""}>Items</Link>
                     </div>
                     <div className={styles.link}>
                       <div className={`${styles.tmWaterItem} ${styles.item}`}></div>
                       <div className={`${styles.tmGrassItem} ${styles.item}`}></div>
-                      <Link to="/moves">Moves</Link>
+                      <Link to="/moves" className={pathname === "/moves" ? styles.active : ""}>Moves</Link>
                     </div>
 
                   </div>

@@ -1,0 +1,407 @@
+html{
+    width: 100%;
+    height: 100%;
+    float: left;
+    zoom: 1.4; 
+}
+body{
+    width: 100%;
+    height: 100%;
+    float: left;
+
+}
+#root{
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+.App{
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+
+
+.center{
+    width: 100%;
+    width: 100%;
+    height: fit-content;
+    float: left;
+    border: 1px solid;
+    display: flex
+;
+    flex-wrap: wrap;
+    /* padding: 10px; */
+    box-sizing: border-box;
+    gap: 30px;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    gap: 3px;
+
+}
+.mainBlock{
+    width: 90%;
+    height: 100%;
+ 
+   display: flex;
+   flex-direction: row-reverse;
+   justify-content: center;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mainContent{
+    width: 100%;
+    min-height: 800px;
+    float: left;
+    flex: 0 0 100%;
+
+}
+.sideContent{
+    min-height: 40px;
+    float: left;
+    flex: 0 0 30%;
+    padding: 20px;
+}
+@media (max-width: 1248px) {
+    .mainBlock {
+      flex-direction: column;
+    }
+  
+    .mainContent,
+    .sideContent {
+      flex: 0 0 100%;
+    }
+  }
+
+
+
+.Hero{
+    width: 100%;
+    height: fit-content;
+    border: 1px solid;
+}
+.HeroTitle{
+    width: 100%;
+    height: fit-content;
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+gap: 1px;
+    align-content: center;
+    flex-wrap: wrap;
+}
+.HeroTitle p{
+    margin: 0;
+    font-size: 20px;
+}
+.HeroTitle h2{
+    margin: 0;
+    font-size: 54px;
+    font-weight: 700;
+    width: fit-content;
+}
+.HeroText{
+    width: 100%;
+    height: fit-content;
+    border: 1px solid;
+}
+
+
+
+
+
+
+
+
+
+.Future{
+    width: 100%;
+    height: fit-content;
+    border: 1px solid;
+    min-height: 200px;
+    background-color: green;
+}
+.FutureTitle{
+    width: 100%;
+    height: fit-content;
+    
+    display: flex
+;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+    gap: 1px;
+    align-content: flex-start;
+    flex-wrap: wrap;
+}
+.FutureTitle p{
+    margin: 0;
+    font-size: 20px;
+}
+.FutureTitle h2{
+margin: 0;
+    font-size: 35px;
+    font-weight: 600;
+    width: fit-content;
+}
+.FutureText{
+    width: 100%;
+    height: fit-content;
+    
+    margin-top: 10px;
+}
+.FutureText ul{
+    margin: 0;
+}
+.FutureText li{
+    margin-bottom: 3px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.Pages{
+    width: 100%;
+    height: fit-content;
+    border: 1px solid;
+    min-height: 200px;
+    position: relative;
+    z-index: 1;
+}
+.PageTitle{
+    width: 100%;
+    height: fit-content;
+    border: 1px solid;
+}
+.PageTitle p{
+    margin: 0;
+}
+.PageButtons{
+    height: 100%;
+    width: 100%;
+    float: left;
+    flex: 1 1;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid;
+    flex-wrap: wrap;
+}
+
+.link{
+    height: 100%;
+    width: 120px;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative  ;
+    border: 1px solid;
+    padding: 10px;
+    border: 3px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.2em 0.2em;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.link a{
+    text-decoration: none;
+    color: black;
+    font-size: 29px;
+    font-weight: 700;
+    transition: 0.3s ease-in-out;
+    position: relative;
+    text-decoration: none;
+    color: black;
+    font-size: 29px;
+    font-weight: 700;
+    transition: color 0.2s ease-in;
+    z-index: 1;
+}
+
+.link::after {
+    content: '';
+    position: absolute;
+    /*
+    left: 0;
+    width: 0%;
+    height: 0%;
+    bottom: 0;
+    */
+    top: 0;
+    right: 0;
+    height: 30px;
+    width: 30px;
+    background-color: black;
+    transition: all 0.3s ease;
+    z-index: 0;
+   border-bottom-left-radius: 0.3em;
+   border-top-right-radius: 0.2em;
+}
+
+.link:hover::after {
+    height: 100%;
+    width: 100%;
+}
+
+
+#PokedexLink::after{
+    background-color: rgb(238, 129, 48);
+}
+/*
+#PokedexLink:hover a{
+    color: red;
+}
+    */
+#ItemLink::after{
+    background-color: rgb(122, 199, 76);
+}
+/*
+#ItemLink:hover a{
+    color: green;
+}
+    */
+#MoveLink::after{
+    background-color: rgb(99, 144, 240);
+}
+/*
+#MoveLink:hover a{
+    color: blue;
+}
+*/
+.link svg{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    z-index: 1;
+    color: black;
+    transition: all 0.3s ease;
+}
+.link:hover svg{
+    top: 50%;
+}
+
+
+
+
+
+
+
+
+
+
+

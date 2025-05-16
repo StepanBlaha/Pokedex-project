@@ -4,12 +4,14 @@ import PokedexList from './pages/PokedexList';
 import Spinner from './components/Spinner';
 import MovePage from './pages/MovePage';
 import ItemPage from './pages/ItemPage';
+import HomePage from './pages/HomePage';
 const DetailPage = lazy(() => import('./pages/DetailPage'));
 const AppRoutes = () => {
     return(
         <Suspense fallback={<Spinner />}>
             <Routes>
-                <Route path='/' element={<PokedexList/>}/>
+                <Route path='/' element={<HomePage/>}/>
+                <Route path='pokedex' element={<PokedexList/>}/>
                 <Route path='moves' element={<MovePage/>}/>
                 <Route path='items' element={<ItemPage/>}/>
                 <Route path='pokemon/:id' element={<DetailPage/>}/>

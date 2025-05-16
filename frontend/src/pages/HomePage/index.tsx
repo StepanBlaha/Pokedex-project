@@ -7,6 +7,7 @@ import axios from "axios";
 import { useQuery } from '@tanstack/react-query';
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 
   
@@ -30,13 +31,13 @@ export default function HomePage(){
                             <p>Fan made multipurpose pokedex</p>
                         </div>
                         <div className={styles.HeroText}>
-                            <p>Pokelog is a fan made passion project. It aims to help group all the data together for better orientation. Need to find a pokemons stats? No worries simply search for him and open his card! Need to find moves accuracy or pp, easily open move page and search for it. The idea for the project came from my own experience. With this i can easily find what pokemon im missing from my pokedex, find what number pokemon is in the pokedex,r what his base stats are and much more...</p>
+                            <p>Pokelog is a fan made passion project. It aims to help group all the data together for better orientation. Need to find a pokemons stats? No worries simply search for him and open his card! Need to find moves accuracy or pp? Easily open move page and search for it. The idea for the project came from my own experience. With this i can easily find what pokemon im missing from my pokedex, find what number pokemon is in the pokedex or what his base stats are and much more...</p>
                         </div>
                     </div>
 
                     <div className={styles.Pages}>
                         <div className={styles.PageTitle}>
-                            <p>Quickly explore all our dexes!</p>
+                            <h2>Quickly explore all of our dexes!</h2>
                         </div>
                         <div className={styles.PageButtons}>
 
@@ -78,6 +79,8 @@ export default function HomePage(){
 
                   </div>
               </div>
+
+              <Footer/>
           </div>
         </div>
         </>

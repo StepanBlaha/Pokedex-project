@@ -27,7 +27,6 @@ body{
     width: 100%;
     height: fit-content;
     float: left;
-    border: 1px solid;
     display: flex
 ;
     flex-wrap: wrap;
@@ -37,12 +36,13 @@ body{
     align-items: center;
     align-content: center;
     flex-direction: column;
-    gap: 3px;
+    gap: 0px;
 
 }
 .mainBlock{
     width: 90%;
     height: 100%;
+    max-width: 1060px;
  
    display: flex;
    flex-direction: row-reverse;
@@ -50,44 +50,24 @@ body{
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .mainContent{
     width: 100%;
     min-height: 800px;
     float: left;
     flex: 0 0 100%;
-
+    border: 5px solid black;
+    box-shadow: 0.0em 0.2em;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+    border-top: none;
+    border-bottom-left-radius: 0.6em;
+    border-bottom-right-radius: 0.6em;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 .sideContent{
     min-height: 40px;
@@ -111,19 +91,18 @@ body{
 .Hero{
     width: 100%;
     height: fit-content;
-    border: 1px solid;
+    float: left;
 }
 .HeroTitle{
     width: 100%;
     height: fit-content;
-    border: 1px solid;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
 gap: 1px;
     align-content: center;
     flex-wrap: wrap;
+        text-align: center;
 }
 .HeroTitle p{
     margin: 0;
@@ -138,7 +117,9 @@ gap: 1px;
 .HeroText{
     width: 100%;
     height: fit-content;
-    border: 1px solid;
+}
+.HeroText p{
+    margin-bottom: 0px;
 }
 
 
@@ -152,19 +133,16 @@ gap: 1px;
 .Future{
     width: 100%;
     height: fit-content;
-    border: 1px solid;
     min-height: 200px;
-    background-color: green;
+    float: left;
 }
 .FutureTitle{
     width: 100%;
     height: fit-content;
-    
-    display: flex
-;
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-top: 20px;
+
     gap: 1px;
     align-content: flex-start;
     flex-wrap: wrap;
@@ -174,10 +152,13 @@ gap: 1px;
     font-size: 20px;
 }
 .FutureTitle h2{
-margin: 0;
     font-size: 35px;
     font-weight: 600;
     width: fit-content;
+
+    margin: 0;
+    font-size: 30px;
+    font-weight: 600;
 }
 .FutureText{
     width: 100%;
@@ -275,18 +256,19 @@ margin: 0;
 .Pages{
     width: 100%;
     height: fit-content;
-    border: 1px solid;
-    min-height: 200px;
     position: relative;
     z-index: 1;
+    float: left;
 }
 .PageTitle{
     width: 100%;
     height: fit-content;
-    border: 1px solid;
+    
 }
-.PageTitle p{
+.PageTitle h2{
     margin: 0;
+    font-size: 30px;
+    font-weight: 600;
 }
 .PageButtons{
     height: 100%;
@@ -297,8 +279,9 @@ margin: 0;
     gap: 20px;
     justify-content: center;
     align-items: center;
-    border: 1px solid;
+    
     flex-wrap: wrap;
+    margin-top: 10px;
 }
 
 .link{
@@ -309,13 +292,13 @@ margin: 0;
     justify-content: center;
     align-items: center;
     position: relative  ;
-    border: 1px solid;
     padding: 10px;
     border: 3px solid black;
     border-radius: 0.4em;
     box-shadow: 0.2em 0.2em;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 25px;
+    padding-right: 25px;
+    transition: all 0.3s ease;
 }
 
 .link a{
@@ -352,10 +335,16 @@ margin: 0;
    border-bottom-left-radius: 0.3em;
    border-top-right-radius: 0.2em;
 }
-
+.link:hover{
+  transform: translateY(-6px) scale(1.05);
+}
 .link:hover::after {
     height: 100%;
     width: 100%;
+   
+}
+.link:active{
+     transform: translateY(6px) scale(1.0);
 }
 
 
@@ -392,7 +381,7 @@ margin: 0;
     transition: all 0.3s ease;
 }
 .link:hover svg{
-    top: 50%;
+    top: 15px;
 }
 
 

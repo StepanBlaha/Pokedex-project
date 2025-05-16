@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import List from "./components/List";
 import { Pokemon, PokemonListResult, SearchedPokemon, SearchedPokemonList } from "../../types/pokemon";
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
   // Function for fetching the pokemon
   const loadPokemon = async (page: number) =>{
@@ -133,6 +134,7 @@ export default function PokedexList(){
                   </div>
 
               </div>
+              <Footer/>
           </div>
         </div>
         </>

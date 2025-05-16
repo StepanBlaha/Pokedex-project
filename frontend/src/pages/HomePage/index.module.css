@@ -299,6 +299,7 @@ gap: 1px;
     padding-left: 25px;
     padding-right: 25px;
     transition: all 0.3s ease;
+     user-select: none;
 }
 
 .link a{

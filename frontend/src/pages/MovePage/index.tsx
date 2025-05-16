@@ -4,6 +4,7 @@ import axios from "axios";
 import { useQuery } from '@tanstack/react-query';
 import List from "./components/List";
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import { Moves, MoveListResult, SearchedMoveList } from "../../types/moves";
 
   // Function for fetching all moves
@@ -125,6 +126,7 @@ export default function MovePage(){
                   </div>   
 
               </div>
+              <Footer/>
           </div>
         </div>
         </>

@@ -4,6 +4,7 @@ import axios from "axios";
 import { useQuery } from '@tanstack/react-query';
 import List from "./components/List";
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import { ItemResult, Item, ItemProps,SearchedItemList } from "../../types/items";
 
   // Function for fetching all moves
@@ -129,6 +130,7 @@ export default function ItemPage(){
                   </div>   
 
               </div>
+              <Footer/>
           </div>
         </div>
         </>

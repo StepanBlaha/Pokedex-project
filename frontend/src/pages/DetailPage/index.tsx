@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { useQuery } from '@tanstack/react-query';
 import Spinner from "../../components/Spinner";
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 const Card = lazy(() => import('./components/Card'));
 
 // Get the pokemon data
@@ -81,6 +82,7 @@ export default function DetailPage(){
                     
                     </div>
                 </div>
+                <Footer/>
             </div>
         </div>
         

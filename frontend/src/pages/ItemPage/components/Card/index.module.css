@@ -298,7 +298,8 @@
   flex-wrap: wrap;
   align-items: stretch;
   gap: 10px;
-
+padding-right: 30px;
+    box-sizing: border-box;
 }
 
 /* Divider (used inline in JSX) */
@@ -384,6 +385,7 @@
   image-rendering: pixelated;
   max-width: 60px;
   min-width: 50px;
+  min-height: 50px;
 }
 
 
@@ -502,3 +504,6 @@
   z-index: 2;
 }
 
+.cardCost{
+      max-width: 120px;
+}

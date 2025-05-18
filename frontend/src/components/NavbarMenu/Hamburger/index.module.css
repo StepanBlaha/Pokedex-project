@@ -1,0 +1,196 @@
+.linkPart{
+    height: 100%;
+    width: 70%;
+    float: left;
+    flex: 1 1;
+    display: flex
+;
+    gap: 20px;
+    flex-direction: column;
+    height: fit-content;
+    border: 1px solid;
+    width: fit-content;
+    position: absolute;
+    top: 100%;
+    top: 76%;
+    z-index: 3;
+    padding: 12px;
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.2em 0.2em;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: opacity 0.2s ease-in, transform 0.2s ease-in;
+    user-select: none;
+
+}
+
+
+
+.linkPart.Open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.linkPart
+.link{
+    height: 100%;
+    width: 120px;
+    float: left;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative  ;
+}
+.linkText{
+    height: fit-content;
+    width: fit-content;
+    background-color: red;
+    transition: 0.3s ease-in-out;
+}
+.link a{
+    text-decoration: none;
+    color: black;
+    font-size: 29px;
+    font-weight: 700;
+    transition: 0.3s ease-in-out;
+
+}
+
+
+.link a {
+    position: relative;
+    text-decoration: none;
+    color: black;
+    font-size: 29px;
+    font-weight: 700;
+    transition: color 0.2s ease-in;
+    z-index: 1;
+}
+
+.link a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px; /* adjust based on spacing */
+    width: 0%;
+    height: 3px;
+    background-color: black;
+    transition: width 0.3s ease;
+}
+
+.link a:hover::after {
+    width: 100%;
+}
+.link a.active::after {
+  width: 100%;
+
+}
+
+
+
+/*BG image section*/
+.item{
+        width: 40px;
+    height: 40px;
+    position: absolute;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-size: cover;
+    z-index: 1;
+}
+.pokeballItem{
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png);
+    top: -13px;
+    right: -3px;
+}
+.potionItem{
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/potion.png);
+    z-index: -1;
+    top: 5px;
+    left: -7px;
+}
+.tmWaterItem{
+   /* background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-water.png);*/
+    z-index: -1;
+    top: 14px;
+    left: -11px;
+}
+.tmGrassItem{
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-grass.png);
+    z-index: -1;
+    top: -1px;
+    right: -11px;
+    height: 50px;
+    width: 50px;
+}
+.pokeradarItem{
+    background-image: url(https://raw.githubusercontent.com/msikma/pokesprite/master/icons/key-item/poke-radar.png);
+    z-index: -1;
+    top: -11px;
+    right: -16px;
+
+}
+.pikachuItem{
+    background-image: url(https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/pikachu-original-cap.png);
+    z-index: -1;
+    top: 5px;
+    left: -19px;
+}
+.bikeItem{
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/bicycle.png);
+    z-index: -1;
+    top: -9px;
+    left: -7px;
+
+}
+.mapItem{
+    background-image: url(https://raw.githubusercontent.com/msikma/pokesprite/master/icons/key-item/town-map.png);
+    z-index: -1;
+    top: 9px;
+    right: -3px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+.BurgerButton{
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.BurgerButton svg{
+    color: white;
+    width: 80%;
+    height: 80%;
+}
+
+.Menu{
+    height: 100%;
+    width: fit-content;
+    position: relative;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+}

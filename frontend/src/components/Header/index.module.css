@@ -496,71 +496,7 @@
     padding-left: 10px;
     padding-right: 10px;
     box-sizing: border-box;
-}
-
-.linkPart{
-    height: 100%;
-    width: 70%;
-
-    float: left;
-    flex: 1;
-    display: flex;
-    gap: 20px;
-}
-
-.link{
-    height: 100%;
-    width: 120px;
-    float: left;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative  ;
-}
-.linkText{
-    height: fit-content;
-    width: fit-content;
-    background-color: red;
-    transition: 0.3s ease-in-out;
-}
-.link a{
-    text-decoration: none;
-    color: black;
-    font-size: 29px;
-    font-weight: 700;
-    transition: 0.3s ease-in-out;
-
-}
-
-
-.link a {
-    position: relative;
-    text-decoration: none;
-    color: black;
-    font-size: 29px;
-    font-weight: 700;
-    transition: color 0.2s ease-in;
-    z-index: 1;
-}
-
-.link a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -5px; /* adjust based on spacing */
-    width: 0%;
-    height: 3px;
-    background-color: black;
-    transition: width 0.3s ease;
-}
-
-.link a:hover::after {
-    width: 100%;
-}
-.link a.active::after {
-  width: 100%;
-
+        justify-content: space-between;
 }
 
 
@@ -594,75 +530,6 @@
 
 
 
-
-
-
-
-
-/*BG image section*/
-.item{
-        width: 40px;
-    height: 40px;
-    position: absolute;
-    background-repeat: no-repeat;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
-    background-size: cover;
-    z-index: 1;
-}
-.pokeballItem{
-    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png);
-    top: 43px;
-    right: -3px;
-}
-.potionItem{
-    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/potion.png);
-    z-index: -1;
-    top: 14px;
-    left: -7px;
-}
-.tmWaterItem{
-   /* background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-water.png);*/
-    z-index: -1;
-    top: 14px;
-    left: -11px;
-}
-.tmGrassItem{
-    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-grass.png);
-    z-index: -1;
-    top: 38px;
-    right: -11px;
-    height: 50px;
-    width: 50px;
-}
-.pokeradarItem{
-    background-image: url(https://raw.githubusercontent.com/msikma/pokesprite/master/icons/key-item/poke-radar.png);
-    z-index: -1;
-    top: 42px;
-    right: -17px;
-
-}
-.pikachuItem{
-    background-image: url(https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/pikachu-original-cap.png);
-    z-index: -1;
-    top: 14px;
-    left: -7px;
-
-}
-.bikeItem{
-    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/bicycle.png);
-    z-index: -1;
-    top: 14px;
-    left: -7px;
-
-}
-.mapItem{
-    background-image: url(https://raw.githubusercontent.com/msikma/pokesprite/master/icons/key-item/town-map.png);
-    z-index: -1;
-    top: 38px;
-    right: -11px;
-
-}
 
 
 

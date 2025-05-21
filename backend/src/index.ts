@@ -5,6 +5,7 @@ import pokemonRoutes from "./routes/pokemonRoutes"
 import pokedexRoutes from "./routes/pokedexlistRoutes"
 import moveRoutes from './routes/moveRoutes'
 import itemRoutes from './routes/itemRoutes'
+import authRoutes from './routes/authRoutes'
 import axios from 'axios';
 import dotenv from 'dotenv';
 
@@ -23,6 +24,7 @@ app.use('/api', randomPokemonRoutes);
 app.use('/api', pokemonRoutes); 
 app.use('/api', pokedexRoutes); 
 app.use('/api', moveRoutes);
-app.use('/api', itemRoutes)
+app.use('/api', itemRoutes);
+app.use('/api', authRoutes)
 
 app.listen(5000, () => console.log('Server running on port 5000'));

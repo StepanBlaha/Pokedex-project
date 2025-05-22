@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { registerFormData, loginFormData, User } from "../../types/user";
 import { useForm } from "react-hook-form";
 import { hashPassword,comparePasswords } from "../../utils/hash";
-
+import { useAuth } from "../../hooks/useAuth";
 // Register user
 const loginUser = async(data: any) => {
     try {
@@ -22,6 +22,7 @@ const loginUser = async(data: any) => {
 }  
 
 export default function LoginPage(){
+    const {isLoggedIn, login, logout} = useAuth();
     const {register, handleSubmit, formState: {errors, isSubmitting}, setError,} = useForm<loginFormData>();
 
     const onSubmit = async(data: loginFormData)=>{
@@ -31,7 +32,16 @@ export default function LoginPage(){
         // Compare passwords
         const correctPassword = await comparePasswords(data.password, user.password)
         console.log(correctPassword)
-        alert("User logged in!")
+        if(correctPassword){
+            login();
+            console.log(isLoggedIn)
+            alert("User logged in!")
+        }else{
+            setError("password",{
+                type: "manual",
+                message: "Incorrect Password",
+            })
+        }
     } catch (err: any) {
         alert(err.message);
     }
@@ -46,6 +56,7 @@ export default function LoginPage(){
             <div className={styles.formBlock}>
                 <div className={styles.formTitle}>
                 <p>Login</p>
+                
                 </div>
                 <form className={styles.registerForm} onSubmit={handleSubmit(onSubmit)}>
 
@@ -76,6 +87,10 @@ export default function LoginPage(){
                     <p>Don`t have an account? <Link to="/register">Register</Link></p>
                 </div>
 
+            </div>
+
+            <div className={styles.backHome}>
+                <Link to="/">Home</Link>
             </div>
                     
             </div>

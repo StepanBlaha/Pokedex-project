@@ -19,13 +19,15 @@ body{
     width: 100%;
     height: 100%;
     float: left;
-    overflow: hidden;
+    
 }
 
 
 .center{
     width: 100%;
     height: 100%;
+    min-height: fit-content;
+
     float: left;
     display: flex;
     flex-wrap: wrap;
@@ -36,19 +38,21 @@ body{
     align-content: center;
     flex-direction: column;
     gap: 3px;
+    justify-content: center;
 
 }
 .formBlock{
 
-    min-width: 300px;
-    width: 40%;
-    min-height: 300px;
-    border: 1px solid;
-    border: 3px solid black;
-    border-radius: 0.4em;
-    box-shadow: 0.2em 0.2em;
-    transition: transform 0.3s ease, scale 0.3s ease;
-    padding-bottom: 15px;
+  min-width: 225px;
+  width: 40%;
+  min-height: 300px;
+  height: fit-content;
+  border: 1px solid;
+  border: 3px solid black;
+  border-radius: 0.4em;
+  box-shadow: 0.2em 0.2em;
+  transition: transform 0.3s ease, scale 0.3s ease;
+  padding-bottom: 15px;
 }
 
 .formTitle {
@@ -112,24 +116,25 @@ body{
 
 
 .submitButton {
-    border: 3px solid #000;
-    background: #000;
-    color: #fff;
-    padding: 10px;
-    font-size: 18px;
-    /* left: 20%; */
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s;
-    width: 40%;
-    height: 25px;
-    display: flex
+  border: 3px solid #000;
+  background: #000;
+  color: #fff;
+  padding: 10px;
+  font-size: 18px;
+  /* left: 20%; */
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
+  width: 40%;
+  height: 25px;
+  display: flex
 ;
-    justify-content: center;
-    align-items: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
 }
 
 .submitButton::before {
@@ -227,9 +232,13 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+        padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
 }
 .actionSection p{
     width: fit-content;
+    text-align: center;
 }
 .actionSection a{
     color: black;

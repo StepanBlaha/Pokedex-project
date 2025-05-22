@@ -6,7 +6,7 @@ export const registerUser = async (req: Request, res: Response) => {
         const user = await userService.createUser(req.body)
         res.status(201).json(user)
     } catch(error: any) {
-        console.log("Error: "+ error.message)
+        console.log("Error: ", error.message)
         res.status(400).json({error: error.message})
     }
 }

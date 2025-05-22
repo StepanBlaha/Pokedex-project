@@ -5,7 +5,9 @@ import { useQuery } from '@tanstack/react-query';
 import { Link } from "react-router-dom";
 import { registerFormData } from "../../types/user";
 import { useForm } from "react-hook-form";
+import { hashPassword } from "../../utils/hash";
 
+// Register user
 const registerUser = async(data: any) => {
   try {
     const res = await axios.post("http://localhost:5000/api/register", {
@@ -13,9 +15,9 @@ const registerUser = async(data: any) => {
         name: data.name,
         password: data.password,
       });;
-      console.log(res)
       return res.data;
   } catch (error) {
+    throw new Error('Email is already registered');
     
   }
 }  
@@ -24,7 +26,6 @@ export default function AuthPage(){
   const {register, handleSubmit, formState: {errors, isSubmitting}, setError,} = useForm<registerFormData>();
 
   const onSubmit = async(data: registerFormData)=>{
-    console.log(data.email)
     // Validation logic
     if(!data.email.includes("@")){
       setError("email", {
@@ -40,7 +41,6 @@ export default function AuthPage(){
       });
       return;
     }
-
 
     // Password strength check
     if(data.password.length < 8){
@@ -66,8 +66,10 @@ export default function AuthPage(){
     }
 
     try {
+      // Hash the password
+      data.password = await hashPassword(data.password, 10);
+      // Register user
       const res = await registerUser(data);
-      console.log(res)
       alert("User registered!")
     } catch (err: any) {
       alert(err.message);

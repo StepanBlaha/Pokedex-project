@@ -1,0 +1,77 @@
+.link{
+    height: 100%;
+    width: 120px;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative  ;
+}
+.link a{
+    text-decoration: none;
+    color: black;
+    font-size: 29px;
+    font-weight: 700;
+    transition: 0.3s ease-in-out;
+
+}
+.link a {
+    position: relative;
+    text-decoration: none;
+    color: black;
+    font-size: 29px;
+    font-weight: 700;
+    transition: color 0.2s ease-in;
+    z-index: 1;
+}
+.link a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px; /* adjust based on spacing */
+    width: 0%;
+    height: 3px;
+    background-color: black;
+    transition: width 0.3s ease;
+}
+.link a:hover::after {
+    width: 100%;
+}
+.link a.active::after {
+    width: 100%;
+}
+
+.link p{
+    margin: 0;
+    text-decoration: none;
+    color: black;
+    font-size: 29px;
+    font-weight: 700;
+    transition: 0.3s ease-in-out;
+
+}
+.link p {
+    position: relative;
+    text-decoration: none;
+    color: black;
+    font-size: 29px;
+    font-weight: 700;
+    transition: color 0.2s ease-in;
+    z-index: 1;
+}
+.link p::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px; /* adjust based on spacing */
+    width: 0%;
+    height: 3px;
+    background-color: black;
+    transition: width 0.3s ease;
+}
+.link p:hover::after {
+    width: 100%;
+}
+.link p.active::after {
+    width: 100%;
+}

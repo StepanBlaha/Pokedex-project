@@ -1,8 +1,9 @@
 import styles from "./index.module.css"
 import { Link } from "react-router-dom"
 import NavbarMenu from "../NavbarMenu"
+import UserMenu from "../UserMenu";
 export default function Header(){
-   
+
     return(
         <div className={styles.mainHeader}>
                 <div className={styles.headerLogoPart}>
@@ -55,7 +56,7 @@ export default function Header(){
                   
 
                   <div className={styles.accountPart}>
-                    <div className={styles.pokeball}></div>
+                    <UserMenu/>
                   </div>
 
 

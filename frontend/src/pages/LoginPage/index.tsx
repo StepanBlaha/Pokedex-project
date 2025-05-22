@@ -90,7 +90,12 @@ export default function LoginPage(){
             </div>
 
             <div className={styles.backHome}>
-                <Link to="/">Home</Link>
+                <Link to="/">
+                    <div className={styles.backHomeCenter}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-move-left-icon lucide-move-left"><path d="M6 8L2 12L6 16"></path><path d="M2 12H22"></path></svg>
+                        <p>Home</p>
+                    </div>
+                </Link>
             </div>
                     
             </div>

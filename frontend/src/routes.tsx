@@ -12,7 +12,7 @@ const AppRoutes = () => {
     return(
         <Suspense fallback={<Spinner />}>
             <Routes>
-                <Route path='/' element={<RegisterPage />} />
+                <Route path='/' element={<HomePage />} />
                 <Route path='register' element={<RegisterPage/>}/>
                 <Route path='login' element={<LoginPage/>}/>
                 <Route path='pokedex' element={<PokedexList/>}/>

@@ -249,3 +249,44 @@ body{
 .actionSection p a:hover{
     color: rgb(73, 73, 73);
 }
+
+
+
+.backHome{
+  min-width: 225px;
+  width: 40%;
+  height: fit-content;
+  padding-top: 10px;
+}
+
+.backHomeCenter{
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  gap: 6px;
+}
+.backHomeCenter p{
+  color: black;
+  margin: 0;
+}
+.backHome a:hover .backHomeCenter p, .backHome a:hover .backHomeCenter svg{
+  color: rgb(78, 78, 78) !important;
+}
+.backHome a{
+  color: black;
+  margin: 0;
+  text-decoration: none;
+  transition: 0.4s ease-in;
+}
+.backHome p{
+  margin: 0;
+  font-weight: 600;
+  transition: 0.1s ease-in;
+}
+.backHome svg{
+  stroke-width: 3px;
+  transition: 0.1s ease-in;
+}

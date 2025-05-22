@@ -1,0 +1,242 @@
+html{
+    width: 100%;
+    height: 100%;
+    float: left;
+    zoom: 1.4; 
+}
+body{
+    width: 100%;
+    height: 100%;
+    float: left;
+
+}
+#root{
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+.App{
+    width: 100%;
+    height: 100%;
+    float: left;
+    overflow: hidden;
+}
+
+
+.center{
+    width: 100%;
+    height: 100%;
+    float: left;
+    display: flex;
+    flex-wrap: wrap;
+    /* padding: 10px; */
+    box-sizing: border-box;
+    gap: 30px;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    gap: 3px;
+
+}
+.formBlock{
+
+    min-width: 300px;
+    width: 40%;
+    min-height: 300px;
+    border: 1px solid;
+    border: 3px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.2em 0.2em;
+    transition: transform 0.3s ease, scale 0.3s ease;
+    padding-bottom: 15px;
+}
+
+.formTitle {
+    width: 100%;
+    height: fit-content;
+    float: left;
+
+    display: flex;
+    font-size: 32px;
+    font-weight: 900;
+    color: #000;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    margin-top: 15px;
+
+    display: block;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.formTitle p{
+    margin: 0;
+    width: fit-content;
+    position: relative;
+}
+.formTitle p::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #000;
+  transform: translateX(-200%);
+  transition: transform 0.3s;
+}
+
+.formBlock:hover .formTitle p::after {
+  transform: translateX(0%);
+}
+.registerForm{
+    height: fit-content;
+    width: 100%;
+    float: left;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+
+.submitButton {
+    border: 3px solid #000;
+    background: #000;
+    color: #fff;
+    padding: 10px;
+    font-size: 18px;
+    /* left: 20%; */
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+    width: 40%;
+    height: 25px;
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
+}
+
+.submitButton::before {
+  content: "Sure?";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 105%;
+  background-color: #5ad641;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(100%);
+  transition: transform 0.3s;
+}
+
+.submitButton:hover::before {
+  transform: translateY(0);
+}
+
+.submitButton:active {
+  transform: scale(0.95);
+}
+
+.inputContainer {
+  display: flex;
+  width: 100%;
+}
+
+.registerForm .inputContainer {
+  border: 3px solid #000;
+  font-size: 16px;
+  font-family: inherit;
+  transition: transform 0.3s;
+  width: calc(100% - 26px); /* Adjust for padding and border */
+    width: 100%;
+    box-sizing: border-box;
+    border: 3px solid black;
+    border-radius: 0.3em;
+    box-shadow: 0.2em 0.2em;
+}
+
+.registerForm .inputContainer:focus-within{
+  outline: none;
+  transform: scale(1.05);
+  background-color: #000;
+}
+.icon {
+  color: white;
+  background-color: black;
+  min-width: 50px;
+  text-align: center;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputContainer input {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.formSection{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.formSection label{
+    font-size: 19px;
+    font-weight: 600;
+}
+.actionSection{
+    width: 100%;
+    height: fit-content;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.actionSection p{
+    width: fit-content;
+}
+.actionSection a{
+    color: black;
+    font-weight: 800;
+    position: relative;
+    transition: all 0.2s ease-in;
+}
+.actionSection p a:hover{
+    color: rgb(73, 73, 73);
+}

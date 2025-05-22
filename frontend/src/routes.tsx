@@ -5,14 +5,16 @@ import Spinner from './components/Spinner';
 import MovePage from './pages/MovePage';
 import ItemPage from './pages/ItemPage';
 import HomePage from './pages/HomePage';
-import AuthPage from './pages/AuthPage';
+import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/LoginPage';
 const DetailPage = lazy(() => import('./pages/DetailPage'));
 const AppRoutes = () => {
     return(
         <Suspense fallback={<Spinner />}>
             <Routes>
-                <Route path='/' element={<AuthPage />} />
-                <Route path='auth' element={<AuthPage/>}/>
+                <Route path='/' element={<RegisterPage />} />
+                <Route path='register' element={<RegisterPage/>}/>
+                <Route path='login' element={<LoginPage/>}/>
                 <Route path='pokedex' element={<PokedexList/>}/>
                 <Route path='moves' element={<MovePage/>}/>
                 <Route path='items' element={<ItemPage/>}/>

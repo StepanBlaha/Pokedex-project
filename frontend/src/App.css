@@ -2,7 +2,9 @@
   text-align: center;
   overflow: hidden;
 }
-
+#root{
+  height: 100%;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

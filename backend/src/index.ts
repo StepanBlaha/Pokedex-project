@@ -7,6 +7,7 @@ import moveRoutes from './routes/moveRoutes'
 import itemRoutes from './routes/itemRoutes'
 import authRoutes from './routes/authRoutes'
 import userPokedexRoutes from "./routes/userPokedexRoutes"
+import favouriteRoutes from "./routes/favouriteRoutes"
 import axios from 'axios';
 import dotenv from 'dotenv';
 
@@ -28,5 +29,6 @@ app.use('/api', moveRoutes);
 app.use('/api', itemRoutes);
 app.use('/api', authRoutes)
 app.use('/api', userPokedexRoutes)
+app.use('/api', favouriteRoutes)
 
 app.listen(5000, () => console.log('Server running on port 5000'));

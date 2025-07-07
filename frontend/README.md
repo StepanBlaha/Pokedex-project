@@ -7,3 +7,8 @@ Frontend part for my fan made pokedex project
  - Mongo
  - Nodejs
  - Express
+
+## Todo
+ - User pokedex
+ - 404
+ - Favourites

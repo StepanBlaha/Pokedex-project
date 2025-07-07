@@ -6,7 +6,8 @@ import MovePage from './pages/MovePage';
 import ItemPage from './pages/ItemPage';
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
-import LoginPage from './pages/LoginPage';
+import LoginPage from './pages/Login';
+import Profile from './pages/Profile';
 const DetailPage = lazy(() => import('./pages/DetailPage'));
 const AppRoutes = () => {
     return(
@@ -14,8 +15,9 @@ const AppRoutes = () => {
             <Routes>
                 <Route path='/' element={<HomePage />} />
                 <Route path='register' element={<RegisterPage/>}/>
+                <Route path='profile' element={<Profile/>}/>
                 <Route path='login' element={<LoginPage/>}/>
-                <Route path='pokedex' element={<PokedexList/>}/>
+                <Route path='pokemon' element={<PokedexList/>}/>
                 <Route path='moves' element={<MovePage/>}/>
                 <Route path='items' element={<ItemPage/>}/>
                 <Route path='pokemon/:id' element={<DetailPage/>}/>

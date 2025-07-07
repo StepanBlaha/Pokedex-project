@@ -14,7 +14,7 @@ export default function LoggedInMenu({ logout }: LoggedInMenuProps) {
 
         <>
         <div className={styles.link}>
-            <Link to="/" >Profile</Link>
+            <Link to="/profile" >Profile</Link>
             <div className={`${styles.trainerItem} ${styles.item}`}></div>
         </div>
         <div className={styles.link} onClick={logout}>

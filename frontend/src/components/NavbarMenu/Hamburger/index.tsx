@@ -24,7 +24,7 @@ export default function HamburgerMenu(){
                     {/*absolutne jeste nefunguje
                     <Link to="/" className={pathname==="/" ? `${styles.link} ${styles.active}`: styles.link}>Pokedex</Link>
                     */}
-                    <Link to="/pokedex" className={pathname === "/pokedex" ? styles.active : ""}>Pokedex</Link>
+                    <Link to="/pokemon" className={pathname === "/pokemon" ? styles.active : ""}>Pokemon</Link>
                 </div>
                 <div className={styles.link}>
                     <div className={`${styles.pokeballItem} ${styles.item}`}></div>

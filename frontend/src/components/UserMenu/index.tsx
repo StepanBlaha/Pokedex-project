@@ -1,19 +1,27 @@
 import styles from "./index.module.css"
-import { Link } from "react-router-dom"
 import { useState } from "react"
-import { useAuth } from "../../hooks/useAuth";
 import LoggedInMenu from "./LoggedIn";
 import LoggedOutMenu from "./LoggedOut";
-export default function UserMenu(){
-    const {isLoggedIn, login, logout} = useAuth()
-    const [isOpen, setIsOpen] = useState(false)
-    return(
+import { useUser } from "@clerk/clerk-react";
+import { useClerk } from '@clerk/clerk-react';
 
+export default function UserMenu(){
+    const { user, isLoaded } = useUser();
+    const { signOut } = useClerk();
+    const [isOpen, setIsOpen] = useState(false)
+
+    const handleLogout = async () => {
+        await signOut();
+        // Optionally redirect
+        window.location.href = '/login';
+    };
+
+    return(
         <>
         <div className={styles.Menu}>
             <div className={styles.pokeball} onClick={()=>setIsOpen(!isOpen)}></div>
             <div className={`${styles.linkPart} ${ isOpen  ? styles.Open : ""}`} >
-                {isLoggedIn ? <LoggedInMenu logout={() => logout()} /> : <LoggedOutMenu />}
+                {user ? <LoggedInMenu logout={() => handleLogout()} /> : <LoggedOutMenu />}
             </div>
         </div>
         </>

@@ -12,3 +12,4 @@ Frontend part for my fan made pokedex project
  - User pokedex
  - 404
  - Favourites
+ - Refactor

@@ -16,7 +16,9 @@ export interface PokemonListResult {
   
   export interface PokemonListProps{
     data: Pokemon[];
+    userData?: number[];
     lastCardRef: React.RefObject<HTMLDivElement | null>; 
+    onToggle?: (id: number, add: boolean) => void
 }
 
 
@@ -77,4 +79,10 @@ export interface SearchedPokemon{
 }
 export interface SearchedPokemonList{
   searchedPokemon: SearchedPokemon[]
+}
+
+
+export interface UserPokedexRecord{
+  pokemonIds: number[],
+  userId: string
 }

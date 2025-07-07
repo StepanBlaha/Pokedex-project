@@ -1,7 +1,11 @@
+import { UserPokedexRecord } from "./pokemon";
 export interface CardProps{
     name: string,
     id: number,
-    type: string
+    type: string,
+    caught?: boolean,
+    entries?: number[],
+    onToggle?: (id: number, add: boolean) => void
 }
 export interface MoveCardprops{
     id: number;

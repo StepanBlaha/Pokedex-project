@@ -3,34 +3,26 @@ import BarChart from "../../../../components/Charts/BarChart";
 import { ChartData, scales } from 'chart.js';
 import styles from "./index.module.css"
 import React, { useEffect, useState, Suspense, lazy } from 'react';
+import { PokemonListResult, UserPokedexRecord } from "../../../../types/pokemon";
 import Button from "../../../../components/Button";
 import EvolutionList from "../EvolutionList";
+import { useUser } from "@clerk/clerk-react";
+import axios from "axios";
+import { pokemonTypeColors } from "../../../../constants/types";
+// Load users caught pokemon
+const loadUsersPokemon = async(id: string) => {
+    const items = await axios.post<UserPokedexRecord>(`http://localhost:5000/api/userpokedex/get`, {
+    userId: id,
+    });
+    return items.data.pokemonIds
+}
 
-
-export default function Card({data, backData}: PokemonDetailCardProps){
-    const [flipped, setFlipped] = useState(false)
-    const [statLabels, setStatLabels] = useState<string[]>([])
-    const [statValues, setStatValues] = useState<number[]>([])
-    const pokemonTypeColors : { [key: string]: string } = {
-        normal: "#A8A77A",
-        fire: "#EE8130",
-        water: "#6390F0",
-        electric: "#F7D02C",
-        grass: "#7AC74C",
-        ice: "#96D9D6",
-        fighting: "#C22E28",
-        poison: "#A33EA1",
-        ground: "#E2BF65",
-        flying: "#A98FF3",
-        psychic: "#F95587",
-        bug: "#A6B91A",
-        rock: "#B6A136",
-        ghost: "#735797",
-        dragon: "#6F35FC",
-        dark: "#705746",
-        steel: "#B7B7CE",
-        fairy: "#D685AD"
-      };
+export default function Card({data, backData, id}: PokemonDetailCardProps){
+    const [flipped, setFlipped] = useState(false); // Card flipped state
+    const [statLabels, setStatLabels] = useState<string[]>([]); // Labels for pokemon stats
+    const { user, isLoaded } = useUser(); // User auth data
+    const [statValues, setStatValues] = useState<number[]>([]); // Pokemons stats
+    const [ userPokedex, setUserPokedex] = useState<number[]>([]); // Users pokedex
     const generationMap: {[key:string]:number} = {
         "generation-i": 1,
         "generation-ii": 2,
@@ -52,6 +44,13 @@ export default function Card({data, backData}: PokemonDetailCardProps){
         }
         
     },[data])
+    // If user is logged in load his pokedex
+    useEffect(()=>{
+        if(user){
+            loadUsersPokemon(user?.id)
+            .then(data => setUserPokedex(data))
+        }
+    }, [user])
     // Define the data for the bar chart and the setup
     const barData: ChartData<'bar'> = {
         labels: statLabels,
@@ -95,7 +94,7 @@ export default function Card({data, backData}: PokemonDetailCardProps){
     useEffect(()=>{
         if(backData.back_sprite == null){
             backData.back_sprite = data.image
-       }
+    }
     },[])
     
     return(
@@ -103,7 +102,17 @@ export default function Card({data, backData}: PokemonDetailCardProps){
 
                 <div className={styles.front}>
                     <div className={styles.cardTitle}>
-                            <h2>{data.name}</h2>
+                        <div className={styles.cardTitleGroup}>
+                            <h2>{data.name}</h2>{userPokedex.length > 0 && userPokedex.includes(Number(id)) ? (
+                                <>
+                                <div className={styles.pokeball}>
+                                    <span className={styles.text}>
+                                        <span className={styles.tooltip}>Pokemon caught</span>
+                                    </span>
+                                </div>
+                                </>
+                            ): ""}
+                        </div>
                         <div className={styles.cardType}>
                             <div className={styles.typeImage}  style={{ backgroundImage: `url(/assets/typeBanners/${data.type}.png` }}></div>
                         </div>

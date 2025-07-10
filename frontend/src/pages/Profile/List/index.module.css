@@ -1,3 +1,20 @@
+.pokedexList{
+    width: 100%;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    justify-items: center;
+    display: grid;
+    grid-template-columns:  repeat(auto-fit, minmax(220px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+/*
 import styles from "./index.module.css"
 import React, { useEffect, useState, useRef } from 'react';
 import axios from "axios";
@@ -14,7 +31,6 @@ import { PokemonListResult, Pokemon } from "../../types/pokemon";
 import List from "./List";
 import { pokemonTypeColors } from "../../constants/types";
 import { getSprite } from "../../utils/sprites";
-import { getCachedData } from "../../utils/cache";
 // Load favourite data
 const loadFavourite = async(id: string, key: string) => {
     const items = await axios.post<FavouriteRecord>(`http://localhost:5000/api/favourite/get`, {
@@ -38,31 +54,11 @@ const loadPokemon = async (page: number) =>{
     return res.data
 }
 // Load all pokemon
-const fetchAllPokemonInBatches = async () => {
-    const cache = getCachedData("sb_pokemon");
-    if(cache !== null) return JSON.parse(cache);
-    const limit = 100;
-    let page = 0;
-    let allResults: Pokemon[] = [];
-    let hasMore = true;
-
-    while (hasMore) {
-        try {
-        const res = await axios.get<PokemonListResult>(`http://localhost:5000/api/pokedex?page=${page}&limit=${limit}`);
-        allResults = [...allResults, ...res.data.results];
-        if (res.data.results.length < limit) {
-            hasMore = false; // no more pages
-        } else {
-            page++;
-        }
-        } catch (error) {
-        console.error("Error fetching batch:", error);
-        hasMore = false;
-        }
-    }
-    localStorage.setItem("sb_pokemon", JSON.stringify(allResults))
-    return allResults;
+const loadAllPokemon = async () =>{
+    const res = await axios.get<PokemonListResult>(`http://localhost:5000/api/pokedex?page=${0}&limit=10`)
+    return res.data
 }
+
 
 export default function Profile(){
     const { height, width } = useWindowDimensions(); // Window size
@@ -78,25 +74,27 @@ export default function Profile(){
         Region:""
     })
     const favoriteId = Number(favourite.Pokemon); // Favourite pokemons id
-    const [favPoke, setFavPoke] = useState<Pokemon | undefined>();
-    const favouritePokeSprite = getSprite(favoriteId); // Favourite pokemons sprite
-    const [allPoke, setAllPoke] = useState<Pokemon[]>(); // All pokemon
+    const favoritePoke = items.find(item => item.id === favoriteId); // Favourite pokemons data
+    const [favPoke, setFavPoke] = useState<Pokemon | undefined>()
+    const favouritePokeSprite = getSprite(favoriteId)
 
-    // Set favourite pokemon
+    const [allPoke, setAllPoke] = useState<Pokemon[]>()
+
     useEffect(()=>{
-        if (!allPoke || allPoke.length === 0) return;
-        const favouritePoke = allPoke.find(item => Number(item.id) === Number(favoriteId)); // Favourite pokemons data
-        setFavPoke(favouritePoke)
-    }, [allPoke, favoriteId])
-
-    // Load all pokemon
-    useEffect(() => {
-        const loadAll = async () => {
-            const allPokemon = await fetchAllPokemonInBatches();
-            setAllPoke(allPokemon);
-        }
-        loadAll();
-    }, []);
+        console.log(favoriteId)
+        const favoritePoke = items.find(item => item.id === favoriteId); // Favourite pokemons data
+        console.log(favoritePoke)
+    },[favoriteId])
+    useEffect(()=>{
+        loadAllPokemon().then(data=>setAllPoke(data.results))
+    },[])
+    useEffect(()=>{
+        if(allPoke === undefined) return
+        const favoritePoke = allPoke.find(item => item.id === favoriteId);
+        setFavPoke(favoritePoke)
+    }, [allPoke])
+    
+    
     
     // Handle fetching pokemon
     const {data, refetch, isFetching, error} = useQuery({
@@ -190,7 +188,7 @@ export default function Profile(){
                                         {favouritePokeSprite ? (<div className={`${styles.pokeballItem}`} style={{backgroundImage: `url(${favouritePokeSprite})`, imageRendering: "unset"}}></div>):(<div className={`${styles.pokeballItem}`} ></div>)}
                                         {width > 100 && (
                                             <>
-                                                <p>Favourite Pokémon: {favPoke ? titleCaseWord(favPoke.name) : "Unknown"}</p>
+                                                <p>Favourite Pokémon: {favoritePoke ? titleCaseWord(favoritePoke.name) : "Unknown"}</p>
                                             </>
                                         )}
                                     </div>
@@ -272,3 +270,6 @@ export default function Profile(){
 }
 
 
+
+
+*/

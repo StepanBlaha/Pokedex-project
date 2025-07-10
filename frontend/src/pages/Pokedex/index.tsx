@@ -23,7 +23,6 @@ const loadUsersPokemon = async(id: string) => {
     });
     console.log(items.data.pokemonIds)
     return items.data.pokemonIds
-
 }
 
   // Function for fetching searched pokemon
@@ -37,7 +36,6 @@ const loadSearch = async(search: string) => {
         console.error('Error in loadSearch:', error);
     }
 }
-
 const updateUserPokedex = async(id: string, entries: number[]) => {
     const items = await axios.post<UserPokedexRecord>(`http://localhost:5000/api/userpokedex/update`, {
     userId: id,
@@ -45,7 +43,6 @@ const updateUserPokedex = async(id: string, entries: number[]) => {
     });
     console.log(items.data.pokemonIds)
     return items.data.pokemonIds
-
 }
 
 

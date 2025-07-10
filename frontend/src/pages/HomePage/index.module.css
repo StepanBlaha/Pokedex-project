@@ -8,7 +8,6 @@ body{
     width: 100%;
     height: 100%;
     float: left;
-
 }
 #root{
     width: 100%;
@@ -21,36 +20,28 @@ body{
     float: left;
     overflow-x: hidden;
 }
-
-
 .center{
     width: 100%;
     width: 100%;
     height: fit-content;
     float: left;
-    display: flex
-;
+    display: flex;
     flex-wrap: wrap;
-    /* padding: 10px; */
     box-sizing: border-box;
     gap: 30px;
     align-items: center;
     align-content: center;
     flex-direction: column;
     gap: 0px;
-
 }
 .mainBlock{
     width: 90%;
     height: 100%;
     max-width: 1060px;
- 
-   display: flex;
-   flex-direction: row-reverse;
-   justify-content: center;
-
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
 }
-
 .mainContent{
     width: 100%;
     min-height: 800px;
@@ -78,17 +69,14 @@ body{
 }
 @media (max-width: 1248px) {
     .mainBlock {
-      flex-direction: column;
+        flex-direction: column;
     }
-  
+
     .mainContent,
     .sideContent {
-      flex: 0 0 100%;
+        flex: 0 0 100%;
     }
-  }
-
-
-
+}
 .Hero{
     width: 100%;
     height: fit-content;
@@ -100,10 +88,10 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-gap: 1px;
+    gap: 1px;
     align-content: center;
     flex-wrap: wrap;
-        text-align: center;
+    text-align: center;
 }
 .HeroTitle p{
     margin: 0;
@@ -122,15 +110,6 @@ gap: 1px;
 .HeroText p{
     margin-bottom: 0px;
 }
-
-
-
-
-
-
-
-
-
 .Future{
     width: 100%;
     height: fit-content;
@@ -143,7 +122,6 @@ gap: 1px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-
     gap: 1px;
     align-content: flex-start;
     flex-wrap: wrap;
@@ -156,7 +134,6 @@ gap: 1px;
     font-size: 35px;
     font-weight: 600;
     width: fit-content;
-
     margin: 0;
     font-size: 30px;
     font-weight: 600;
@@ -164,7 +141,6 @@ gap: 1px;
 .FutureText{
     width: 100%;
     height: fit-content;
-    
     margin-top: 10px;
 }
 .FutureText ul{
@@ -173,87 +149,6 @@ gap: 1px;
 .FutureText li{
     margin-bottom: 3px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .Pages{
     width: 100%;
     height: fit-content;
@@ -264,7 +159,6 @@ gap: 1px;
 .PageTitle{
     width: 100%;
     height: fit-content;
-    
 }
 .PageTitle h2{
     margin: 0;
@@ -280,11 +174,9 @@ gap: 1px;
     gap: 20px;
     justify-content: center;
     align-items: center;
-    
     flex-wrap: wrap;
     margin-top: 10px;
 }
-
 .link{
     height: 40px;
     width: 120px;
@@ -300,9 +192,8 @@ gap: 1px;
     padding-left: 25px;
     padding-right: 25px;
     transition: all 0.3s ease;
-     user-select: none;
+    user-select: none;
 }
-
 .link a{
     text-decoration: none;
     color: black;
@@ -317,16 +208,9 @@ gap: 1px;
     transition: color 0.2s ease-in;
     z-index: 1;
 }
-
 .link::after {
     content: '';
     position: absolute;
-    /*
-    left: 0;
-    width: 0%;
-    height: 0%;
-    bottom: 0;
-    */
     top: 0;
     right: 0;
     height: 30px;
@@ -334,46 +218,28 @@ gap: 1px;
     background-color: black;
     transition: all 0.3s ease;
     z-index: 0;
-   border-bottom-left-radius: 0.3em;
-   border-top-right-radius: 0.2em;
+    border-bottom-left-radius: 0.3em;
+    border-top-right-radius: 0.2em;
 }
 .link:hover{
-  transform: translateY(-6px) scale(1.05);
+    transform: translateY(-6px) scale(1.05);
 }
 .link:hover::after {
     height: 100%;
     width: 100%;
-   
 }
 .link:active{
-     transform: translateY(6px) scale(1.0);
+    transform: translateY(6px) scale(1.0);
 }
-
-
 #PokedexLink::after{
     background-color: rgb(238, 129, 48);
 }
-/*
-#PokedexLink:hover a{
-    color: red;
-}
-    */
 #ItemLink::after{
     background-color: rgb(122, 199, 76);
 }
-/*
-#ItemLink:hover a{
-    color: green;
-}
-    */
 #MoveLink::after{
     background-color: rgb(99, 144, 240);
 }
-/*
-#MoveLink:hover a{
-    color: blue;
-}
-*/
 .link svg{
     position: absolute;
     top: 2px;
@@ -385,14 +251,3 @@ gap: 1px;
 .link:hover svg{
     top: 19px;
 }
-
-
-
-
-
-
-
-
-
-
-

@@ -24,9 +24,6 @@ const loadItems = async (page: number) =>{
       console.error('Error in loadSearch:', error);
     }
   }
-  
- 
-
 export default function ItemPage(){
   // States and refs
   const [inputValue, setInputValue] = useState("")
@@ -40,14 +37,12 @@ export default function ItemPage(){
     enabled: false,
   })
 
-   const {data: searchedItems, refetch: searchItems, isFetching: isSearching, error: searchError} = useQuery({
-      queryKey: ["itemSearch", inputValue],
-      queryFn:()=> loadSearch(inputValue),
-      enabled: false,
-    })
+  const {data: searchedItems, refetch: searchItems, isFetching: isSearching, error: searchError} = useQuery({
+    queryKey: ["itemSearch", inputValue],
+    queryFn:()=> loadSearch(inputValue),
+    enabled: false,
+  })
   
-
-
   // Update state when data changes
   useEffect(() => {
     if (data?.results) {
@@ -136,5 +131,3 @@ export default function ItemPage(){
         </>
     )
 }
-
-

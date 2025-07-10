@@ -1,288 +1,51 @@
-
-/*
-.card{
-    height: 55px;
-    width: 200px;
-    background: #f5f5f5;
-    padding: 10px;
-    box-shadow: 0 4px 0 #bdbdbd,;
-    border-radius: 8px;
-    position: relative;
-    background-repeat: no-repeat;
-    background-size: auto;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
-    background-position-x: 94px;
-
-
-
-
-    border: 3px solid black;
-    border-radius: 0.4em;
-    box-shadow: 0.2em 0.2em;
-
-    transition: transform 0.3s ease, scale 0.3s ease;
-
-
-    
-
-
-    height: 55px;
-    width: 200px;
-    background: #f5f5f5;
-    padding: 10px;
-    box-shadow: 0 4px 0 #bdbdbd,;
-    border-radius: 8px;
-    position: relative;
-    background-repeat: no-repeat;
-    background-size: auto;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
-    background-position-x: 94px;
-    border: 3px solid black;
-    border-radius: 0.4em;
-    box-shadow: 0.2em 0.2em;
-   
-    transition: transform 0.3s ease, scale 0.3s ease;
-
-
-    background-position-x: 94px;
-
-    
-}
-    */
 .card:hover{
   transform: translateY(-6px) scale(1.05);
-    background-position: bottom; 
-    background-position-x: 100px;
+  background-position: bottom; 
+  background-position-x: 100px;
 }
-/*
-.card {
-  
-  position: relative;
-  width: fit-content;
-  height: 55px;
-  padding: 10px;
-  background: #f5f5f5;
-  border: 3px solid black;
-  border-radius: 0.4em;
-  box-shadow: 0.2em 0.2em;
-  transition: transform 0.3s ease, scale 0.3s ease;
-  overflow: hidden;
-
-
-
-
-    position: relative;
-    width: fit-content;
-    min-height: 55px;
-    padding: 10px;
-    background: #f5f5f5;
-    border: 3px solid black;
-    border-radius: 0.4em;
-    box-shadow: 0.2em 0.2em;
-    transition: transform 0.3s ease, scale 0.3s ease;
-    overflow: hidden;
-    display: flex
-;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    row-gap: 5px;
-
-  }
-
-.sprite {
-    position: absolute;
-    right: 25px;
-    top: 2px;
-    width: 100px;
-    height: 100px;
-    background-repeat: no-repeat;
-    background-size: auto;
-    image-rendering: pixelated;
-    transition: background-image 0.3s ease;
-    background-position: center;
-}
-.cardTitle{
-  height: 100%;
-  width: 160px;
-  float: left;
-
-  display: flex
-  ;
-  align-items: center;
-  padding-left: 10px;
-  box-sizing: border-box;
-  background-color: red;
-}
-.cardTitle p{
-  text-transform: capitalize;
-  margin: 0;
-  font-weight: 700;
-}
-.cardCategory{
-  height: 100%;
-  min-width: 120px;
-  float: left;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  background-color: blue;
-  flex-direction: column;
-  justify-content: center
-}
-
-.cardCategory p{
-  margin: 0;
-  font-weight: 600;
-}
-.cardPower{
-  height: 100%;
-  min-width: 80px;
-  float: left;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  background-color: pink;
-  flex-direction: column;
-  justify-content: center
-}
-
-.cardPower p{
-  margin: 0;
-  font-weight: 600;
-}
-.cardAccuracy{
-  height: 100%;
-  min-width: 80px;
-  float: left;
-  display: flex
-;
-  align-items: center;
-  
-  box-sizing: border-box;
-  background-color: gray;
-  flex-direction: column;
-  justify-content: center
-}
-
-.cardAccuracy p{
-  margin: 0;
-  font-weight: 600;
-}
-.cardPP{
-  height: 100%;
-  min-width: 60px;
-  float: left;
-  display: flex
-;
-  align-items: center;
-  
-  box-sizing: border-box;
-  background-color: yellow;
-  flex-direction: column;
-  justify-content: center
-}
-
-.cardPP p{
-  margin: 0;
-  font-weight: 600;
-}
-
-
-
-
-
-
-
-*/
-
-
-
-
-
-
 .cardButton{
-    height: 100%;
-    width: 30%;
-    float: left;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    background-color: green;
-    height: 30px;
-    width: 30px;
-    border-bottom-left-radius: 10px;
-    border-top-right-radius: 3px;
-    padding: 4px;
-
+  height: 100%;
+  width: 30%;
+  float: left;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: green;
+  height: 30px;
+  width: 30px;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 3px;
+  padding: 4px;
 }
 .cardButton::after {
   content: '';
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0); /* No darkening initially */
+  background-color: rgba(0, 0, 0, 0); 
   transition: background-color 0.3s ease;
   pointer-events: none;
   border-bottom-left-radius: 10px;
-    border-top-right-radius: 3px;
+  border-top-right-radius: 3px;
 }
-
 .cardButton:hover::after {
-  background-color: rgba(0, 0, 0, 0.2); /* Slightly dark overlay */
+  background-color: rgba(0, 0, 0, 0.2); 
+}
+.buttonCenter {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  position: relative;
+}
+.buttonCenter svg{
+  color: black;
 }
 
-
-  .buttonCenter {
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /*
-    box-shadow:
-      0 4px 0 #bdbdbd,
-      0 6px 10px rgba(0, 0, 0, 0.1);
-      */
-    transition: all 0.2s ease;
-    transform-style: preserve-3d;
-    transform: translateZ(0);
-    position: relative;
-  }
-  .buttonCenter svg{
-    color: black;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  .card {
+.card {
   position: relative;
   width: 100%;
   max-width: 900px;
@@ -292,24 +55,18 @@
   border-radius: 0.4em;
   box-shadow: 0.2em 0.2em;
   transition: transform 0.3s ease, scale 0.3s ease;
-
-
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
   gap: 10px;
-padding-right: 30px;
-    box-sizing: border-box;
+  padding-right: 30px;
+  box-sizing: border-box;
 }
-
-/* Divider (used inline in JSX) */
 .divider {
   width: 2px;
   background-color: black;
   align-self: stretch;
 }
-
-/* Shared section styles */
 .cardTitle,
 .cardCategory,
 .cardPower,
@@ -323,11 +80,6 @@ padding-right: 30px;
   align-items: center;
   box-sizing: border-box;
 }
-
-/* Specific background colors for visual feedback */
-
-
-/* Text styles */
 .cardTitle p,
 .cardCategory p,
 .cardPower p,
@@ -342,8 +94,6 @@ padding-right: 30px;
   font-weight: 700;
   text-transform: capitalize;
 }
-
-/* Sprite styles */
 .sprite {
   position: absolute;
   right: 10px;
@@ -356,21 +106,20 @@ padding-right: 30px;
   background-position: center;
   transition: background-image 0.3s ease;
 }
-
 .typeImage{
-    min-width: 90px;
-    min-height: 20px;
-    height: fit-content;
-    width: fit-content;
-    float: left;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: absolute;
-    bottom: -10px;
-    left: 22px;
+  min-width: 90px;
+  min-height: 20px;
+  height: fit-content;
+  width: fit-content;
+  float: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  bottom: -10px;
+  left: 22px;
 }
 .itemImage{
   flex: 1 1;
@@ -387,92 +136,50 @@ padding-right: 30px;
   min-width: 50px;
   min-height: 50px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* From Uiverse.io by Siyu1017 */ 
 .tooltipContainer {
   transition: all 0.2s;
   font-size: 17px;
-
   width: fit-content;
   box-sizing: border-box;
   min-width: 10px;
   height: 20px;
-
-
 }
-
 .text {
   z-index: 9;
   color: black;
-  /* padding: 0.3em 0.3em; */
   border-radius: 8px;
-  /* height: fit-content; */
   cursor: pointer;
   font-weight: 600;
-  /* box-shadow: 0 4px 16px 4px rgba(0, 0, 0, 0.15); */
   height: fit-content;
   width: fit-content;
-  display: flex
-;
+  display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
   top: 2px;
   right: 2px;
 }
-
 .tooltip {
-    position: absolute;
-    transform: translateX(50%) translateY(0%) scale(0);
-    padding: 0.3em 0.6em;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.2s;
-    background: var(--tooltip-bg);
-    color: var(--tooltip-color);
-    border-radius: 0.5rem;
-    z-index: 9999;
-    right: 20px;
-    border: 1px solid;
-    /* top: -90%; */
-    background: #f5f5f5;
-    border: 3px solid black;
-    border-radius: 0.4em;
-    box-shadow: 0.2em 0.2em;
-    position: fixed;
-
-    right: 30px;
-    bottom: 60%;
+  position: absolute;
+  transform: translateX(50%) translateY(0%) scale(0);
+  padding: 0.3em 0.6em;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s;
+  background: var(--tooltip-bg);
+  color: var(--tooltip-color);
+  border-radius: 0.5rem;
+  z-index: 9999;
+  right: 20px;
+  border: 1px solid;
+  background: #f5f5f5;
+  border: 3px solid black;
+  border-radius: 0.4em;
+  box-shadow: 0.2em 0.2em;
+  position: fixed;
+  right: 30px;
+  bottom: 60%;
 }
-
 .tooltip::before {
   position: absolute;
   content: "";
@@ -484,26 +191,20 @@ padding-right: 30px;
   background: var(--tooltip-bg);
   border-bottom-right-radius: 0.175rem;
 }
-
 .tooltipContainer:hover .tooltip {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
   transform: translateX(-0%) translateY(-00%) scale(1);
-
 }
-
-
 .card {
   position: relative;
   z-index: 1;
 }
-
 .text {
   position: absolute;
   z-index: 2;
 }
-
 .cardCost{
-      max-width: 120px;
+  max-width: 120px;
 }

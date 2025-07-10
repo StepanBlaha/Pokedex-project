@@ -45,7 +45,8 @@ interface StatInfo {
 }
 export interface PokemonDetailCardProps {
   data: PokemonDetailData;
-  backData:PokemonBackDetailData
+  backData:PokemonBackDetailData,
+  id?: string
 }
 
 

@@ -255,7 +255,25 @@ body{
 
 
 
-
+.PokemonSelect{
+    width: fit-content;
+    height: 300px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: 10;
+    gap: 6px;
+    border-radius: 0.6em;
+    border: 5px solid black;
+    box-shadow: 0.0em 0.2em;
+    padding: 8px;
+    width: clamp(220px, 48vw, 600px);
+    overflow: auto;
+}
 
 .TypeSelect{
     width: fit-content;
@@ -322,6 +340,18 @@ body{
     transform: translateY(0px);
     scale: 1;
     filter: unset;
+}
+.typeImageSelected{
+    min-width: 90px;
+    min-height: 20px;
+    height: fit-content;
+    width: fit-content;
+    float: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 

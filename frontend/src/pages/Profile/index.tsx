@@ -216,7 +216,11 @@ export default function Profile(){
                                         </div>
                                     )}
                                     <div className={styles.FavGroup}>
-                                        <div className={`${styles.tmItem}`}></div>
+                                        {favourite.Type !== undefined ? (
+                                            <div className={`${styles.tmItem}`} style={{ backgroundImage: `url(/assets/tms/${favourite.Type}.png` }}></div>
+                                        ):(
+                                            <div className={`${styles.tmItem}`} ></div>
+                                        )}
                                         {width > 100 && (
                                             user && 
                                             <>

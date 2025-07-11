@@ -21,36 +21,28 @@ body{
     float: left;
     overflow-x: hidden;
 }
-
-
 .center{
     width: 100%;
     width: 100%;
     height: fit-content;
     float: left;
-    display: flex
-;
+    display: flex;
     flex-wrap: wrap;
-    /* padding: 10px; */
     box-sizing: border-box;
     gap: 30px;
     align-items: center;
     align-content: center;
     flex-direction: column;
     gap: 0px;
-
 }
 .mainBlock{
     width: 90%;
     height: 100%;
     max-width: 1060px;
-    
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
-
 }
-
 .mainContent{
     min-height: 800px;
     width: 100%;
@@ -84,7 +76,7 @@ body{
     border-radius: 0.6em;
     border: 5px solid black;
     box-shadow: 0.0em 0.2em;
-    padding: 20px;
+    
 }
 .ProfileHeader{
     width: 100%;
@@ -94,6 +86,13 @@ body{
     box-sizing: border-box;
     gap: 8px;
     position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding: 20px;
+    background-position: 17%;
+    background-position: 0px -144px;
+
 }
 .ProfileName{
     color: black;
@@ -138,8 +137,9 @@ body{
 }
 .trainerItem{
     background-image: url(https://play.pokemonshowdown.com/sprites/trainers/ash.png);
-    top: -59px;
-    right: -25px;
+    top: -23px;
+    right: -10px;
+    filter: drop-shadow(2px 4px 6px black);
 }
 
 .ProfileContent{
@@ -148,6 +148,8 @@ body{
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    padding: 20px;
+    padding-top: 0;
 }
 
 .Favourite{
@@ -274,7 +276,6 @@ body{
     width: clamp(220px, 48vw, 600px);
     overflow: auto;
 }
-
 .TypeSelect{
     width: fit-content;
     height: fit-content;
@@ -300,14 +301,12 @@ body{
     box-sizing: border-box;
     display: flex;
     position: relative;
-    
 }
 .typeTitle{
     width: fit-content;
     height: fit-content;
     display: flex;
     box-sizing: border-box;
-
 }
 .typeTitle p{
     color: black;
@@ -353,19 +352,129 @@ body{
     background-repeat: no-repeat;
     background-position: center;
 }
+.TrainerEdit{
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    z-index: 1;
+    right: 1px;
+    padding: 4px;
+    border: 2px solid;
+    border-radius: 7px;
+    top: 76px;
+    background-color: white;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s ease-out;
+}
+.TrainerEdit:hover{
+    background-color: #a1a1a1;
+}
+.TrainerEdit svg{
+    width: 16px;
+    height: 16px;
+}
+.Trainer{
+    width: fit-content;
+    height: fit-content;
+    box-sizing: border-box;
+    display: flex;
+    position: relative;
+    padding: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s ease-out;
+}
+.Trainer:hover{
+    background-color: #a1a1a1;
+}
+.FavTrainer{
+    background-color: #a1a1a1;
+}
+.TrainerImage{
+    min-width: 50px;
+    min-height: 50px;
+    height: fit-content;
+    width: fit-content;
+    float: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    transition: 0.3s ease-out;
+}
 
 
 
 
 
-
-
-
-
-
-
-
-
+.TrainerSelect{
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: fit-content;
+    background-color: white;
+    flex-direction: column;
+    box-sizing: border-box;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: 10;
+    gap: 6px;
+    border-radius: 0.6em;
+    border: 5px solid black;
+    box-shadow: 0.0em 0.2em;
+    /*padding-top: 8px;*/
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: none;
+}   
+.TrainerHeader{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    box-sizing: border-box;
+}
+.TrainerHeaderOption{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: 0.3s ease-out;
+    box-sizing: border-box;
+}
+.TrainerHeaderOption:hover{
+    background-color: #c2c2c2;
+}
+.SelectedCustomPage{
+    background-color: #c2c2c2;
+}
+.TrainerHeaderOption p{
+    color: black;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 500;
+    margin: 0;
+    text-align: center;
+}
+.TrainerContent{
+    width: 100%;
+    display: grid;
+    box-sizing: border-box;
+    grid-template-columns: repeat(3, 1fr);
+    height: fit-content;
+    padding: 8px;
+    padding-top: 0;
+}
 
 
 

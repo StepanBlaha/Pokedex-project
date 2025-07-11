@@ -75,7 +75,9 @@ export default function Profile(){
     const [favourite, setFavourite] = useState({
         Type: "",
         Pokemon:"",
-        Region:""
+        Region:"",
+        Trainer:"",
+        Background:""
     })
     const favoriteId = Number(favourite.Pokemon); // Favourite pokemons id
     const [favPoke, setFavPoke] = useState<Pokemon | undefined>();
@@ -120,12 +122,14 @@ export default function Profile(){
         if(!user) return
         const fetchFavs = async () => {
         try {
-            const [type, pokemon, region] = await Promise.all([
+            const [type, pokemon, region, trainer, background] = await Promise.all([
                 loadFavourite(user.id, "Type"),
                 loadFavourite(user.id, "Pokemon"),
                 loadFavourite(user.id, "Region"),
+                loadFavourite(user.id, "Trainer"),
+                loadFavourite(user.id, "Background"),
             ]);
-            setFavourite({ Type: type, Pokemon: pokemon, Region: region });
+            setFavourite({ Type: type, Pokemon: pokemon, Region: region, Trainer: trainer, Background: background });
         } catch (err) {
             console.error("Chyba při načítání oblíbeného:", err);
         }
@@ -157,6 +161,9 @@ export default function Profile(){
         refetch();
     }, [page]);
 
+    const [trainersOpen, setTrainersOpen] = useState<boolean>(false);
+    const [customPage, setCustomPage] = useState<"trainers" | "bgs">("trainers");
+
     return(
         <>
         <div className={styles.App}>
@@ -168,18 +175,55 @@ export default function Profile(){
                     <div className={styles.mainContent}>
                     
                         <div className={styles.ProfileBlock}>
-
-                            <div className={styles.ProfileHeader}>
+                            <div className={styles.ProfileHeader}  style={{ backgroundImage: `${favourite.Background !== undefined ? `url(/assets/bgs/${favourite.Background}.jpg` : `url(/assets/bgs/12.jpg` }` }}>
                                 <p className={styles.ProfileName}>{user?.username}</p>
-                                <div className={`${styles.trainerItem} ${styles.item}`}></div>
+                                {/* Show fav trainer if selected */}
+                                {favourite.Trainer !== undefined ? (
+                                    <div className={`${styles.trainerItem} ${styles.item}`} style={{ backgroundImage: `url(/assets/trainers/${favourite.Trainer}.png` }}></div>
+                                ):(
+                                    <div className={`${styles.trainerItem} ${styles.item}`}></div>
+                                )}
+                                <div className={styles.TrainerEdit} onClick={()=>setTrainersOpen(!trainersOpen)}>
+                                    <PencilLine />
+                                </div>
+                                {trainersOpen && (
+                                    <div className={styles.TrainerSelect}>
+                                        <div className={styles.TrainerHeader}>
+                                            <div className={`${styles.TrainerHeaderOption} ${customPage === "trainers" ? styles.SelectedCustomPage: ""} `} onClick={()=>setCustomPage("trainers")}>
+                                                <p>Trainers</p>
+                                            </div>
+                                            <div className={`${styles.TrainerHeaderOption} ${customPage === "bgs" ? styles.SelectedCustomPage: ""} `} onClick={()=>setCustomPage("bgs")}>
+                                                <p>Backgrounds</p>
+                                            </div>
+                                        </div>
+                                        {customPage === "trainers" ? (
+                                            <div className={styles.TrainerContent}>
+                                                {Array.from({ length: 84 }, (_, i) => i + 1).map((num) => (
+                                                    user &&
+                                                    <div className={`${styles.Trainer} ${num === Number(favourite.Trainer) ? styles.FavTrainer : ""}`} onClick={()=>{handleFavourite("Trainer", num); setTrainersOpen(false)}}>
+                                                        <div className={`${styles.TrainerImage}`} style={{ backgroundImage: `url(/assets/trainers/${num}.png` }}></div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        ) : (
+                                            <div className={styles.TrainerContent}>
+                                                {Array.from({ length: 14 }, (_, i) => i + 1).map((num) => (
+                                                    user &&
+                                                    <div className={`${styles.Trainer} ${num === Number(favourite.Background) ? styles.FavTrainer : ""}`} onClick={()=>{handleFavourite("Background", num); setTrainersOpen(false)}}>
+                                                        <div className={`${styles.TrainerImage}`} style={{ backgroundImage: `url(/assets/bgs/${num}.jpg` }}></div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className={styles.ProfileContent}>
                                 <div className={styles.TrainerLevel}>
                                     <p>lvl 34</p>
                                     <div className={styles.TrainerLevelBar}></div>
                                 </div>
-                            </div>
-
-                            <div className={styles.ProfileContent}>
-
                                 <div className={styles.Favourite}>
                                     {pokeOpen && (
                                         <div className={styles.PokemonSelect}>
@@ -187,7 +231,7 @@ export default function Profile(){
                                         </div>
                                     )}
                                     <div className={styles.FavGroup}>
-                                        {favouritePokeSprite ? (<div className={`${styles.pokeballItem}`} style={{backgroundImage: `url(${favouritePokeSprite})`, imageRendering: "unset"}}></div>):(<div className={`${styles.pokeballItem}`} ></div>)}
+                                        {favouritePokeSprite ? (<div className={`${styles.pokeballItem}`} style={{backgroundImage: `url(${favouritePokeSprite})`}}></div>):(<div className={`${styles.pokeballItem}`} ></div>)}
                                         {width > 100 && (
                                             <>
                                                 <p>Favourite Pokémon: {favPoke ? titleCaseWord(favPoke.name) : "Unknown"}</p>

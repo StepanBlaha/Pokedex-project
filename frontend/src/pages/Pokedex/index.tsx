@@ -170,6 +170,7 @@ export default function Pokedex(){
                         className={styles.searchInput}
                         placeholder="Charizard..."
                         />
+                        <p>{userPokedex?.length}/1025</p>
                     </div>
 
                     <div className={styles.mainContent}>

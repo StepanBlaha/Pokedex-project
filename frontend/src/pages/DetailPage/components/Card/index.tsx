@@ -4,10 +4,12 @@ import { ChartData, scales } from 'chart.js';
 import styles from "./index.module.css"
 import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { PokemonListResult, UserPokedexRecord } from "../../../../types/pokemon";
+import { FavouriteRecord } from "../../../../types/favourite";
 import Button from "../../../../components/Button";
 import EvolutionList from "../EvolutionList";
 import { useUser } from "@clerk/clerk-react";
 import axios from "axios";
+import { Star } from 'lucide-react';
 import { pokemonTypeColors } from "../../../../constants/types";
 // Load users caught pokemon
 const loadUsersPokemon = async(id: string) => {
@@ -16,7 +18,23 @@ const loadUsersPokemon = async(id: string) => {
     });
     return items.data.pokemonIds
 }
-
+// Load favourite data
+const loadFavourite = async(id: string, key: string) => {
+    const items = await axios.post<FavouriteRecord>(`http://localhost:5000/api/favourite/get`, {
+    userId: id,
+    key: key
+    });
+    return items.data.value
+}
+// Update favourite data
+const updateFavourite = async(id: string, key: string, value: string | number ) => {
+    const items = await axios.post<FavouriteRecord>(`http://localhost:5000/api/favourite/create`, {
+    userId: id,
+    key: key,
+    value: value
+    });
+    return items.data.value
+}
 export default function Card({data, backData, id}: PokemonDetailCardProps){
     const [flipped, setFlipped] = useState(false); // Card flipped state
     const [statLabels, setStatLabels] = useState<string[]>([]); // Labels for pokemon stats
@@ -34,6 +52,10 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
         "generation-viii": 8,
         "generation-ix": 9
     };
+    // Favourite pokemon
+    const [favourite, setFavourite] = useState({
+        Pokemon:""
+    })
 
     useEffect(()=>{
         if(data?.stats){
@@ -96,14 +118,40 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
             backData.back_sprite = data.image
     }
     },[])
-    
+    // Handle changing favourite
+    const handleFavourite = (key: string, value: string | number) => {
+        if(!user) return
+        console.log(value)
+        updateFavourite(user?.id, key, value)
+        setFavourite(prev => ({
+            ...prev,
+            [key]: value
+        }));
+    }
+    // Set default favourite
+    useEffect(()=>{
+        if(!user) return
+        const fetchFavs = async () => {
+            try {
+                const [pokemon] = await Promise.all([
+                    loadFavourite(user.id, "Pokemon")
+                ]);
+                setFavourite({ Pokemon: pokemon});
+            } catch (err) {
+                console.error("Chyba při načítání oblíbeného:", err);
+            }
+        };
+        fetchFavs();
+    },[user])
+
     return(
         <div className={`${styles.card} ${flipped ? styles.flipped : ""}`}>
 
                 <div className={styles.front}>
                     <div className={styles.cardTitle}>
                         <div className={styles.cardTitleGroup}>
-                            <h2>{data.name}</h2>{userPokedex.length > 0 && userPokedex.includes(Number(id)) ? (
+                            <h2>{data.name}</h2>
+                            {userPokedex.length > 0 && userPokedex.includes(Number(id)) ? (
                                 <>
                                 <div className={styles.pokeball}>
                                     <span className={styles.text}>
@@ -112,6 +160,11 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
                                 </div>
                                 </>
                             ): ""}
+                            {user && (
+                                <div className={styles.Fav} onClick={()=>{Number(favourite.Pokemon) === Number(id) ? handleFavourite("Pokemon",0) : handleFavourite("Pokemon",Number(id))}}>
+                                    <Star fill={Number(favourite.Pokemon) === Number(id) ? "black" : "none"}/>
+                                </div>
+                            )}
                         </div>
                         <div className={styles.cardType}>
                             <div className={styles.typeImage}  style={{ backgroundImage: `url(/assets/typeBanners/${data.type}.png` }}></div>

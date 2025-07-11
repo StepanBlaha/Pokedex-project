@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useUser } from '@clerk/clerk-react';
-import { PencilLine  } from 'lucide-react';
+import { PencilLine, IdCard   } from 'lucide-react';
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { FavouriteRecord } from "../../types/favourite";
 import { titleCaseWord } from "../../utils/text";
@@ -15,6 +15,8 @@ import List from "./List";
 import { pokemonTypeColors } from "../../constants/types";
 import { getSprite } from "../../utils/sprites";
 import { getCachedData } from "../../utils/cache";
+import { checkAllBadges } from "../../utils/badges";
+import TrainerCard from "./trainerCard";
 // Load favourite data
 const loadFavourite = async(id: string, key: string) => {
     const items = await axios.post<FavouriteRecord>(`http://localhost:5000/api/favourite/get`, {
@@ -178,7 +180,7 @@ export default function Profile(){
 
     const [trainersOpen, setTrainersOpen] = useState<boolean>(false);
     const [customPage, setCustomPage] = useState<"trainers" | "bgs">("trainers");
-
+    const [card, setCard] = useState(false); // Show only trainer card
     return(
         <>
         <div className={styles.App}>
@@ -188,145 +190,159 @@ export default function Profile(){
 
                 <div className={styles.mainBlock}>
                     <div className={styles.mainContent}>
-                    
-                        <div className={styles.ProfileBlock}>
-                            <div className={styles.ProfileHeader}  style={{ backgroundImage: `${favourite.Background !== undefined ? `url(/assets/bgs/${favourite.Background}.jpg` : `url(/assets/bgs/12.jpg` }` }}>
-                                <p className={styles.ProfileName}>{user?.username}</p>
-                                {/* Show fav trainer if selected */}
-                                {favourite.Trainer !== undefined ? (
-                                    <div className={`${styles.trainerItem} ${styles.item}`} style={{ backgroundImage: `url(/assets/trainers/${favourite.Trainer}.png` }}></div>
-                                ):(
-                                    <div className={`${styles.trainerItem} ${styles.item}`}></div>
-                                )}
-                                <div className={styles.TrainerEdit} onClick={()=>setTrainersOpen(!trainersOpen)}>
-                                    <PencilLine />
-                                </div>
-                                {trainersOpen && (
-                                    <div className={styles.TrainerSelect}>
-                                        <div className={styles.TrainerHeader}>
-                                            <div className={`${styles.TrainerHeaderOption} ${customPage === "trainers" ? styles.SelectedCustomPage: ""} `} onClick={()=>setCustomPage("trainers")}>
-                                                <p>Trainers</p>
-                                            </div>
-                                            <div className={`${styles.TrainerHeaderOption} ${customPage === "bgs" ? styles.SelectedCustomPage: ""} `} onClick={()=>setCustomPage("bgs")}>
-                                                <p>Backgrounds</p>
-                                            </div>
+                        {card ? (
+                            <>
+                                <div className={styles.backHomeDiv} onClick={()=>setCard(false)}>
+                                        <div className={styles.backHome}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-move-left-icon lucide-move-left"><path d="M6 8L2 12L6 16"/><path d="M2 12H22"/></svg>
+                                            <p>Back</p>
                                         </div>
-                                        {customPage === "trainers" ? (
-                                            <div className={styles.TrainerContent}>
-                                                {Array.from({ length: 84 }, (_, i) => i + 1).map((num) => (
-                                                    user &&
-                                                    <div className={`${styles.Trainer} ${num === Number(favourite.Trainer) ? styles.FavTrainer : ""}`} onClick={()=>{handleFavourite("Trainer", num); setTrainersOpen(false)}}>
-                                                        <div className={`${styles.TrainerImage}`} style={{ backgroundImage: `url(/assets/trainers/${num}.png` }}></div>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        ) : (
-                                            <div className={styles.TrainerContent}>
-                                                {Array.from({ length: 14 }, (_, i) => i + 1).map((num) => (
-                                                    user &&
-                                                    <div className={`${styles.Trainer} ${num === Number(favourite.Background) ? styles.FavTrainer : ""}`} onClick={()=>{handleFavourite("Background", num); setTrainersOpen(false)}}>
-                                                        <div className={`${styles.TrainerImage}`} style={{ backgroundImage: `url(/assets/bgs/${num}.jpg` }}></div>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        )}
-                                    </div>
-                                )}
-                            </div>
-
-                            <div className={styles.ProfileContent}>
-                                <div className={styles.TrainerLevel}>
-                                    <p>lvl 34</p>
-                                    <div className={styles.TrainerLevelBar}></div>
                                 </div>
-                                <div className={styles.Favourite}>
-                                    {pokeOpen && (
-                                        <div className={styles.PokemonSelect}>
-                                            <List data={items} lastCardRef={lastRef} onClick={handleFavourite} favourite={Number(favourite.Pokemon)} onClose={()=>setPokeOpen(false)}/>
+                                <TrainerCard/>
+                            </>
+                            ): (
+                            <div className={styles.ProfileBlock}>
+                                <div className={styles.ProfileHeader}  style={{ backgroundImage: `${favourite.Background !== undefined ? `url(/assets/bgs/${favourite.Background}.jpg` : `url(/assets/bgs/12.jpg` }` }}>
+                                    <p className={styles.ProfileName}>{user?.username}</p>
+                                    {/* Show fav trainer if selected */}
+                                    {favourite.Trainer !== undefined ? (
+                                        <div className={`${styles.trainerItem} ${styles.item}`} style={{ backgroundImage: `url(/assets/trainers/${favourite.Trainer}.png` }}></div>
+                                    ):(
+                                        <div className={`${styles.trainerItem} ${styles.item}`}></div>
+                                    )}
+                                    <div className={styles.TrainerEdit} onClick={()=>setTrainersOpen(!trainersOpen)}>
+                                        <PencilLine />
+                                    </div>
+                                    {trainersOpen && (
+                                        <div className={styles.TrainerSelect}>
+                                            <div className={styles.TrainerHeader}>
+                                                <div className={`${styles.TrainerHeaderOption} ${customPage === "trainers" ? styles.SelectedCustomPage: ""} `} onClick={()=>setCustomPage("trainers")}>
+                                                    <p>Trainers</p>
+                                                </div>
+                                                <div className={`${styles.TrainerHeaderOption} ${customPage === "bgs" ? styles.SelectedCustomPage: ""} `} onClick={()=>setCustomPage("bgs")}>
+                                                    <p>Backgrounds</p>
+                                                </div>
+                                            </div>
+                                            {customPage === "trainers" ? (
+                                                <div className={styles.TrainerContent}>
+                                                    {Array.from({ length: 84 }, (_, i) => i + 1).map((num) => (
+                                                        user &&
+                                                        <div className={`${styles.Trainer} ${num === Number(favourite.Trainer) ? styles.FavTrainer : ""}`} onClick={()=>{handleFavourite("Trainer", num); setTrainersOpen(false)}}>
+                                                            <div className={`${styles.TrainerImage}`} style={{ backgroundImage: `url(/assets/trainers/${num}.png` }}></div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            ) : (
+                                                <div className={styles.TrainerContent}>
+                                                    {Array.from({ length: 14 }, (_, i) => i + 1).map((num) => (
+                                                        user &&
+                                                        <div className={`${styles.Trainer} ${num === Number(favourite.Background) ? styles.FavTrainer : ""}`} onClick={()=>{handleFavourite("Background", num); setTrainersOpen(false)}}>
+                                                            <div className={`${styles.TrainerImage}`} style={{ backgroundImage: `url(/assets/bgs/${num}.jpg` }}></div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
                                         </div>
                                     )}
-                                    <div className={styles.FavGroup}>
-                                        {favouritePokeSprite ? (<div className={`${styles.pokeballItem}`} style={{backgroundImage: `url(${favouritePokeSprite})`}}></div>):(<div className={`${styles.pokeballItem}`} ></div>)}
-                                        {width > 100 && (
-                                            <>
-                                                <p>Favourite Pokémon: {favPoke ? titleCaseWord(favPoke.name) : "Unknown"}</p>
-                                            </>
-                                        )}
+                                </div>
+
+                                <div className={styles.ProfileContent}>
+                                    <div className={styles.TrainerLevel}>
+                                        <p>lvl 34</p>
+                                        <div className={styles.TrainerLevelBar}></div>
                                     </div>
 
-                                    <div className={styles.FavGroup}>
-                                        <div className={styles.FavEdit} onClick={()=>setPokeOpen(!pokeOpen)}>
-                                            <PencilLine />
+                                    <div className={styles.Favourite}>
+                                        {pokeOpen && (
+                                            <div className={styles.PokemonSelect}>
+                                                <List data={items} lastCardRef={lastRef} onClick={handleFavourite} favourite={Number(favourite.Pokemon)} onClose={()=>setPokeOpen(false)}/>
+                                            </div>
+                                        )}
+                                        <div className={styles.FavGroup}>
+                                            {favouritePokeSprite ? (<div className={`${styles.pokeballItem}`} style={{backgroundImage: `url(${favouritePokeSprite})`}}></div>):(<div className={`${styles.pokeballItem}`} ></div>)}
+                                            {width > 100 && (
+                                                <>
+                                                    <p>Favourite Pokémon: {favPoke ? titleCaseWord(favPoke.name) : "Unknown"}</p>
+                                                </>
+                                            )}
                                         </div>
+
+                                        <div className={styles.FavGroup}>
+                                            <div className={styles.FavEdit} onClick={()=>setPokeOpen(!pokeOpen)}>
+                                                <PencilLine />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className={styles.Favourite}>
+                                        {typesOpen && (
+                                            <div className={styles.TypeSelect}>
+                                                {(Object.entries(pokemonTypeColors) as [keyof typeof pokemonTypeColors, string][])
+                                                    .map(([key, color], i) => (
+                                                        user &&
+                                                        <div className={styles.Type} onClick={()=>{handleFavourite("Type", key); setTypesOpen(false)}}>
+                                                            <div className={styles.typeImage}  style={{ backgroundImage: `url(/assets/typeBanners/${key}.png` }}></div>
+                                                        </div>
+                                                ))}
+                                                
+                                            </div>
+                                        )}
+                                        <div className={styles.FavGroup}>
+                                            {favourite.Type !== undefined ? (
+                                                <div className={`${styles.tmItem}`} style={{ backgroundImage: `url(/assets/tms/${favourite.Type}.png` }}></div>
+                                            ):(
+                                                <div className={`${styles.tmItem}`} ></div>
+                                            )}
+                                            {width > 100 && (
+                                                user && 
+                                                <>
+                                                    <p>Favourite Type: </p>
+                                                    <div className={styles.typeImageSelected}  style={{ backgroundImage: `url(/assets/typeBanners/${favourite.Type}.png` }}></div>
+                                                </>
+                                            )}
+                                        </div>
+
+                                        <div className={styles.FavGroup}>
+                                            <div className={styles.FavEdit} onClick={()=>setTypesOpen(!typesOpen)}>
+                                                <PencilLine />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className={styles.PokedexLink}>
+                                        <div className={`${styles.pokedexItem}`}></div>
+                                            <div className={styles.link}>
+                                                <Link to={"/pokedex"}>Pokedex</Link> <p>{userPokemon?.length}/1025</p>
+                                            </div>
                                     </div>
                                 </div>
 
-                                <div className={styles.Favourite}>
-                                    {typesOpen && (
-                                        <div className={styles.TypeSelect}>
-                                            {(Object.entries(pokemonTypeColors) as [keyof typeof pokemonTypeColors, string][])
-                                                .map(([key, color], i) => (
-                                                    user &&
-                                                    <div className={styles.Type} onClick={()=>{handleFavourite("Type", key); setTypesOpen(false)}}>
-                                                        <div className={styles.typeImage}  style={{ backgroundImage: `url(/assets/typeBanners/${key}.png` }}></div>
-                                                    </div>
-                                            ))}
-                                            
-                                        </div>
+                                <div className={styles.Badges}>
+                                    {userPokemon !== undefined && userPokemon.length >0 && (
+                                        <>
+                                        {
+                                            checkAllBadges(userPokemon).map((gen, ind)=>{
+                                                if(gen === true){
+                                                    return(
+                                                        <>
+                                                        <div className={styles.Badge} style={{ backgroundImage: `url(/assets/badges/${ind+1}.png` }}></div>
+                                                        </>
+                                                    )
+                                                } 
+                                            })
+                                        }
+                                        </>
                                     )}
-                                    <div className={styles.FavGroup}>
-                                        {favourite.Type !== undefined ? (
-                                            <div className={`${styles.tmItem}`} style={{ backgroundImage: `url(/assets/tms/${favourite.Type}.png` }}></div>
-                                        ):(
-                                            <div className={`${styles.tmItem}`} ></div>
-                                        )}
-                                        {width > 100 && (
-                                            user && 
-                                            <>
-                                                <p>Favourite Type: </p>
-                                                <div className={styles.typeImageSelected}  style={{ backgroundImage: `url(/assets/typeBanners/${favourite.Type}.png` }}></div>
-                                            </>
-                                        )}
-                                    </div>
-
-                                    <div className={styles.FavGroup}>
-                                        <div className={styles.FavEdit} onClick={()=>setTypesOpen(!typesOpen)}>
-                                            <PencilLine />
-                                        </div>
-                                    </div>
                                 </div>
 
-                                <div className={styles.Favourite}>
-                                    <div className={styles.FavGroup}>
-                                        <div className={`${styles.mapItem}`}></div>
-                                        {width > 100 && (
-                                            <p>Favourite Region: {titleCaseWord(favourite.Region)}</p>
-                                        )}
-                                    </div>
-
-                                    <div className={styles.FavGroup}>
-                                        <div className={styles.FavEdit}>
-                                            <PencilLine />
-                                        </div>
-                                    </div>
+                                <div className={styles.ShowTrainerCard} onClick={()=>setCard(true)}>
+                                    <IdCard />
                                 </div>
-                                
-                                <div className={styles.PokedexLink}>
-                                    <div className={`${styles.pokedexItem}`}></div>
-                                        <div className={styles.link}>
-                                            <Link to={"/pokedex"}>Pokedex</Link> <p>{userPokemon?.length}/1025</p>
-                                        </div>
-                                </div>
-
 
                             </div>
-                        </div>
-                    
-                    
-
+                        )}
                     </div>
                 </div>
-
                 <Footer/>
             </div>
         </div>

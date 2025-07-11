@@ -24,7 +24,7 @@ export default function Footer(){
                         <p>Explore</p>
                     </div>
                     <div className={styles.PagesText}>
-                        <Link to="/pokedex">Pokedex</Link>
+                        <Link to="/pokemon">Pokedex</Link>
                         <Link to="/items">Items</Link>
                         <Link to="/moves">Moves</Link>
                     </div>

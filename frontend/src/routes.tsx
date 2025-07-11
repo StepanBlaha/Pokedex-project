@@ -9,6 +9,8 @@ import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/Login';
 import Profile from './pages/Profile';
 import Pokedex from './pages/Pokedex';
+import RequireAuth from './components/RequireAuth/RequireAuth';
+import NotFound from './pages/404';
 const DetailPage = lazy(() => import('./pages/DetailPage'));
 const AppRoutes = () => {
     return(
@@ -16,13 +18,22 @@ const AppRoutes = () => {
             <Routes>
                 <Route path='/' element={<HomePage />} />
                 <Route path='register' element={<RegisterPage/>}/>
-                <Route path='profile' element={<Profile/>}/>
+                <Route path='profile' element={
+                    <RequireAuth>
+                        <Profile/>
+                    </RequireAuth>
+                    }/>
                 <Route path='login' element={<LoginPage/>}/>
                 <Route path='pokemon' element={<PokedexList/>}/>
-                <Route path='pokedex' element={<Pokedex/>}/>
+                <Route path='pokedex' element={
+                    <RequireAuth>
+                        <Pokedex/>
+                    </RequireAuth>
+                }/>
                 <Route path='moves' element={<MovePage/>}/>
                 <Route path='items' element={<ItemPage/>}/>
                 <Route path='pokemon/:id' element={<DetailPage/>}/>
+                <Route path='*' element={<NotFound />} />
             </Routes>
         </Suspense>
     )

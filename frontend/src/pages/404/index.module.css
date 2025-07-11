@@ -1,0 +1,176 @@
+html{
+    width: 100%;
+    height: 100%;
+    float: left;
+    zoom: 1.4; 
+}
+body{
+    width: 100%;
+    height: 100%;
+    float: left;
+
+}
+#root{
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+.App{
+    width: 100%;
+    height: 100%;
+    float: left;
+    overflow-x: hidden;
+}
+.center{
+    width: 100%;
+    width: 100%;
+    height: fit-content;
+    float: left;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    gap: 30px;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    gap: 0px;
+}
+.mainBlock{
+    width: 90%;
+    height: 100%;
+    max-width: 1060px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+.mainContent{
+    min-height: 800px;
+    width: 100%;
+    float: left;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    align-items: center;
+}
+@media (max-width: 1248px) {
+    .mainBlock {
+        flex-direction: column;
+    }
+
+    .mainContent,
+    .sideContent {
+        flex: 0 0 100%;
+    }
+}
+.NotFoundCard{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    box-sizing: border-box;
+    border: 1px solid red;
+}
+.NotFoundContent{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    gap: 12px;
+}
+.NotFoundText{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+.Title{
+    color: black;
+    font-weight: 700;
+    font-size: clamp(30px, 5vw, 64px);
+    line-height: clamp(40px, 6vw, 96px);
+    letter-spacing: 0;
+    margin: 0;
+    text-align: left;
+}
+.Title span{
+    color: #f6e652;
+}
+.Text{
+    color: black;
+    font-weight: 600;
+    font-size: clamp(15px, 2vw, 22px);
+    line-height: clamp(25px, 4vw, 34px);
+    letter-spacing: 0;
+    margin: 0;
+    text-align: left;
+}
+.HomeButton{
+    
+    width: fit-content;
+    height: fit-content;
+    background-color: #f6e652;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s ease-out;
+    display: flex;
+    box-sizing: border-box;
+    padding: 8px 14px;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+}
+.HomeButton:hover{
+    background-color: #f6bd20;
+}
+.HomeButton:hover p{
+    color: white !important;
+}
+.HomeButton:hover svg{
+    color: white !important;
+}
+.HomeButton p{
+    color: black;
+    font-weight: 500;
+    margin: 0;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 26px;
+    letter-spacing: 0;
+    text-align: center;
+    vertical-align: middle;
+    align-items: center;
+    min-width: fit-content;
+    transition: 0.3s ease-out;
+}
+.HomeButton svg{
+    color: black;
+    min-height: 24px;
+    max-height: 24px;
+    min-width: 24px;
+    max-width: 24px;
+    transition: 0.3s ease-out;
+}
+.NotFoundImage{
+    width: 100%;
+    height: auto;
+    flex-grow: 1;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-size: contain;
+}
+.NotFoundImage img{
+    height: 100%;
+    width: 100%;
+    max-width: 630px;
+}
+@media (max-width: 700px){
+    .NotFoundCard{
+        flex-direction: column;
+    }
+}

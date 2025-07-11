@@ -10,7 +10,7 @@ import { PencilLine  } from 'lucide-react';
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { FavouriteRecord } from "../../types/favourite";
 import { titleCaseWord } from "../../utils/text";
-import { PokemonListResult, Pokemon } from "../../types/pokemon";
+import { PokemonListResult, Pokemon, UserPokedexRecord } from "../../types/pokemon";
 import List from "./List";
 import { pokemonTypeColors } from "../../constants/types";
 import { getSprite } from "../../utils/sprites";
@@ -63,7 +63,12 @@ const fetchAllPokemonInBatches = async () => {
     localStorage.setItem("sb_pokemon", JSON.stringify(allResults))
     return allResults;
 }
-
+const loadUsersPokemon = async(id: string) => {
+    const items = await axios.post<UserPokedexRecord>(`http://localhost:5000/api/userpokedex/get`, {
+    userId: id,
+    });
+    return items.data.pokemonIds
+}
 export default function Profile(){
     const { height, width } = useWindowDimensions(); // Window size
     const { user, isLoaded } = useUser(); // User context
@@ -72,6 +77,7 @@ export default function Profile(){
     const [pokeOpen, setPokeOpen] = useState<boolean>(false); // Favourite pokemon modal flag
     const [items, setItems] = useState<Pokemon[]>([]); // Fetched pokemon
     const lastRef = useRef<HTMLDivElement | null>(null); // Last pokemon for infinity scroll
+    const [userPokemon, setUserPokemon] = useState<number[]>();
     const [favourite, setFavourite] = useState({
         Type: "",
         Pokemon:"",
@@ -83,7 +89,16 @@ export default function Profile(){
     const [favPoke, setFavPoke] = useState<Pokemon | undefined>();
     const favouritePokeSprite = getSprite(favoriteId); // Favourite pokemons sprite
     const [allPoke, setAllPoke] = useState<Pokemon[]>(); // All pokemon
-
+    // Load users pokemon
+    useEffect(()=>{
+        if(userPokemon && userPokemon?.length > 0 ) return
+        const loadUsersData = async () => {
+            if(!user) return
+            const userPoke = await loadUsersPokemon(user.id);
+            setUserPokemon(userPoke);
+        }
+        loadUsersData();
+    },[user])
     // Set favourite pokemon
     useEffect(()=>{
         if (!allPoke || allPoke.length === 0) return;
@@ -299,7 +314,7 @@ export default function Profile(){
                                 <div className={styles.PokedexLink}>
                                     <div className={`${styles.pokedexItem}`}></div>
                                         <div className={styles.link}>
-                                            <Link to={"/pokedex"}>Pokedex</Link>
+                                            <Link to={"/pokedex"}>Pokedex</Link> <p>{userPokemon?.length}/1025</p>
                                         </div>
                                 </div>
 

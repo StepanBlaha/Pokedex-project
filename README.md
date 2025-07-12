@@ -2,6 +2,7 @@
 - refactor
 - maybe custom pokemon team
 - maybe guess pokemon by sprite game (filter brightness 0) - nedele
+- loader pri nacitani pokemonu - nedele
 
 # On hold
 - trainer level - ( nevim podle ceho bych delal levely )

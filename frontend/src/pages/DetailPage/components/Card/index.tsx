@@ -167,6 +167,9 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
                             {user && (
                                 <div className={styles.Fav} onClick={()=>{Number(favourite.Pokemon) === Number(id) ? handleFavourite("Pokemon",0) : handleFavourite("Pokemon",Number(id))}}>
                                     <Star fill={Number(favourite.Pokemon) === Number(id) ? "black" : "none"}/>
+                                    <span className={styles.textFav}>
+                                        <span className={styles.tooltipFav}>Favourite</span>
+                                    </span>
                                 </div>
                             )}
                         </div>
@@ -330,6 +333,9 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
             </Button>
             <div className={styles.ShinyToggle} onClick={()=>setShowShiny(!showShiny)}>
                 <Sparkle fill={showShiny === true?  "black" : "none"}/>
+                <span className={styles.textShiny}>
+                    <span className={styles.tooltipShiny}>Shiny</span>
+                </span>
             </div>
         </div>
     )

@@ -16,3 +16,8 @@
     justify-items: center;
     
 }
+@media (max-width: 700px) {
+    .pokedexList{
+        padding: unset;
+    }
+}

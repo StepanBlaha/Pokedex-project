@@ -264,7 +264,7 @@ export default function Profile(){
                                                 </div>
                                             ) : (
                                                 <div className={styles.TrainerContent}>
-                                                    {Array.from({ length: 14 }, (_, i) => i + 1).map((num) => (
+                                                    {Array.from({ length: 19 }, (_, i) => i + 1).map((num) => (
                                                         user &&
                                                         <div className={`${styles.Trainer} ${num === Number(favourite.Background) ? styles.FavTrainer : ""}`} onClick={()=>{handleFavourite("Background", num); setTrainersOpen(false)}}>
                                                             <div className={`${styles.TrainerImage}`} style={{ backgroundImage: `url(/assets/bgs/${num}.jpg` }}></div>

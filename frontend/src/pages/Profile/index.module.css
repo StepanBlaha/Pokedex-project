@@ -71,13 +71,14 @@ body{
     min-height: 400px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+
 
     border-radius: 0.6em;
     border: 5px solid black;
     box-shadow: 0.0em 0.2em;
     width: clamp(200px, 60vw, 800px);
     position: relative;
+    padding-bottom: 10px;
 }
 .ProfileHeader{
     width: 100%;
@@ -98,6 +99,11 @@ body{
 @media (max-width: 700px) {
     .ProfileHeader{
         background-position: center;
+    }
+}
+@media (min-width: 1400px) {
+    .ProfileHeader{
+            background-position: 0px -290px;
     }
 }
 .ProfileName{
@@ -126,6 +132,7 @@ body{
     flex-direction: column;
     gap: 2px;
     box-sizing: border-box;
+    margin-bottom: 20px;
 }
 .TrainerLevel p{
     color: black;
@@ -306,12 +313,12 @@ body{
     height: fit-content;
     background-color: white;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     box-sizing: border-box;
     position: absolute;
     right: 0;
     top: 100%;
-    z-index: 1;
+    z-index: 10;
     gap: 6px;
     border-radius: 0.6em;
     border: 5px solid black;
@@ -319,6 +326,13 @@ body{
     padding: 8px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+
+    max-width: 80vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-height: 300px;
+    overflow: auto;
 }
 .Type{
     width: fit-content;
@@ -505,9 +519,11 @@ body{
     height: fit-content;
     box-sizing: border-box;
     display: flex;
-    position: absolute;
     top: 70px;
     left: 10px;
+    max-width: 100%;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
 }
 .Badge{
     min-width: 40px;
@@ -521,10 +537,18 @@ body{
     image-rendering: pixelated;
     image-rendering: crisp-edges;
 }
+.TrainerCardButonWrap{
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    padding: 0px 10px;
+    justify-content: flex-end;
+    box-sizing: border-box;
+}
 .ShowTrainerCard{
     width: fit-content;
     height: fit-content;
-    position: absolute;
+
     z-index: 1;;
     padding: 4px;
     border: 2px solid;
@@ -677,7 +701,14 @@ body{
 .link:hover svg{
     top: 19px;
 }
-
+@media(max-width:700px){
+    .link{
+        width: fit-content;
+    }
+    .PokedexLink{
+        justify-content: space-between;
+    }
+}
 
 
 
@@ -706,6 +737,7 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    gap: 30px;
 }
 .TrainerExpCardMain{
     height: fit-content;
@@ -788,4 +820,65 @@ body{
         flex-wrap: wrap;
         justify-content: center;
     }
+}
+.ExportButton{
+    width: fit-content;
+    height: fit-content;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s ease-out;
+    z-index: 20;
+    user-select: none;
+    background-color: transparent;
+    border: unset;
+    padding: 4px;
+    border: 2px solid;
+    border-radius: 7px;
+}
+.ExportButton:hover{
+    background-color: #a1a1a1;
+}
+.ExportButton svg{
+    min-height: 20px;
+    max-height: 20px;
+    min-width: 20px;
+    max-width: 20px;
+    color: black;
+}
+.ActionWrapper{
+    width: 100%;
+    height: fit-content;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.DownloadLoader{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #7575754a;
+    backdrop-filter: blur(20px);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 20px;
+}
+.DownloadLoader p{
+    color: black;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: clamp(32px, 4vw, 60px);
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+}
+.DownloadLoader span{
+    color: #f6e652;
 }

@@ -4,10 +4,7 @@ import { Link } from "react-router-dom";
 import { registerFormData, loginFormData, User } from "../../types/user";
 import { useForm } from "react-hook-form";
 import { useSignIn } from "@clerk/clerk-react";
-import { useAuth } from "../../hooks/useAuth";
-
 export default function LoginPage(){
-    const {isLoggedIn, login, logout} = useAuth();
     const { signIn, setActive, isLoaded } = useSignIn();
     const {register, handleSubmit, formState: {errors, isSubmitting}, setError,} = useForm<loginFormData>();
     const [ email, setEmail] = useState<string>("");

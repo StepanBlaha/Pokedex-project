@@ -4,8 +4,8 @@ import AppRoutes from './routes';
 import { BrowserRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { ClerkProvider, RedirectToSignIn } from '@clerk/clerk-react';
-console.log('Clerk Publishable Key:', process.env.REACT_APP_CLERK_PUBLISHABLE_KEY);
 
+console.log('Clerk Publishable Key:', process.env.REACT_APP_CLERK_PUBLISHABLE_KEY);
 const PUBLISHABLE_KEY = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY ?? 'default_publishable_key';
 
 if (!PUBLISHABLE_KEY) {
@@ -25,7 +25,6 @@ function App() {
         ></link>
       </Helmet>
       <React.StrictMode>
-
       <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl='/'>
         <BrowserRouter>
           <AppRoutes />

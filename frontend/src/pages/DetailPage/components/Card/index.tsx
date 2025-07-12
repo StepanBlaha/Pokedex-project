@@ -11,6 +11,7 @@ import { useUser } from "@clerk/clerk-react";
 import axios from "axios";
 import { Star } from 'lucide-react';
 import { pokemonTypeColors } from "../../../../constants/types";
+import { Sparkle } from 'lucide-react';
 // Load users caught pokemon
 const loadUsersPokemon = async(id: string) => {
     const items = await axios.post<UserPokedexRecord>(`http://localhost:5000/api/userpokedex/get`, {
@@ -41,6 +42,9 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
     const { user, isLoaded } = useUser(); // User auth data
     const [statValues, setStatValues] = useState<number[]>([]); // Pokemons stats
     const [ userPokedex, setUserPokedex] = useState<number[]>([]); // Users pokedex
+    const [showShiny, setShowShiny] = useState<boolean>(false);
+    const backShiny = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${id}.png`
+    const shiny = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`
     const generationMap: {[key:string]:number} = {
         "generation-i": 1,
         "generation-ii": 2,
@@ -169,7 +173,12 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
                         <div className={styles.cardType}>
                             <div className={styles.typeImage}  style={{ backgroundImage: `url(/assets/typeBanners/${data.type}.png` }}></div>
                         </div>
-                        <div className={styles.cardImage} style={{ backgroundImage: `url(${data.image})` }}></div>
+                        {showShiny === true ? (
+                            <div className={styles.cardImage} style={{ backgroundImage: `url(${shiny})` }}></div>
+                        ) : (
+                            <div className={styles.cardImage} style={{ backgroundImage: `url(${data.image})` }}></div>
+                        )}
+                        
                     </div>
 
                     <div className={styles.cardInformations}>
@@ -245,7 +254,11 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
                             <div className={styles.typeImage}  style={{ backgroundImage: `url(/assets/typeBanners/${data.type}.png` }}></div>
 
                         </div>
-                            <div className={styles.cardImage} style={{ backgroundImage: `url(${backData.back_sprite})` }}></div>
+                            {showShiny === true ? (
+                                <div className={styles.cardImage} style={{ backgroundImage: `url(${backShiny})` }}></div>
+                            ) : (
+                                <div className={styles.cardImage} style={{ backgroundImage: `url(${backData.back_sprite})` }}></div>
+                            )}
                     </div>
 
                     <div className={styles.cardInformationsBack}>
@@ -315,6 +328,9 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
             <Button onClick={()=>setFlipped(!flipped)} className={styles.flipButton}   style={{ backgroundColor: `${pokemonTypeColors[data.type]} ` }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right-left-icon lucide-arrow-right-left"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></svg>
             </Button>
+            <div className={styles.ShinyToggle} onClick={()=>setShowShiny(!showShiny)}>
+                <Sparkle fill={showShiny === true?  "black" : "none"}/>
+            </div>
         </div>
     )
 }

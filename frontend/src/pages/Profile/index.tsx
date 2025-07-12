@@ -12,11 +12,14 @@ import { FavouriteRecord } from "../../types/favourite";
 import { titleCaseWord } from "../../utils/text";
 import { PokemonListResult, Pokemon, UserPokedexRecord } from "../../types/pokemon";
 import List from "./List";
+import { Download } from 'lucide-react';
 import { pokemonTypeColors } from "../../constants/types";
 import { getSprite } from "../../utils/sprites";
 import { getCachedData } from "../../utils/cache";
 import { checkAllBadges } from "../../utils/badges";
 import TrainerCard from "./trainerCard";
+import { toPng } from 'html-to-image';
+import download from 'downloadjs';
 // Load favourite data
 const loadFavourite = async(id: string, key: string) => {
     const items = await axios.post<FavouriteRecord>(`http://localhost:5000/api/favourite/get`, {
@@ -65,6 +68,7 @@ const fetchAllPokemonInBatches = async () => {
     localStorage.setItem("sb_pokemon", JSON.stringify(allResults))
     return allResults;
 }
+// Load users pokemom
 const loadUsersPokemon = async(id: string) => {
     const items = await axios.post<UserPokedexRecord>(`http://localhost:5000/api/userpokedex/get`, {
     userId: id,
@@ -80,6 +84,7 @@ export default function Profile(){
     const [items, setItems] = useState<Pokemon[]>([]); // Fetched pokemon
     const lastRef = useRef<HTMLDivElement | null>(null); // Last pokemon for infinity scroll
     const [userPokemon, setUserPokemon] = useState<number[]>();
+    const [downloadLoading, setDownloadLoading] = useState<boolean>(false);
     const [favourite, setFavourite] = useState({
         Type: "",
         Pokemon:"",
@@ -87,6 +92,20 @@ export default function Profile(){
         Trainer:"",
         Background:""
     })
+    // Handle downloading trainer card
+    const handleDownload = async () => {
+        if (!cardRef.current) return;
+        setDownloadLoading(true);
+        try {
+            const dataUrl = await toPng(cardRef.current);
+            download(dataUrl, 'downloaded-card.png');
+        } catch (error) {
+            console.error('Error generating image:', error);
+        }
+        finally{
+            setDownloadLoading(false);
+        }
+    };
     const favoriteId = Number(favourite.Pokemon); // Favourite pokemons id
     const [favPoke, setFavPoke] = useState<Pokemon | undefined>();
     const favouritePokeSprite = getSprite(favoriteId); // Favourite pokemons sprite
@@ -181,6 +200,7 @@ export default function Profile(){
     const [trainersOpen, setTrainersOpen] = useState<boolean>(false);
     const [customPage, setCustomPage] = useState<"trainers" | "bgs">("trainers");
     const [card, setCard] = useState(false); // Show only trainer card
+    const cardRef = useRef<HTMLDivElement>(null); // Ref for export
     return(
         <>
         <div className={styles.App}>
@@ -192,13 +212,23 @@ export default function Profile(){
                     <div className={styles.mainContent}>
                         {card ? (
                             <>
+                            {downloadLoading && (
+                                <div className={styles.DownloadLoader}>
+                                    <p>Downloading card<span>...</span></p>
+                                </div>
+                            )}
+                            <div className={styles.ActionWrapper}>
                                 <div className={styles.backHomeDiv} onClick={()=>setCard(false)}>
                                         <div className={styles.backHome}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-move-left-icon lucide-move-left"><path d="M6 8L2 12L6 16"/><path d="M2 12H22"/></svg>
                                             <p>Back</p>
                                         </div>
                                 </div>
-                                <TrainerCard/>
+                                <button className={styles.ExportButton} onClick={handleDownload}>
+                                    <Download/>
+                                </button>
+                            </div>
+                                <TrainerCard cardRef={cardRef}/>
                             </>
                             ): (
                             <div className={styles.ProfileBlock}>
@@ -247,6 +277,24 @@ export default function Profile(){
                                 </div>
 
                                 <div className={styles.ProfileContent}>
+                                    <div className={styles.Badges}>
+                                        {userPokemon !== undefined && userPokemon.length >0 && (
+                                            <>
+                                            {
+                                                checkAllBadges(userPokemon).map((gen, ind)=>{
+                                                    if(gen === true){
+                                                        return(
+                                                            <>
+                                                            <div className={styles.Badge} style={{ backgroundImage: `url(/assets/badges/${ind+1}.png` }}></div>
+                                                            </>
+                                                        )
+                                                    } 
+                                                })
+                                            }
+                                            </>
+                                        )}
+                                    </div>
+
                                     <div className={styles.TrainerLevel}>
                                         <p>lvl 34</p>
                                         <div className={styles.TrainerLevelBar}></div>
@@ -260,7 +308,7 @@ export default function Profile(){
                                         )}
                                         <div className={styles.FavGroup}>
                                             {favouritePokeSprite ? (<div className={`${styles.pokeballItem}`} style={{backgroundImage: `url(${favouritePokeSprite})`}}></div>):(<div className={`${styles.pokeballItem}`} ></div>)}
-                                            {width > 100 && (
+                                            {width > 700 && (
                                                 <>
                                                     <p>Favourite Pokémon: {favPoke ? titleCaseWord(favPoke.name) : "Unknown"}</p>
                                                 </>
@@ -293,7 +341,7 @@ export default function Profile(){
                                             ):(
                                                 <div className={`${styles.tmItem}`} ></div>
                                             )}
-                                            {width > 100 && (
+                                            {width > 700 && (
                                                 user && 
                                                 <>
                                                     <p>Favourite Type: </p>
@@ -312,32 +360,22 @@ export default function Profile(){
                                     <div className={styles.PokedexLink}>
                                         <div className={`${styles.pokedexItem}`}></div>
                                             <div className={styles.link}>
-                                                <Link to={"/pokedex"}>Pokedex</Link> <p>{userPokemon?.length}/1025</p>
+                                                {width > 700 && (
+                                                    <Link to={"/pokedex"}>Pokedex</Link> 
+                                                )}
+                                                <p>{userPokemon?.length}/1025</p>
                                             </div>
+                                    </div>
+
+                                </div>
+                                <div className={styles.TrainerCardButonWrap}>
+                                    <div className={styles.ShowTrainerCard} onClick={()=>setCard(true)}>
+                                        <IdCard />
                                     </div>
                                 </div>
 
-                                <div className={styles.Badges}>
-                                    {userPokemon !== undefined && userPokemon.length >0 && (
-                                        <>
-                                        {
-                                            checkAllBadges(userPokemon).map((gen, ind)=>{
-                                                if(gen === true){
-                                                    return(
-                                                        <>
-                                                        <div className={styles.Badge} style={{ backgroundImage: `url(/assets/badges/${ind+1}.png` }}></div>
-                                                        </>
-                                                    )
-                                                } 
-                                            })
-                                        }
-                                        </>
-                                    )}
-                                </div>
+                                
 
-                                <div className={styles.ShowTrainerCard} onClick={()=>setCard(true)}>
-                                    <IdCard />
-                                </div>
 
                             </div>
                         )}

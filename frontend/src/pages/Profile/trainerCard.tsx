@@ -9,14 +9,14 @@ import { useUser } from '@clerk/clerk-react';
 import { PencilLine  } from 'lucide-react';
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { FavouriteRecord } from "../../types/favourite";
-import { titleCaseWord } from "../../utils/text";
 import { PokemonListResult, Pokemon, UserPokedexRecord } from "../../types/pokemon";
 import List from "./List";
 import { pokemonTypeColors } from "../../constants/types";
 import { getSprite } from "../../utils/sprites";
 import { getCachedData } from "../../utils/cache";
 import { checkAllBadges } from "../../utils/badges";
-import { i } from "@clerk/clerk-react/dist/useAuth-DN6TRwS8";
+
+import { exportComponentAsPNG } from 'react-component-export-image';
 // Load favourite data
 const loadFavourite = async(id: string, key: string) => {
     const items = await axios.post<FavouriteRecord>(`http://localhost:5000/api/favourite/get`, {
@@ -71,7 +71,11 @@ const loadUsersPokemon = async(id: string) => {
     });
     return items.data.pokemonIds
 }
-export default function TrainerCard(){
+
+type TrainerCardProps = {
+    cardRef: React.Ref<HTMLDivElement>;
+};
+export default function TrainerCard( { cardRef }: TrainerCardProps){
     const { height, width } = useWindowDimensions(); // Window size
     const { user, isLoaded } = useUser(); // User context
     const [page, setPage] = useState<number>(0); // Page for infinity scroll
@@ -79,7 +83,7 @@ export default function TrainerCard(){
     const [pokeOpen, setPokeOpen] = useState<boolean>(false); // Favourite pokemon modal flag
     const [items, setItems] = useState<Pokemon[]>([]); // Fetched pokemon
     const lastRef = useRef<HTMLDivElement | null>(null); // Last pokemon for infinity scroll
-    const [userPokemon, setUserPokemon] = useState<number[]>();
+    const [userPokemon, setUserPokemon] = useState<number[]>(); // Users pokemon
     const [favourite, setFavourite] = useState({
         Type: "",
         Pokemon:"",
@@ -182,7 +186,7 @@ export default function TrainerCard(){
     
     return(
         <>
-        <div className={styles.TrainerExpCard} style={{ backgroundImage: `${favourite.Background !== undefined ? `url(/assets/bgs/${favourite.Background}.jpg` : `url(/assets/bgs/12.jpg` }` }}>
+        <div className={styles.TrainerExpCard} ref={cardRef} style={{ backgroundImage: `${favourite.Background !== undefined ? `url(/assets/bgs/${favourite.Background}.jpg` : `url(/assets/bgs/12.jpg` }` }}>
             <div className={styles.TrainerExpCardMain}>
                 <div className={styles.TrainerExpCardName}>{user?.username}</div>
                 <div className={styles.TrainerExpCardAvatar}>
@@ -211,7 +215,8 @@ export default function TrainerCard(){
                     </>
                 )}
             </div>
-        </div>
+        </div>   
+        
         </>
     )
 }

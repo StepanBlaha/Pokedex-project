@@ -507,3 +507,30 @@
   align-items: center;
   cursor: pointer;
 }
+.card.flipped .ShinyToggle{
+    right: unset;
+    left: 10px;
+}
+.ShinyToggle{
+  width: fit-content;
+  height: fit-content;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+  transition: 0.3s ease-out;
+  z-index: 20;
+  user-select: none;
+}
+.ShinyToggle svg{
+  min-height: 30px;
+  max-height: 30px;
+  min-width: 30px;
+  max-width: 30px;
+  color: black;
+
+}

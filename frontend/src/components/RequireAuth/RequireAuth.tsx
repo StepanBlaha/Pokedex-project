@@ -7,17 +7,16 @@ interface RequireAuthProps {
     children: ReactElement;
 }
 
-const RequireAuth = ({ children }: RequireAuthProps)=> {
-    const { user, isLoaded } = useUser(); // User context
+const RequireAuth = ({ children }: RequireAuthProps) => {
+    const { user, isLoaded } = useUser();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(!user){
-        navigate("/login")
-    }
-    }, [user, navigate]);
+        if (isLoaded && !user) {
+        navigate("/login");
+        }
+    }, [isLoaded, user, navigate]);
 
     return user ? children : null;
-}
-
+};
 export default RequireAuth;

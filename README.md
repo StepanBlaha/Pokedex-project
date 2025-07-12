@@ -7,3 +7,4 @@
 - expor trainer card
 - maybe custom pokemon team
 - maybe guess pokemon by sprite game (filter brightness 0)
+- pridat vic pozadi

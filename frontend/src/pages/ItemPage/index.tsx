@@ -122,6 +122,11 @@ export default function ItemPage(){
 
                   <div className={styles.mainContent}>
                     <List data={items} lastCardRef={lastRef}/>
+                    {isFetching && (
+                      <div className={styles.Loader}>
+                        <p>Loading more...</p>
+                      </div>
+                    )}
                   </div>   
 
               </div>

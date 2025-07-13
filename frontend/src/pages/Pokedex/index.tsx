@@ -180,6 +180,11 @@ export default function Pokedex(){
                         userData={userPokedex}
                         onToggle={handleToggle}
                         />
+                        {isFetching && (
+                            <div className={styles.Loader}>
+                                <p>Loading more...</p>
+                            </div>
+                        )}
                     </div>
 
                 </div>

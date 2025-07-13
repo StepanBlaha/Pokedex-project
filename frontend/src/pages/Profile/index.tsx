@@ -320,7 +320,17 @@ export default function Profile(){
                                     </div>
 
                                     <div className={styles.TrainerLevel}>
-                                        <p>lvl {Math.floor( userXp / 1000)}</p>
+                                        <p className={styles.Level}>
+                                            lvl {Math.floor( userXp / 1000)}
+                                            {
+                                                /*
+                                            <span className={styles.textLevel}>
+                                                <span className={styles.tooltipLevel}>Gain levels by playig guess the pokemon</span>
+                                            </span>
+                                                 */
+                                            }
+                                        </p>
+                                        
                                         <div className={styles.TrainerLevelBar}>
                                             <div className={styles.LevelBar} style={{width: `${((userXp % 1000) / 1000) * 100}%`, backgroundColor: `${favourite.Type !== undefined ? pokemonTypeColors[favourite.Type] : "#969696"}`}}></div>
                                         </div>

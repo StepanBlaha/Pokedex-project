@@ -72,3 +72,19 @@
   border: 3px solid #7e7e7e;
   box-shadow: 0.4em 0.4em;
 }
+.Loader{
+  width: 100%;
+  height: fit-content;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Loader p{
+  font-size: 20px;
+  color: black;
+  text-align: center;
+  font-weight: 600;
+  margin: 0;
+  padding: 10px 0px;
+}

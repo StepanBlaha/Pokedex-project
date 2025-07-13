@@ -1,18 +1,18 @@
 .linkPart{
-    height: 100%;
-    width: 70%;
-
+height: 100%;
+    width: 100%;
     float: left;
-    flex: 1;
-    display: flex;
+    flex: 1 1;
+    display: flex
+;
     gap: 20px;
+    gap: clamp(8px, 1.6vw, 20px);
+    justify-content: space-evenly;
 }
 
 .link{
     height: 100%;
-    width: 120px;
     float: left;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,6 +28,7 @@
     text-decoration: none;
     color: black;
     font-size: 29px;
+    font-size: clamp(18px, 2.7vw, 29px);
     font-weight: 700;
     transition: 0.3s ease-in-out;
 
@@ -39,6 +40,7 @@
     text-decoration: none;
     color: black;
     font-size: 29px;
+    font-size: clamp(18px, 2.7vw, 29px);
     font-weight: 700;
     transition: color 0.2s ease-in;
     z-index: 1;
@@ -100,6 +102,14 @@
     right: -11px;
     height: 50px;
     width: 50px;
+}
+.expShareItem{
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/scanner.png);
+    z-index: -1;
+    top: 35px;
+    right: -32px;
+    height: 40px;
+    width: 40px;
 }
 .pokeradarItem{
     background-image: url(https://raw.githubusercontent.com/msikma/pokesprite/master/icons/key-item/poke-radar.png);

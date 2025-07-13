@@ -28,6 +28,10 @@ export default function NormalMenu(){
                 <div className={`${styles.tmGrassItem} ${styles.item}`}></div>
                 <Link to="/moves" className={pathname === "/moves" ? styles.active : ""}>Moves</Link>
             </div>
+            <div className={styles.link}>
+                <div className={`${styles.expShareItem} ${styles.item}`}></div>
+                <Link to="/guesser" className={pathname === "/guesser" ? styles.active : ""}>Guesser</Link>
+            </div>
         </div>
         
         </>

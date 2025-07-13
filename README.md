@@ -1,8 +1,9 @@
 # TODO
 - refactor
 - maybe custom pokemon team
-- maybe guess pokemon by sprite game (filter brightness 0) - nedele
 - loader pri nacitani pokemonu - nedele
+- maybe v guesseru pri psani ukazovat moznosti pokemonu
+- premistit guesser do main navbaru - nedele
 
 # On hold
 - trainer level - ( nevim podle ceho bych delal levely )

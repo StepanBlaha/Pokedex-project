@@ -155,7 +155,16 @@
     right: -3px;
 
 }
-
+.expShareItem{
+    background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/scanner.png);
+    z-index: -1;
+    top: 9px;
+    right: 97px;
+    height: 40px;
+    width: 40px;
+    transform: rotate(45deg);
+    transform: scaleX(-1) rotate(15deg);
+}
 
 
 

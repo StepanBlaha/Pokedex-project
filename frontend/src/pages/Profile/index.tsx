@@ -13,13 +13,29 @@ import { titleCaseWord } from "../../utils/text";
 import { PokemonListResult, Pokemon, UserPokedexRecord } from "../../types/pokemon";
 import List from "./List";
 import { Download } from 'lucide-react';
-import { pokemonTypeColors } from "../../constants/types";
 import { getSprite } from "../../utils/sprites";
 import { getCachedData } from "../../utils/cache";
 import { checkAllBadges } from "../../utils/badges";
 import TrainerCard from "./trainerCard";
 import { toPng } from 'html-to-image';
 import download from 'downloadjs';
+import { userLevelResult } from "../../types/user";
+import { pokemonTypeColors } from "../../constants/types";
+// Update user xp
+const UpdateUserLevel = async (id: string, xp:number) =>{
+        const items = await axios.post<userLevelResult>(`http://localhost:5000/api/userlevel/create`, {
+        userId: id,
+        xp: xp
+    });
+    return items.data
+}
+// Get user xp
+const GetUserLevel = async (id: string) =>{
+        const items = await axios.post<userLevelResult>(`http://localhost:5000/api/userlevel/get`, {
+        userId: id
+    });
+    return items.data
+}
 // Load favourite data
 const loadFavourite = async(id: string, key: string) => {
     const items = await axios.post<FavouriteRecord>(`http://localhost:5000/api/favourite/get`, {
@@ -76,6 +92,8 @@ const loadUsersPokemon = async(id: string) => {
     return items.data.pokemonIds
 }
 export default function Profile(){
+    const [ userXp, setUserXp ] = useState<number>(0); // User xp
+    const [ useLevel, setUseLevel ] = useState<number>(0); // User xp
     const { height, width } = useWindowDimensions(); // Window size
     const { user, isLoaded } = useUser(); // User context
     const [page, setPage] = useState<number>(0); // Page for infinity scroll
@@ -92,6 +110,12 @@ export default function Profile(){
         Trainer:"",
         Background:""
     })
+    // Set user level on load
+    useEffect(()=>{
+        if(user){
+            GetUserLevel(user.id).then(data => setUserXp(data.xp))
+        }
+    },[user])
     // Handle downloading trainer card
     const handleDownload = async () => {
         if (!cardRef.current) return;
@@ -167,7 +191,7 @@ export default function Profile(){
             ]);
             setFavourite({ Type: type, Pokemon: pokemon, Region: region, Trainer: trainer, Background: background });
         } catch (err) {
-            console.error("Chyba při načítání oblíbeného:", err);
+            console.error("Error loading favourites:", err);
         }
     };
     fetchFavs();
@@ -296,8 +320,10 @@ export default function Profile(){
                                     </div>
 
                                     <div className={styles.TrainerLevel}>
-                                        <p>lvl 34</p>
-                                        <div className={styles.TrainerLevelBar}></div>
+                                        <p>lvl {Math.floor( userXp / 1000)}</p>
+                                        <div className={styles.TrainerLevelBar}>
+                                            <div className={styles.LevelBar} style={{width: `${((userXp % 1000) / 1000) * 100}%`, backgroundColor: `${favourite.Type !== undefined ? pokemonTypeColors[favourite.Type] : "#969696"}`}}></div>
+                                        </div>
                                     </div>
 
                                     <div className={styles.Favourite}>

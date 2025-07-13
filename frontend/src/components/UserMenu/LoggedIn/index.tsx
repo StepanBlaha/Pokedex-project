@@ -52,6 +52,9 @@ export default function LoggedInMenu({ logout }: LoggedInMenuProps) {
         <div className={styles.link}>
             <Link to="/pokedex" >Pokedex</Link>
         </div>
+        <div className={styles.link}>
+            <Link to="/guesser" >Guesser</Link>
+        </div>
         <div className={styles.link} onClick={logout}>
             <p>Logout</p>
         </div>

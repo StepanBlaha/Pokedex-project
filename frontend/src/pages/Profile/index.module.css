@@ -148,6 +148,15 @@ body{
     box-sizing: border-box;
     border-radius: 30px;
     background-color: #cecece;
+    position: relative;
+}
+.LevelBar{
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    border-radius: 30px;
 }
 .item{
     width: 124px;

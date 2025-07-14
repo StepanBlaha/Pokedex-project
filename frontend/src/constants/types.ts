@@ -19,3 +19,23 @@ export const pokemonTypeColors : { [key: string]: string } = {
     steel: "#B7B7CE",
     fairy: "#D685AD"
 };
+export const pokemonTypes = [
+    "normal",
+    "fire",
+    "water",
+    "electric",
+    "grass",
+    "ice",
+    "fighting",
+    "poison",
+    "ground",
+    "flying",
+    "psychic",
+    "bug",
+    "rock",
+    "ghost",
+    "dragon",
+    "dark",
+    "steel",
+    "fairy"
+];

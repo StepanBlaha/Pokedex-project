@@ -90,29 +90,32 @@ body{
     flex: 0 0 70%;
 }
 .sideContent{
-    min-height: 40px;
-    float: left;
-    flex: 0 0 30%;
-    padding: 20px;
+  min-height: 40px;
+  float: left;
+  flex: 0 0 30%;
+  padding: 20px;
+  gap: 10px;
+  display: flex;
+  align-items: center;
 }
 @media (max-width: 1248px) {
-    .mainBlock {
-      flex-direction: column;
-    }
-  
-    .mainContent,
-    .sideContent {
-      flex: 0 0 100%;
-    }
+  .mainBlock {
+    flex-direction: column;
   }
+
+  .mainContent,
+  .sideContent {
+    flex: 0 0 100%;
+  }
+}
 
 
 
 
 .card{
-    height: 60px;
-    width: 200px;
-    border: 1px solid;
+  height: 60px;
+  width: 200px;
+  border: 1px solid;
 }
 
 .searchInput {
@@ -121,28 +124,22 @@ body{
   --font-color-sub: #666;
   --bg-color: #fff;
   --main-color: #323232;
-
-
   background-color: var(--bg-color);
- 
   font-size: 15px;
   font-weight: 600;
   color: var(--font-color);
   padding: 5px 10px;
   outline: none;
-
-    border: 3px solid black;
-    border-radius: 0.4em;
-    box-shadow: 0.2em 0.2em;
-    transition: ease 0.25s;
-    height: 20px;
+  border: 3px solid black;
+  border-radius: 0.4em;
+  box-shadow: 0.2em 0.2em;
+  transition: ease 0.25s;
+  height: 20px;
 }
-
 .searchInput::placeholder {
   color: var(--font-color-sub);
   opacity: 0.8;
 }
-
 .searchInput:focus {
   border: 3px solid #7e7e7e;
   box-shadow: 0.4em 0.4em;
@@ -163,7 +160,35 @@ body{
   margin: 0;
   padding: 10px 0px;
 }
+.TypeFilter{
+    --input-focus: #2d8cf0;
+    --font-color: #323232;
+    --font-color-sub: #666;
+    --bg-color: #fff;
+    --main-color: #323232;
+    background-color: var(--bg-color);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--font-color);
+    padding: 5px 10px;
+    outline: none;
+    border: 3px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.2em 0.2em;
+    transition: 0.3s ease-out;
+    cursor: pointer;
 
-
+}
+.TypeFilter svg{
+  color: red;
+}
+.TypeFilter::placeholder {
+  color: var(--font-color-sub);
+  opacity: 0.8;
+}
+.TypeFilter:hover {
+  border: 3px solid #7e7e7e;
+  box-shadow: 0.4em 0.4em;
+}
 
 

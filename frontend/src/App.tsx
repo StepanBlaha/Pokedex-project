@@ -4,6 +4,7 @@ import AppRoutes from './routes';
 import { BrowserRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { ClerkProvider, RedirectToSignIn } from '@clerk/clerk-react';
+import { PokemonProvider } from './context/pokemonContext';
 
 console.log('Clerk Publishable Key:', process.env.REACT_APP_CLERK_PUBLISHABLE_KEY);
 const PUBLISHABLE_KEY = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY ?? 'default_publishable_key';
@@ -27,7 +28,9 @@ function App() {
       <React.StrictMode>
       <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl='/'>
         <BrowserRouter>
+        <PokemonProvider>
           <AppRoutes />
+        </PokemonProvider>
         </BrowserRouter>
       </ClerkProvider>
       </React.StrictMode>

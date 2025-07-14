@@ -6,6 +6,9 @@ import List from "./components/List";
 import { Pokemon, PokemonListResult, SearchedPokemon, SearchedPokemonList } from "../../types/pokemon";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import { usePokemon } from "../../context/pokemonContext";
+import { pokemonTypes } from "../../constants/types";
+import Select from "../../components/Select";
 
   // Function for fetching the pokemon
   const loadPokemon = async (page: number) =>{
@@ -31,6 +34,14 @@ import Footer from "../../components/Footer";
   
 
 export default function PokedexList(){
+  const { pokemon, loading } = usePokemon(); // Pokemon context
+  useEffect(()=>{
+    if (loading === false) {
+      console.log("---------------")
+      console.log(pokemon)
+      console.log("---------------")
+    }
+  },[pokemon, loading])
   // States and refs
   const [inputValue, setInputValue] = useState("")
   const [items, setItems] = useState<Pokemon[]>([]);
@@ -110,6 +121,8 @@ export default function PokedexList(){
     }
   }, [inputValue]);
 // This is for the search ----------------------------------------------------------
+
+const [ filter, setFilter] = useState<string>("")
     return(
         <>
         <div className={styles.App}>
@@ -127,10 +140,22 @@ export default function PokedexList(){
                     className={styles.searchInput}
                     placeholder="Charizard..."
                     />
+                    <Select onChange={setFilter}/>
+                    <select name="" id="" onChange={(e)=>setFilter(e.target.value)} className={styles.TypeFilter}>
+                      <option value="">all</option>
+                      {pokemonTypes.map((type, i)=>(
+                        <option value={type}>{type}</option>
+                      ))}
+                    </select>
                   </div>
 
                   <div className={styles.mainContent}>
+                    {filter !== "" ?(
+                      <List data={pokemon.filter(pok => pok.types.includes(filter))} lastCardRef={lastRef}/>
+                    ):(
                       <List data={items} lastCardRef={lastRef}/>
+
+                    )}
                       {isFetching && (
                         <div className={styles.Loader}>
                           <p>Loading more...</p>

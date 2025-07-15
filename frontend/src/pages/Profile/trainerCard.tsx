@@ -1,57 +1,17 @@
 import styles from "./index.module.css"
 import React, { useEffect, useState, useRef } from 'react';
-import axios from "axios";
 import { useQuery } from '@tanstack/react-query';
-import { Link } from "react-router-dom";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
 import { useUser } from '@clerk/clerk-react';
-import { PencilLine  } from 'lucide-react';
-import useWindowDimensions from "../../hooks/useWindowDimensions";
-import { FavouriteRecord } from "../../types/favourite";
-import { PokemonListResult, Pokemon, UserPokedexRecord } from "../../types/pokemon";
-import List from "./List";
-import { pokemonTypeColors } from "../../constants/types";
+import { Pokemon } from "../../types/pokemon";
 import { getSprite } from "../../utils/sprites";
-import { getCachedData } from "../../utils/cache";
 import { checkAllBadges } from "../../utils/badges";
-import { loadFavourite, updateFavourite, loadPokemon, loadUsersPokemon } from "../../utils/fetch";
-import { exportComponentAsPNG } from 'react-component-export-image';
-
-
-// Load all pokemon
-const fetchAllPokemonInBatches = async () => {
-    const cache = getCachedData("sb_pokemon");
-    if(cache !== null) return JSON.parse(cache);
-    const limit = 100;
-    let page = 0;
-    let allResults: Pokemon[] = [];
-    let hasMore = true;
-
-    while (hasMore) {
-        try {
-        const res = await axios.get<PokemonListResult>(`http://localhost:5000/api/pokedex?page=${page}&limit=${limit}`);
-        allResults = [...allResults, ...res.data.results];
-        if (res.data.results.length < limit) {
-            hasMore = false; // no more pages
-        } else {
-            page++;
-        }
-        } catch (error) {
-        console.error("Error fetching batch:", error);
-        hasMore = false;
-        }
-    }
-    localStorage.setItem("sb_pokemon", JSON.stringify(allResults))
-    return allResults;
-}
+import { loadFavourite, updateFavourite, loadPokemon, loadUsersPokemon, fetchAllPokemonInBatches } from "../../utils/fetch";
 
 
 type TrainerCardProps = {
     cardRef: React.Ref<HTMLDivElement>;
 };
 export default function TrainerCard( { cardRef }: TrainerCardProps){
-    const { height, width } = useWindowDimensions(); // Window size
     const { user, isLoaded } = useUser(); // User context
     const [page, setPage] = useState<number>(0); // Page for infinity scroll
     const [typesOpen, setTypesOpen] = useState<boolean>(false); // Favourite type modal flag

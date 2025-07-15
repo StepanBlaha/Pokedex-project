@@ -1,6 +1,5 @@
 import styles from "./index.module.css"
 import React, { useEffect, useState, useRef } from 'react';
-import axios from "axios";
 import { useQuery } from '@tanstack/react-query';
 import List from "./components/List";
 import { Pokemon, PokemonListResult, SearchedPokemon, SearchedPokemonList } from "../../types/pokemon";

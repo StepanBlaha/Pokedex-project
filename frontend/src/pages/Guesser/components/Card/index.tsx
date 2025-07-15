@@ -1,33 +1,21 @@
 import {PokemonDetailCardProps} from "../../../../types/pokemon"
 import styles from "./index.module.css"
-import axios from "axios";
 import React, { useEffect, useState, Suspense, lazy, FormEvent } from 'react';
 import { useUser } from "@clerk/clerk-react";
 import { ChevronRight, RefreshCcw  } from 'lucide-react';
-import { userLevelResult } from "../../../../types/user";
-
-// Update user xp
-const UpdateUserLevel = async (id: string, xp:number) =>{
-        const items = await axios.post<userLevelResult>(`http://localhost:5000/api/userlevel/create`, {
-        userId: id,
-        xp: xp
-    });
-    return items.data
-}
-// Get user xp
-const GetUserLevel = async (id: string) =>{
-        const items = await axios.post<userLevelResult>(`http://localhost:5000/api/userlevel/get`, {
-        userId: id
-    });
-    return items.data
-}
-
+import { GetUserLevel, UpdateUserLevel } from "../../../../utils/fetch";
 
 interface GuessCardProps extends PokemonDetailCardProps{
     newId: ()=>void
 }
 export default function Card({data, backData, id, newId}: GuessCardProps){
     const { user, isLoaded } = useUser(); // User auth data
+    const [ guessed, setGuessed ] = useState<boolean>(false); // Correct guess flag
+    const [ guess, setGuess ] = useState<string>(""); // Current guess
+    const [ guesses, setGuesses ] =useState<string[]>([]); // All the guesses
+    const [ gameoverOpen, setGameoverOpen ] = useState<boolean>(false); // Game over flag
+    const [ tries, setTries] = useState<number>(0); // Number of tries
+    const [ hint, setHint ] = useState<number>(0); // Number of hints
 
     // Start new game
     const handlePlayAgain = () => {
@@ -53,12 +41,6 @@ export default function Card({data, backData, id, newId}: GuessCardProps){
         }
     }
 
-    const [ guessed, setGuessed ] = useState<boolean>(false); // Correct guess flag
-    const [ guess, setGuess ] = useState<string>(""); // Current guess
-    const [ guesses, setGuesses ] =useState<string[]>([]); // All the guesses
-    const [ gameoverOpen, setGameoverOpen ] = useState<boolean>(false); // Game over flag
-    const [ tries, setTries] = useState<number>(0); // Number of tries
-    const [ hint, setHint ] = useState<number>(0); // Number of hints
 
     return(
         <>

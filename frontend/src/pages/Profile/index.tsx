@@ -8,92 +8,20 @@ import Footer from "../../components/Footer";
 import { useUser } from '@clerk/clerk-react';
 import { PencilLine, IdCard   } from 'lucide-react';
 import useWindowDimensions from "../../hooks/useWindowDimensions";
-import { FavouriteRecord } from "../../types/favourite";
 import { titleCaseWord } from "../../utils/text";
-import { PokemonListResult, Pokemon, UserPokedexRecord } from "../../types/pokemon";
+import { Pokemon } from "../../types/pokemon";
 import List from "./List";
 import { Download } from 'lucide-react';
 import { getSprite } from "../../utils/sprites";
-import { getCachedData } from "../../utils/cache";
 import { checkAllBadges } from "../../utils/badges";
 import TrainerCard from "./trainerCard";
 import { toPng } from 'html-to-image';
 import download from 'downloadjs';
-import { userLevelResult } from "../../types/user";
 import { pokemonTypeColors } from "../../constants/types";
-// Update user xp
-const UpdateUserLevel = async (id: string, xp:number) =>{
-        const items = await axios.post<userLevelResult>(`http://localhost:5000/api/userlevel/create`, {
-        userId: id,
-        xp: xp
-    });
-    return items.data
-}
-// Get user xp
-const GetUserLevel = async (id: string) =>{
-        const items = await axios.post<userLevelResult>(`http://localhost:5000/api/userlevel/get`, {
-        userId: id
-    });
-    return items.data
-}
-// Load favourite data
-const loadFavourite = async(id: string, key: string) => {
-    const items = await axios.post<FavouriteRecord>(`http://localhost:5000/api/favourite/get`, {
-    userId: id,
-    key: key
-    });
-    return items.data.value
-}
-// Update favourite data
-const updateFavourite = async(id: string, key: string, value: string | number ) => {
-    const items = await axios.post<FavouriteRecord>(`http://localhost:5000/api/favourite/create`, {
-    userId: id,
-    key: key,
-    value: value
-    });
-    return items.data.value
-}
-// Load all pokemon
-const loadPokemon = async (page: number) =>{
-    const res = await axios.get<PokemonListResult>(`http://localhost:5000/api/pokedex?page=${page}&limit=10`)
-    return res.data
-}
-// Load all pokemon
-const fetchAllPokemonInBatches = async () => {
-    const cache = getCachedData("sb_pokemon");
-    if(cache !== null) return JSON.parse(cache);
-    const limit = 100;
-    let page = 0;
-    let allResults: Pokemon[] = [];
-    let hasMore = true;
+import { loadFavourite, updateFavourite, loadPokemon, fetchAllPokemonInBatches, loadUsersPokemon, GetUserLevel, UpdateUserLevel } from "../../utils/fetch";
 
-    while (hasMore) {
-        try {
-        const res = await axios.get<PokemonListResult>(`http://localhost:5000/api/pokedex?page=${page}&limit=${limit}`);
-        allResults = [...allResults, ...res.data.results];
-        if (res.data.results.length < limit) {
-            hasMore = false; // no more pages
-        } else {
-            page++;
-        }
-        } catch (error) {
-        console.error("Error fetching batch:", error);
-        hasMore = false;
-        }
-    }
-    localStorage.setItem("sb_pokemon", JSON.stringify(allResults))
-    return allResults;
-}
-// Load users pokemom
-const loadUsersPokemon = async(id: string) => {
-    const items = await axios.post<UserPokedexRecord>(`http://localhost:5000/api/userpokedex/get`, {
-    userId: id,
-    });
-    return items.data.pokemonIds
-}
 export default function Profile(){
     const [ userXp, setUserXp ] = useState<number>(0); // User xp
-    const [ useLevel, setUseLevel ] = useState<number>(0); // User xp
     const { height, width } = useWindowDimensions(); // Window size
     const { user, isLoaded } = useUser(); // User context
     const [page, setPage] = useState<number>(0); // Page for infinity scroll

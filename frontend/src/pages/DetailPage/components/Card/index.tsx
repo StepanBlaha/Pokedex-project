@@ -3,39 +3,14 @@ import BarChart from "../../../../components/Charts/BarChart";
 import { ChartData, scales } from 'chart.js';
 import styles from "./index.module.css"
 import React, { useEffect, useState, Suspense, lazy } from 'react';
-import { PokemonListResult, UserPokedexRecord } from "../../../../types/pokemon";
-import { FavouriteRecord } from "../../../../types/favourite";
 import Button from "../../../../components/Button";
 import EvolutionList from "../EvolutionList";
 import { useUser } from "@clerk/clerk-react";
-import axios from "axios";
 import { Star } from 'lucide-react';
 import { pokemonTypeColors } from "../../../../constants/types";
 import { Sparkle } from 'lucide-react';
-// Load users caught pokemon
-const loadUsersPokemon = async(id: string) => {
-    const items = await axios.post<UserPokedexRecord>(`http://localhost:5000/api/userpokedex/get`, {
-    userId: id,
-    });
-    return items.data.pokemonIds
-}
-// Load favourite data
-const loadFavourite = async(id: string, key: string) => {
-    const items = await axios.post<FavouriteRecord>(`http://localhost:5000/api/favourite/get`, {
-    userId: id,
-    key: key
-    });
-    return items.data.value
-}
-// Update favourite data
-const updateFavourite = async(id: string, key: string, value: string | number ) => {
-    const items = await axios.post<FavouriteRecord>(`http://localhost:5000/api/favourite/create`, {
-    userId: id,
-    key: key,
-    value: value
-    });
-    return items.data.value
-}
+import { loadUsersPokemon, loadFavourite, updateFavourite } from "../../../../utils/fetch";
+
 export default function Card({data, backData, id}: PokemonDetailCardProps){
     const [flipped, setFlipped] = useState(false); // Card flipped state
     const [statLabels, setStatLabels] = useState<string[]>([]); // Labels for pokemon stats

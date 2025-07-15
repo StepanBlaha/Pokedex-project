@@ -1,30 +1,9 @@
 import React, { useEffect, useState, forwardRef  } from 'react';
 import styles from "./index.module.css"
 import { MoveCardprops } from '../../../../types/card';
-
+import { pokemonTypeColors } from '../../../../constants/types';
 
 const Card = forwardRef<HTMLDivElement, MoveCardprops>(({ name, id, type, accuracy, pp, class_name, category, power }, ref)=>{
-    const pokemonTypeColors : { [key: string]: string } = {
-        normal: "#A8A77A",
-        fire: "#EE8130",
-        water: "#6390F0",
-        electric: "#F7D02C",
-        grass: "#7AC74C",
-        ice: "#96D9D6",
-        fighting: "#C22E28",
-        poison: "#A33EA1",
-        ground: "#E2BF65",
-        flying: "#A98FF3",
-        psychic: "#F95587",
-        bug: "#A6B91A",
-        rock: "#B6A136",
-        ghost: "#735797",
-        dragon: "#6F35FC",
-        dark: "#705746",
-        steel: "#B7B7CE",
-        fairy: "#D685AD"
-      };
-      
 
     return(
     <div className={styles.card} ref={ref}  >

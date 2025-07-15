@@ -1,29 +1,12 @@
 import styles from "./index.module.css"
 import React, { useEffect, useState, useRef } from 'react';
-import axios from "axios";
 import { useQuery } from '@tanstack/react-query';
 import List from "./components/List";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import { ItemResult, Item, ItemProps,SearchedItemList } from "../../types/items";
+import { ItemProps } from "../../types/items";
+import { loadItems, loadSearchItems } from "../../utils/fetch";
 
-  // Function for fetching all moves
-const loadItems = async (page: number) =>{
-    const items = await axios.get<ItemResult>(`http://localhost:5000/api/items?page=${page}&limit=10`)
-    console.log(items.data)
-    return items.data
-}
-  // Function for fetching searched moves
-  const loadSearch = async(search: string) => {
-    try {
-      const res = await axios.post<SearchedItemList>("http://localhost:5000/api/searchItems", {
-        search: search
-      });;
-      return res.data;
-    } catch (error) {
-      console.error('Error in loadSearch:', error);
-    }
-  }
 export default function ItemPage(){
   // States and refs
   const [inputValue, setInputValue] = useState("")
@@ -39,7 +22,7 @@ export default function ItemPage(){
 
   const {data: searchedItems, refetch: searchItems, isFetching: isSearching, error: searchError} = useQuery({
     queryKey: ["itemSearch", inputValue],
-    queryFn:()=> loadSearch(inputValue),
+    queryFn:()=> loadSearchItems(inputValue),
     enabled: false,
   })
   

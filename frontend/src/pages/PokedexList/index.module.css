@@ -107,9 +107,17 @@ body{
   .sideContent {
     flex: 0 0 100%;
   }
+  .sideContent{
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }
 
-
+@media (max-width: 700px) {
+  .sideContent{
+    flex-direction: column;
+  }
+}
 
 
 .card{
@@ -134,7 +142,8 @@ body{
   border-radius: 0.4em;
   box-shadow: 0.2em 0.2em;
   transition: ease 0.25s;
-  height: 20px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 .searchInput::placeholder {
   color: var(--font-color-sub);

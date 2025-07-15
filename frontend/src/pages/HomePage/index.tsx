@@ -1,7 +1,5 @@
 import styles from "./index.module.css"
 import React, { useEffect, useState, useRef } from 'react';
-import axios from "axios";
-import { useQuery } from '@tanstack/react-query';
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";

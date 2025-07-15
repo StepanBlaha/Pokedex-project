@@ -1,30 +1,12 @@
 import styles from "./index.module.css"
 import React, { useEffect, useState, useRef } from 'react';
-import axios from "axios";
 import { useQuery } from '@tanstack/react-query';
 import List from "./components/List";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import { Moves, MoveListResult, SearchedMoveList } from "../../types/moves";
+import { Moves } from "../../types/moves";
+import { loadMoves, loadSearchMoves } from "../../utils/fetch";
 
-  // Function for fetching all moves
-  const loadMoves = async (page: number) =>{
-    const res = await axios.get<MoveListResult>(`http://localhost:5000/api/moves?page=${page}&limit=10`)
-    return res.data
-    }
-
-  // Function for fetching searched moves
-  const loadSearch = async(search: string) => {
-    try {
-      const res = await axios.post<SearchedMoveList>("http://localhost:5000/api/searchMoves", {
-        search: search
-      });;
-      return res.data;
-    } catch (error) {
-      console.error('Error in loadSearch:', error);
-    }
-  }
-  
 
 export default function MovePage(){
   // States and refs
@@ -41,7 +23,7 @@ export default function MovePage(){
 
   const {data: searchedMoves, refetch: searchMoves, isFetching: isSearching, error: searchError} = useQuery({
     queryKey: ["moveSearch", inputValue],
-    queryFn:()=> loadSearch(inputValue),
+    queryFn:()=> loadSearchMoves(inputValue),
     enabled: false,
   })
 
@@ -137,5 +119,3 @@ export default function MovePage(){
         </>
     )
 }
-
-

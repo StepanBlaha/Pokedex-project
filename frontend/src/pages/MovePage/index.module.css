@@ -31,21 +31,37 @@
   float: left;
   flex: 0 0 70%;
 }
+
 .sideContent{
   min-height: 40px;
   float: left;
   flex: 0 0 30%;
   padding: 20px;
+  gap: 10px;
+  display: flex;
+  align-items: center;
 }
 @media (max-width: 1248px) {
   .mainBlock {
     flex-direction: column;
   }
+
   .mainContent,
   .sideContent {
     flex: 0 0 100%;
   }
+  .sideContent{
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }
+
+@media (max-width: 700px) {
+  .sideContent{
+    flex-direction: column;
+  }
+}
+
 .card{
   height: 60px;
   width: 200px;
@@ -92,4 +108,40 @@
   font-weight: 600;
   margin: 0;
   padding: 10px 0px;
+}
+.Sort{
+  background-color: white;
+  font-size: 15px;
+  font-weight: 600;
+  color: black;
+  padding: 5px 10px;
+  outline: none;
+  border: 3px solid black;
+  border-radius: 0.4em;
+  box-shadow: 3px 3px;
+  transition: 0.3s ease-out;
+  cursor: pointer;
+  display: flex;
+  position: relative;
+  box-sizing: border-box !important;
+  align-items: center;
+  width: fit-content;
+  justify-content: space-between;
+}
+.Sort svg{
+  color: black;
+  height: 20px;
+  width: 20px;
+}
+.Sort div{
+  height: 20px;
+  width: 20px;
+}
+.Sort::placeholder {
+  color: var(--font-color-sub);
+  opacity: 0.8;
+}
+.Sort:hover {
+  border: 3px solid #7e7e7e;
+  box-shadow: 0.4em 0.4em;
 }

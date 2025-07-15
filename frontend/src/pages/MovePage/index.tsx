@@ -14,7 +14,7 @@ export default function MovePage(){
   const [items, setItems] = useState<Moves[]>([]);
   const [page, setPage] = useState<number>(0)
   const lastRef = useRef<HTMLDivElement | null>(null); 
-
+  const [ sort, setSort ] = useState<"asc" | "desc" | null>(null); // Sort state
   const {data, refetch, isFetching, error} = useQuery({
     queryKey: ["moves", page],
     queryFn:()=> loadMoves(page),
@@ -85,6 +85,19 @@ export default function MovePage(){
     }
   }, [inputValue]);
 // This is for the search ----------------------------------------------------------
+
+  // Handle sorting items
+  /*
+  const sortedItems = (() => {
+    if (sort === "asc") {
+      return [...items].sort((a, b) => a.name.localeCompare(b.name));
+    }
+    if (sort === "desc") {
+      return [...items].sort((a, b) => b.name.localeCompare(a.name));
+    }
+    return items; // untouched
+  })();
+*/
     return(
         <>
         <div className={styles.App}>
@@ -101,6 +114,24 @@ export default function MovePage(){
                     className={styles.searchInput}
                     placeholder="Tackle..."
                     />
+                    {/*
+                    
+                    <div className={styles.Sort} onClick={() => {
+                        if (sort === "desc") {
+                          setSort(null);
+                        } else if (sort === "asc") {
+                          setSort("desc");
+                        } else {
+                          setSort("asc");
+                        }
+                      }}>
+                        A
+                        {sort === 'asc' && <ChevronUp/>}
+                        {sort === 'desc' && <ChevronDown/>}
+                        {sort === null && <Minus/>}
+                      </div>
+                    
+                    */}
                   </div>
 
                   <div className={styles.mainContent}>

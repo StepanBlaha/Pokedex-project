@@ -16,6 +16,7 @@ import { loadPokemon, loadSearch, loadUsersPokemon, updateUserPokedex } from "..
 import { usePokemon } from "../../context/pokemonContext";
 import { isEqualFilters } from "../../utils/filter";
 import { pokemonTypes } from "../../constants/types";
+import { ChevronUp, ChevronDown, Minus } from "lucide-react";
 
 
 export default function Pokedex(){
@@ -27,6 +28,7 @@ export default function Pokedex(){
     const [ userPokedex, setUserPokedex] = useState<number[]>([]); // Users pokedex
     const { filters, handleFilter } = useFilter(); // Filter data
     const { pokemon, loading } = usePokemon(); // Pokemon context
+    const [ sort, setSort ] = useState<"asc" | "desc" | null>(null); // Sort state
         
     useEffect(()=>{
         if(user){
@@ -128,17 +130,34 @@ export default function Pokedex(){
 
      // Handle which list to show
     const filteredItems = (() => {
-        // search + filters
+        // If searching
         if (inputValue !== "" && searchedPokemon?.searchedPokemon) {
             const searchResults = searchedPokemon.searchedPokemon;
-            return !isEqualFilters(filters, defaultFilters) ? searchResults.filter(pok => matchesFilters(pok, filters)) : searchResults;
+            return !isEqualFilters(filters, defaultFilters)
+            ? searchResults.filter(pok => matchesFilters(pok, filters))
+            : searchResults;
         }
-        // filters
+        // If filters applied (but no search)
         if (!isEqualFilters(filters, defaultFilters)) {
             return pokemon.filter(pok => matchesFilters(pok, filters));
         }
-        // all
-        return items; 
+        // No search/filters
+        if (sort === null) {
+            // Let infinite scroll work
+            return items;
+        }
+        // If sorting is applied (but no filters or search), we need full data
+        return pokemon;
+    })();
+    // Handle sorting items
+    const sortedItems = (() => {
+        if (sort === "asc") {
+            return [...filteredItems].sort((a, b) => a.name.localeCompare(b.name));
+        }
+        if (sort === "desc") {
+            return [...filteredItems].sort((a, b) => b.name.localeCompare(a.name));
+        }
+        return filteredItems; // untouched
     })();
 
     return(
@@ -160,12 +179,26 @@ export default function Pokedex(){
                         />
                         <Select onChange={(val)=> handleFilter("type", val?.toString() ?? null)}  data={pokemonTypes} defaultText="Type" selected={filters.type}/>
                         <Select onChange={(val) =>  handleFilter("gen", val === "" || val === null || val === undefined ? null : Number(val))} data={genList} defaultText="Generation" selected={filters.gen?.toString()}/>
+                        <div className={styles.Sort} onClick={() => {
+                            if (sort === "desc") {
+                            setSort(null);
+                            } else if (sort === "asc") {
+                            setSort("desc");
+                            } else {
+                            setSort("asc");
+                            }
+                        }}>
+                            A
+                            {sort === 'asc' && <ChevronUp/>}
+                            {sort === 'desc' && <ChevronDown/>}
+                            {sort === null && <Minus/>}
+                        </div>
                         <p>{userPokedex?.length}/1025</p>
                     </div>
 
                     <div className={styles.mainContent}>
                         <List 
-                        data={filteredItems} 
+                        data={sortedItems} 
                         lastCardRef={lastRef} 
                         userData={userPokedex}
                         onToggle={handleToggle}

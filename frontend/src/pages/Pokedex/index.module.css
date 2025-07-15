@@ -131,3 +131,41 @@ body{
   margin: 0;
   padding: 10px 0px;
 }
+.Sort{
+
+  background-color: white;
+  font-size: 15px;
+  font-weight: 600;
+  color: black;
+  padding: 5px 10px;
+  outline: none;
+  border: 3px solid black;
+  border-radius: 0.4em;
+  box-shadow: 3px 3px;
+  transition: 0.3s ease-out;
+  cursor: pointer;
+  display: flex;
+  position: relative;
+  box-sizing: border-box !important;
+  align-items: center;
+
+  width: fit-content;
+  justify-content: space-between;
+}
+.Sort svg{
+  color: black;
+  height: 20px;
+  width: 20px;
+}
+.Sort div{
+  height: 20px;
+  width: 20px;
+}
+.Sort::placeholder {
+  color: var(--font-color-sub);
+  opacity: 0.8;
+}
+.Sort:hover {
+  border: 3px solid #7e7e7e;
+  box-shadow: 0.4em 0.4em;
+}

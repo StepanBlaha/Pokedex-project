@@ -9,44 +9,20 @@ import Footer from "../../components/Footer";
 import { usePokemon } from "../../context/pokemonContext";
 import { pokemonTypes } from "../../constants/types";
 import Select from "../../components/Select";
-
-  // Function for fetching the pokemon
-  const loadPokemon = async (page: number) =>{
-    // tohle pujde pryc
-    const items = await axios.get(`http://localhost:5000/api/items?page=${page}&limit=10`)
-    console.log(items.data)
-    // tohle pujde pryc
-    const res = await axios.get<PokemonListResult>(`http://localhost:5000/api/pokedex?page=${page}&limit=10`)
-    return res.data
-  }
-
-  // Function for fetching searched pokemon
-  const loadSearch = async(search: string) => {
-    try {
-      const res = await axios.post<SearchedPokemonList>("http://localhost:5000/api/searchPokedex", {
-        search: search
-      });;
-      return res.data;
-    } catch (error) {
-      console.error('Error in loadSearch:', error);
-    }
-  }
-  
+import { defaultFilters } from "../../constants/filters";
+import { useFilter } from "../../context/filterContext";
+import { matchesFilters } from "../../utils/filter";
+import { genList } from "../../constants/gens";
+import { loadSearch, loadPokemon } from "../../utils/fetch";
+import { isEqualFilters } from "../../utils/filter";
 
 export default function PokedexList(){
   const { pokemon, loading } = usePokemon(); // Pokemon context
-  useEffect(()=>{
-    if (loading === false) {
-      console.log("---------------")
-      console.log(pokemon)
-      console.log("---------------")
-    }
-  },[pokemon, loading])
-  // States and refs
-  const [inputValue, setInputValue] = useState("")
-  const [items, setItems] = useState<Pokemon[]>([]);
-  const [page, setPage] = useState<number>(0)
-  const lastRef = useRef<HTMLDivElement | null>(null); 
+  const { filters, handleFilter } = useFilter(); // Filter data
+  const [inputValue, setInputValue] = useState(""); // Search bar value
+  const [items, setItems] = useState<Pokemon[]>([]); // Search result
+  const [page, setPage] = useState<number>(0); // Current page for infinity scroll
+  const lastRef = useRef<HTMLDivElement | null>(null); // Ref for last card in infinity scroll
 
   const {data, refetch, isFetching, error} = useQuery({
     queryKey: ["pokemon", page],
@@ -72,6 +48,7 @@ export default function PokedexList(){
 
   // Effect for the infinity scroll - maybe create custom hook
   useEffect(() => {
+    if(filters !== defaultFilters) return; 
     if (!lastRef.current) return;
     if (data?.results) {
       const observer = new IntersectionObserver((entries) => {
@@ -122,13 +99,12 @@ export default function PokedexList(){
   }, [inputValue]);
 // This is for the search ----------------------------------------------------------
 
-const [ filter, setFilter] = useState<string>("")
+
     return(
         <>
         <div className={styles.App}>
           <div className={styles.center}>
               <Header/>
-
 
               <div className={styles.mainBlock}>
 
@@ -140,18 +116,13 @@ const [ filter, setFilter] = useState<string>("")
                     className={styles.searchInput}
                     placeholder="Charizard..."
                     />
-                    <Select onChange={setFilter}/>
-                    <select name="" id="" onChange={(e)=>setFilter(e.target.value)} className={styles.TypeFilter}>
-                      <option value="">all</option>
-                      {pokemonTypes.map((type, i)=>(
-                        <option value={type}>{type}</option>
-                      ))}
-                    </select>
+                    <Select onChange={(val)=> handleFilter("type", val?.toString() ?? null)}  data={pokemonTypes} defaultText="Type" selected={filters.type}/>
+                    <Select onChange={(val) =>  handleFilter("gen", val === "" || val === null || val === undefined ? null : Number(val))} data={genList} defaultText="Generation" selected={filters.gen?.toString()}/>
                   </div>
 
                   <div className={styles.mainContent}>
-                    {filter !== "" ?(
-                      <List data={pokemon.filter(pok => pok.types.includes(filter))} lastCardRef={lastRef}/>
+                    {!isEqualFilters(filters, defaultFilters) ? (
+                      <List data={pokemon.filter(pok => matchesFilters(pok, filters))} lastCardRef={lastRef}/>
                     ):(
                       <List data={items} lastCardRef={lastRef}/>
 

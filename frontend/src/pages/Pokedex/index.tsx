@@ -7,54 +7,27 @@ import { Pokemon, PokemonListResult, SearchedPokemon, SearchedPokemonList, UserP
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useUser } from "@clerk/clerk-react";
-
-  // Function for fetching the pokemon
-const loadPokemon = async (page: number) =>{
-    // tohle pujde pryc
-    const items = await axios.get(`http://localhost:5000/api/items?page=${page}&limit=10`)
-    console.log(items.data)
-    // tohle pujde pryc
-    const res = await axios.get<PokemonListResult>(`http://localhost:5000/api/pokedex?page=${page}&limit=10`)
-    return res.data
-}
-const loadUsersPokemon = async(id: string) => {
-    const items = await axios.post<UserPokedexRecord>(`http://localhost:5000/api/userpokedex/get`, {
-    userId: id,
-    });
-    console.log(items.data.pokemonIds)
-    return items.data.pokemonIds
-}
-
-  // Function for fetching searched pokemon
-const loadSearch = async(search: string) => {
-    try {
-        const res = await axios.post<SearchedPokemonList>("http://localhost:5000/api/searchPokedex", {
-            search: search
-        });;
-        return res.data;
-    } catch (error) {
-        console.error('Error in loadSearch:', error);
-    }
-}
-const updateUserPokedex = async(id: string, entries: number[]) => {
-    const items = await axios.post<UserPokedexRecord>(`http://localhost:5000/api/userpokedex/update`, {
-    userId: id,
-    entries: entries
-    });
-    console.log(items.data.pokemonIds)
-    return items.data.pokemonIds
-}
+import { defaultFilters } from "../../constants/filters";
+import { useFilter } from "../../context/filterContext";
+import { matchesFilters } from "../../utils/filter";
+import { genList } from "../../constants/gens";
+import Select from "../../components/Select";
+import { loadPokemon, loadSearch, loadUsersPokemon, updateUserPokedex } from "../../utils/fetch";
+import { usePokemon } from "../../context/pokemonContext";
+import { isEqualFilters } from "../../utils/filter";
+import { pokemonTypes } from "../../constants/types";
 
 
 export default function Pokedex(){
-    // States and refs
-    const [inputValue, setInputValue] = useState("")
-    const [items, setItems] = useState<Pokemon[]>([]);
+    const [inputValue, setInputValue] = useState(""); // Search bar value
+    const [items, setItems] = useState<Pokemon[]>([]); // Search result
     const [page, setPage] = useState<number>(0) // Current infinity scroll page
     const lastRef = useRef<HTMLDivElement | null>(null); 
     const { user, isLoaded } = useUser(); // User auth data
     const [ userPokedex, setUserPokedex] = useState<number[]>([]); // Users pokedex
-    
+    const { filters, handleFilter } = useFilter(); // Filter data
+    const { pokemon, loading } = usePokemon(); // Pokemon context
+        
     useEffect(()=>{
         if(user){
             loadUsersPokemon(user?.id)
@@ -150,7 +123,6 @@ export default function Pokedex(){
             setUserPokedex(newEntries)
             updateUserPokedex(user.id, newEntries);
         }
-
     };
 
     return(
@@ -170,16 +142,28 @@ export default function Pokedex(){
                         className={styles.searchInput}
                         placeholder="Charizard..."
                         />
+                        <Select onChange={(val)=> handleFilter("type", val?.toString() ?? null)}  data={pokemonTypes} defaultText="Type" selected={filters.type}/>
+                        <Select onChange={(val) =>  handleFilter("gen", val === "" || val === null || val === undefined ? null : Number(val))} data={genList} defaultText="Generation" selected={filters.gen?.toString()}/>
                         <p>{userPokedex?.length}/1025</p>
                     </div>
 
                     <div className={styles.mainContent}>
-                        <List 
-                        data={items} 
-                        lastCardRef={lastRef} 
-                        userData={userPokedex}
-                        onToggle={handleToggle}
-                        />
+                        {!isEqualFilters(filters, defaultFilters) ? (
+                            <List 
+                            data={pokemon.filter(pok => matchesFilters(pok, filters))} 
+                            lastCardRef={lastRef} 
+                            userData={userPokedex}
+                            onToggle={handleToggle}
+                            />
+                        ):(
+                            <List 
+                            data={items} 
+                            lastCardRef={lastRef} 
+                            userData={userPokedex}
+                            onToggle={handleToggle}
+                            />
+
+                        )}
                         {isFetching && (
                             <div className={styles.Loader}>
                                 <p>Loading more...</p>

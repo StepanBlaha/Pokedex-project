@@ -1,42 +1,49 @@
 import styles from "./index.module.css"
 import React, { useEffect, useState, useRef } from 'react';
-import axios from "axios";
-import { useQuery } from '@tanstack/react-query';
-import { Pokemon, PokemonListResult, SearchedPokemon, SearchedPokemonList } from "../../types/pokemon";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import { usePokemon } from "../../context/pokemonContext";
-import { pokemonTypes } from "../../constants/types";
 import { ChevronRight, ChevronDown } from "lucide-react";
+import { titleCaseWord } from "../../utils/text";
 
 interface SelectProps{
-    onChange:(val:string)=>void
+    onChange:(val:string | number | null)=>void,
+    data: any[],
+    defaultText?:string,
+    selected?: string | null
 }
-export default function Select({onChange}: SelectProps){
+export default function Select({onChange, data, defaultText =  "All", selected = null}: SelectProps){
     const [ open, setOpen ] = useState<boolean>(false); 
-    const [ val, setVal ] = useState<string>("")
-
+    const [ val, setVal ] = useState<string | null>(selected)
+    // Handle closing on click outside
+    const InputRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (InputRef.current && !InputRef.current.contains(event.target as Node)) {
+                setOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+    // Set onchange
     useEffect(()=>{
         onChange(val);
     },[val])
     return(
-        <>
-        <div className={styles.Select}>
-            <p>{val !== "" ? val : "Type"}</p>
-            <div className={styles.Open} onClick={()=>setOpen(!open)}>
-                {open ? <ChevronDown/> : <ChevronRight/>}
-            </div>
-            {open && (
-                <div className={styles.Options}>
-                    <div onClick={()=>{setVal(""); setOpen(false)}} className={styles.Option}>all</div>
-                    {pokemonTypes.map((type, i)=>(
-                    <div onClick={()=>{setVal(type); setOpen(false)}} className={styles.Option}>{type}</div>
-                    ))}
+        <div className={styles.SelectWrapper} ref={InputRef}>
+            <div className={styles.Select} onClick={()=>setOpen(!open)}>
+                <p>{val !== null ? titleCaseWord(val.toString()) : defaultText}</p>
+                <div className={styles.Open} >
+                    {open ? <ChevronDown/> : <ChevronRight/>}
                 </div>
-            )}
-
+            </div>
+                {open && (
+                    <div className={styles.Options}>
+                        <div onClick={()=>{setVal(null); setOpen(false)}} className={styles.Option}>All</div>
+                        {data.map((entry, i)=>(
+                            <div onClick={()=>{setVal(entry); setOpen(false)}} className={styles.Option}>{titleCaseWord(entry.toString())}</div>
+                        ))}
+                    </div>
+                )}
         </div>
-        </>
     )
 }
 

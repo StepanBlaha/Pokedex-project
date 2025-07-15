@@ -15,30 +15,10 @@ import { pokemonTypeColors } from "../../constants/types";
 import { getSprite } from "../../utils/sprites";
 import { getCachedData } from "../../utils/cache";
 import { checkAllBadges } from "../../utils/badges";
-
+import { loadFavourite, updateFavourite, loadPokemon, loadUsersPokemon } from "../../utils/fetch";
 import { exportComponentAsPNG } from 'react-component-export-image';
-// Load favourite data
-const loadFavourite = async(id: string, key: string) => {
-    const items = await axios.post<FavouriteRecord>(`http://localhost:5000/api/favourite/get`, {
-    userId: id,
-    key: key
-    });
-    return items.data.value
-}
-// Update favourite data
-const updateFavourite = async(id: string, key: string, value: string | number ) => {
-    const items = await axios.post<FavouriteRecord>(`http://localhost:5000/api/favourite/create`, {
-    userId: id,
-    key: key,
-    value: value
-    });
-    return items.data.value
-}
-// Load all pokemon
-const loadPokemon = async (page: number) =>{
-    const res = await axios.get<PokemonListResult>(`http://localhost:5000/api/pokedex?page=${page}&limit=10`)
-    return res.data
-}
+
+
 // Load all pokemon
 const fetchAllPokemonInBatches = async () => {
     const cache = getCachedData("sb_pokemon");
@@ -65,12 +45,7 @@ const fetchAllPokemonInBatches = async () => {
     localStorage.setItem("sb_pokemon", JSON.stringify(allResults))
     return allResults;
 }
-const loadUsersPokemon = async(id: string) => {
-    const items = await axios.post<UserPokedexRecord>(`http://localhost:5000/api/userpokedex/get`, {
-    userId: id,
-    });
-    return items.data.pokemonIds
-}
+
 
 type TrainerCardProps = {
     cardRef: React.Ref<HTMLDivElement>;

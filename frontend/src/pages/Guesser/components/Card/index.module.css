@@ -281,7 +281,10 @@
 }
 .GuessSubmit:disabled{
   cursor: no-drop;
-  background-color: red;
+  color: rgb(114, 114, 114);
+  text-decoration: line-through;
+  text-decoration-color: rgb(114, 114, 114);
+  border: 3px solid rgb(114, 114, 114);
 }
 .Guessed{
   width: 100%;

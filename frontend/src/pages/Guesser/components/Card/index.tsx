@@ -197,7 +197,7 @@ export default function Card({data, backData, id, newId}: GuessCardProps){
 
                     <div className={styles.Guessed}>
                         {guesses.map((g,i)=>(
-                            <p className={g.toLowerCase() === data.name.toLowerCase() ? styles.CorrectGuess : ""}>{g}{g.toLowerCase() === data.name.toLowerCase() ? "✅" : ""}</p>
+                            <p className={g.toLowerCase() === data.name.toLowerCase() ? styles.CorrectGuess : ""}>{g}{g.toLowerCase() === data.name.toLowerCase() ? " ✔" : ""}</p>
                         ))}
                     </div>
                 </div>

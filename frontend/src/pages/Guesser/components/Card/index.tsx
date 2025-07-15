@@ -1,9 +1,13 @@
 import {PokemonDetailCardProps} from "../../../../types/pokemon"
 import styles from "./index.module.css"
-import React, { useEffect, useState, Suspense, lazy, FormEvent } from 'react';
+import React, { useEffect, useState, Suspense, lazy, FormEvent, useRef } from 'react';
 import { useUser } from "@clerk/clerk-react";
 import { ChevronRight, RefreshCcw  } from 'lucide-react';
-import { GetUserLevel, UpdateUserLevel } from "../../../../utils/fetch";
+import { GetUserLevel, UpdateUserLevel, loadSearch } from "../../../../utils/fetch";
+import { usePokemon } from "../../../../context/pokemonContext";
+import { Pokemon } from "../../../../types/pokemon";
+import { useQuery } from "@tanstack/react-query";
+import List from "../SuggestedList";
 
 interface GuessCardProps extends PokemonDetailCardProps{
     newId: ()=>void
@@ -16,17 +20,23 @@ export default function Card({data, backData, id, newId}: GuessCardProps){
     const [ gameoverOpen, setGameoverOpen ] = useState<boolean>(false); // Game over flag
     const [ tries, setTries] = useState<number>(0); // Number of tries
     const [ hint, setHint ] = useState<number>(0); // Number of hints
-
+    const { pokemon, loading } = usePokemon(); // Pokemon context
+    const [items, setItems] = useState<Pokemon[]>([]); // Search result
+    const [ suggestOpen, setSuggestOpen ] = useState<boolean>(false); // Suggest list open flag
     // Start new game
     const handlePlayAgain = () => {
         newId();
     }
 
-    const handleGuess = async(e: FormEvent) => {
-        e.preventDefault();
+    const handleGuess = async(e?: FormEvent, guessedName?: string) => {
+        setSuggestOpen(false); // Close suggest list
+        if (e) e.preventDefault();
+        const currentGuess = guessedName ?? guess;
+        if (!currentGuess) return;
+
         setTries(tries+1); // Increment try counter
-        setGuesses(prev=> [...prev, guess]) // Add to guessed words
-        if(guess.toLowerCase() === data.name.toLowerCase()){
+        setGuesses(prev=> [...prev, currentGuess]) // Add to guessed words
+        if(currentGuess.toLowerCase() === data.name.toLowerCase()){
             setGuessed(true); // Set win state
             setGameoverOpen(true); // Open gameover screen
             // Handle updating users level
@@ -40,6 +50,42 @@ export default function Card({data, backData, id, newId}: GuessCardProps){
             setGuess("")
         }
     }
+
+
+
+    const {data: searchedPokemon, refetch: searchPokemon, isFetching: isSearching, error: searchError} = useQuery({
+        queryKey: ["pokemonSearch", guess],
+        queryFn:()=> loadSearch(guess),
+        enabled: false,
+    })
+    // Update state when data changes
+    useEffect(() => {
+
+        if(searchedPokemon?.searchedPokemon){
+            setItems(searchedPokemon.searchedPokemon);
+        }
+    }, [searchedPokemon]);
+
+
+    // Perform search when guess changes
+    useEffect(() => {
+        if (guess !== "") { 
+            if(suggestOpen === false && guessed===false) setSuggestOpen(true)
+            searchPokemon();
+        }
+    }, [guess]);
+
+    // Handle closing on suggest list click outside
+    const InputRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (InputRef.current && !InputRef.current.contains(event.target as Node)) {
+                setSuggestOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
 
     return(
@@ -139,9 +185,17 @@ export default function Card({data, backData, id, newId}: GuessCardProps){
                     </div>
                     <div className={styles.Form}>
                         <form action="" onSubmit={(e)=>handleGuess(e)}>
-                            <input type="text" className={styles.GuessInput} value={guess} onChange={(e)=>setGuess(e.target.value)} disabled={guessed === true}/>
+                            <div className={styles.GuessInputWrapper}>
+                                <input type="text" className={styles.GuessInput} value={guess} onChange={(e)=>setGuess(e.target.value)} disabled={guessed === true}/>
+                                {suggestOpen === true && (
+                                    <div className={styles.Suggestions} ref={InputRef}>
+                                        <List data={items} onSelect={(val)=>{ setGuess(val); setSuggestOpen(false); handleGuess(undefined, val);}} onClose={()=>setSuggestOpen(false)}/>
+                                    </div>
+                                )}
+                            </div>
                             <button className={styles.GuessSubmit} onClick={()=>{}} disabled={guessed === true}>Guess</button>
                         </form>
+                    
                     </div>
 
                     <div className={styles.Guessed}>

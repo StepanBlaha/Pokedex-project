@@ -220,6 +220,7 @@
   width: 100%;
   height: fit-content;
   box-sizing: border-box;
+  position: relative;
 }
 .Form form{
   width: 100%;
@@ -249,7 +250,16 @@
   text-decoration: line-through;
   cursor: no-drop;
 }
-
+.GuessInputWrapper{
+  max-width: 50vw;
+  min-width: 100px;
+  width: auto;
+  flex-shrink: 1;
+  height: fit-content;
+  box-sizing: border-box;
+  display: flex;
+  position: relative;
+}
 .GuessInput{
   --input-focus: #2d8cf0;
   --font-color: #323232;
@@ -266,10 +276,7 @@
   border-radius: 0.4em;
   box-shadow: 0.2em 0.2em;
   transition: ease 0.25s;
-  max-width: 50vw;
-  min-width: 100px;
-  width: auto;
-  flex-shrink: 1;
+  width: 100%;
   box-sizing: border-box;
 }
 .GuessInput::placeholder {
@@ -484,7 +491,23 @@
 .PlayAgainButtonSecond:hover{
   background-color: #a1a1a1;
 }
-
+.Suggestions{
+  width: 100%;
+  height: fit-content;
+  max-height: 200px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  outline: none;
+  border: 3px solid black;
+  border-radius: 0.4em;
+  box-shadow: 0.2em 0.2em;
+  background-color: white;
+  overflow: auto;
+}
 
 @media (max-width: 700px){
   .PlayAgainButtonRefresh{

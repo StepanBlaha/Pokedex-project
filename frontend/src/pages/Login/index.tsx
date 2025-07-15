@@ -27,7 +27,7 @@ export default function LoginPage(){
             if (result.status === "complete") {
                 await setActive({ session: result.createdSessionId });
                 // Redirect to home page
-                window.location.href = '/login';
+                window.location.href = '/home';
             } else {
                 console.log(result.status)
             }

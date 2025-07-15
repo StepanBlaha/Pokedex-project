@@ -4,7 +4,6 @@ interface EvolutionProps{
     title_color: string
 }
 
-
 export default function EvolutionList({ evolutions, title_color} : EvolutionProps ){
     return(
         <>

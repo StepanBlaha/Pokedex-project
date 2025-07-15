@@ -24,6 +24,7 @@
   display: flex;
   flex-direction: row-reverse;
   justify-content: center;
+  flex-direction: column;
 }
 .mainContent{
   width: 100%;
@@ -31,7 +32,6 @@
   float: left;
   flex: 0 0 70%;
 }
-
 .sideContent{
   min-height: 40px;
   float: left;
@@ -39,13 +39,12 @@
   padding: 20px;
   gap: 10px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 @media (max-width: 1248px) {
   .mainBlock {
     flex-direction: column;
   }
-
   .mainContent,
   .sideContent {
     flex: 0 0 100%;
@@ -55,13 +54,11 @@
     flex-wrap: wrap;
   }
 }
-
 @media (max-width: 700px) {
   .sideContent{
     flex-direction: column;
   }
 }
-
 .card{
   height: 60px;
   width: 200px;

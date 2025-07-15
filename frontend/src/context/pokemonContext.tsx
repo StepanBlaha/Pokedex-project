@@ -1,11 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { PokemonListResult, Pokemon } from "../types/pokemon";
+import { PokemonListResult, Pokemon, PokemonContextType } from "../types/pokemon";
 import { getCachedData } from "../utils/cache";
-
-interface PokemonContextType {
-    pokemon: Pokemon[],
-    loading: boolean
-}
 
 const PokemonContext = createContext<PokemonContextType>({
     pokemon: [],
@@ -52,8 +47,6 @@ export const PokemonProvider = ({ children }: { children: React.ReactNode }) => 
             .catch((err) => console.log(err.message))
             .finally(() => setLoading(false));
     }, []);
-
-
 
     return(
         <PokemonContext.Provider value={{pokemon, loading}}>

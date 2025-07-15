@@ -13,7 +13,6 @@
     font-size: 29px;
     font-weight: 700;
     transition: 0.3s ease-in-out;
-
 }
 .link a {
     position: relative;
@@ -28,7 +27,7 @@
     content: '';
     position: absolute;
     left: 0;
-    bottom: -2px; /* adjust based on spacing */
+    bottom: -2px;
     width: 0%;
     height: 3px;
     background-color: black;
@@ -40,7 +39,6 @@
 .link a.active::after {
     width: 100%;
 }
-
 .link p{
     margin: 0;
     text-decoration: none;
@@ -48,7 +46,6 @@
     font-size: 29px;
     font-weight: 700;
     transition: 0.3s ease-in-out;
-
 }
 .link p {
     position: relative;
@@ -63,7 +60,7 @@
     content: '';
     position: absolute;
     left: 0;
-    bottom: -2px; /* adjust based on spacing */
+    bottom: -2px;
     width: 0%;
     height: 3px;
     background-color: black;

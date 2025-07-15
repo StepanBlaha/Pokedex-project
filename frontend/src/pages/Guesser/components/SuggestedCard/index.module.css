@@ -1,12 +1,9 @@
-
 .card:hover{
   transform: translateY(-6px) scale(1.05);
-    background-position: bottom; 
-    background-position-x: 100px;
+  background-position: bottom; 
+  background-position-x: 100px;
 }
 .card {
-
-
   position: relative;
   width: 100%;
   box-sizing: border-box;
@@ -20,7 +17,6 @@
   overflow: hidden;
   cursor: pointer;
 }
-
 .sprite {
   position: absolute;
   right: 25px;
@@ -71,39 +67,29 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0); /* No darkening initially */
+  background-color: rgba(0, 0, 0, 0); 
   transition: background-color 0.3s ease;
   pointer-events: none;
   border-bottom-left-radius: 10px;
-    border-top-right-radius: 3px;
+  border-top-right-radius: 3px;
 }
-
 .cardButton:hover::after {
-  background-color: rgba(0, 0, 0, 0.2); /* Slightly dark overlay */
+  background-color: rgba(0, 0, 0, 0.2); 
 }
 .Caught{
   filter: unset !important;
 }
-
-
-  .buttonCenter {
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /*
-    box-shadow:
-      0 4px 0 #bdbdbd,
-      0 6px 10px rgba(0, 0, 0, 0.1);
-      */
-    transition: all 0.2s ease;
-    transform-style: preserve-3d;
-    transform: translateZ(0);
-    position: relative;
-  }
-  .buttonCenter svg{
-    color: black;
-  }
-
+.buttonCenter {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  position: relative;
+}
+.buttonCenter svg{
+  color: black;
+}

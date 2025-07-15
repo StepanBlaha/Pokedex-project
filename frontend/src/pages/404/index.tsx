@@ -4,7 +4,6 @@ import Footer from "../../components/Footer";
 import { useNavigate } from "react-router-dom";
 import { ChevronRight } from 'lucide-react';
 
-
 export default function NotFound(){
     const navigate = useNavigate();
     return(
@@ -15,7 +14,6 @@ export default function NotFound(){
                 <div className={styles.mainBlock}>
                     <div className={styles.mainContent}>
                         <div className={styles.NotFoundCard}>
-
                             <div className={styles.NotFoundContent}>
                                 <div className={styles.NotFoundText}>
                                     <p className={styles.Title}>
@@ -30,13 +28,9 @@ export default function NotFound(){
                                     <ChevronRight/>
                                 </div>
                             </div>
-{/*style={{ backgroundImage: `url(/assets/charizard.png)` }} */}
                             <div className={styles.NotFoundImage} >
                             <img src="/assets/pika.png " alt="" /></div>
                         </div>
-                        
-                    
-                    
                     </div>
                 </div>
                 <Footer/>
@@ -45,5 +39,3 @@ export default function NotFound(){
         </>
     )
 }
-
-

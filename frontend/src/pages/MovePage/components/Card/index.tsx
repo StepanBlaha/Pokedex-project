@@ -7,7 +7,6 @@ const Card = forwardRef<HTMLDivElement, MoveCardprops>(({ name, id, type, accura
 
     return(
     <div className={styles.card} ref={ref}  >
-        
         <div className={styles.typeImage}  style={{ backgroundImage: `url(/assets/typeBanners/${type}.png` }}></div>
         <div className={styles.cardTitle}>
             <p style={{ color: `${pokemonTypeColors[type]} ` }} >{name}</p>
@@ -18,13 +17,11 @@ const Card = forwardRef<HTMLDivElement, MoveCardprops>(({ name, id, type, accura
             <p style={{ color: `${pokemonTypeColors[type]} ` }}>{category}</p>
         </div>
         <div className={styles.divider}></div>
-
         <div className={styles.cardPower}>
             <p>Power</p>
             <p style={{ color: `${pokemonTypeColors[type]} ` }}>{power ? power : 0}</p>
         </div>
         <div className={styles.divider}></div>
-
         <div className={styles.cardAccuracy}>
             <p>Accuracy</p>
             <p style={{ color: `${pokemonTypeColors[type]} ` }}>{accuracy}</p>
@@ -34,9 +31,8 @@ const Card = forwardRef<HTMLDivElement, MoveCardprops>(({ name, id, type, accura
             <p>PP</p>
             <p style={{ color: `${pokemonTypeColors[type]} ` }}>{pp}</p>
         </div>
-
     </div>
     )
 })
- 
+
 export default Card;

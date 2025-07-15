@@ -5,9 +5,6 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useUser } from '@clerk/clerk-react';
 
-
-
-
 export default function HomePage(){
     const { user, isLoaded } = useUser(); // User context
     useEffect(()=>{
@@ -58,10 +55,7 @@ export default function HomePage(){
                         </div>
                         <div className={styles.FutureText}>
                             <ul>
-                                <li>User account system</li>
-                                <li>Filter option for pokemons, moves and items</li>
-                                <li>Personal pokedex system</li>
-                                <li>Shiny checklist</li>
+                                <li>Custom pokemon teams</li>
                                 <li>Ai-powered chatbot</li>
                                 <li>And much more!!</li>
                             </ul>

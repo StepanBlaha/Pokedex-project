@@ -2,8 +2,8 @@ import styles from "./index.module.css"
 import { Link } from "react-router-dom"
 
 export default function Footer(){
-   const pathname = window.location.pathname;
-   
+    const pathname = window.location.pathname;
+
     return(
         <div className={styles.mainFooter}>
             <div className={styles.Center}>

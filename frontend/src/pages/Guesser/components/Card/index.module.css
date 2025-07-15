@@ -1,14 +1,11 @@
 .statGraph{
-    width: 100%;
-    height: 180px;
+  width: 100%;
+  height: 180px;
 }
 .statGraph canvas{
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
-
-
-
 .card{
   width: 100%;
   max-width: 500px;
@@ -66,8 +63,6 @@
   text-align: left;
   width: fit-content;
 }
-
-
 .typeImage{
   min-width: 90px;
   min-height: 20px;
@@ -98,16 +93,14 @@
   height: 300px;
   position: absolute;
   top: -115px;
-  /* border: 1px solid; */
   right: -48px;
   image-rendering: pixelated;
   image-rendering: crisp-edges; 
   background-image: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png");
-  background-size: cover; /* or 'contain' depending on layout */
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
-
 .CardHeader{
   width: 100%;
   min-height: 150px;
@@ -127,7 +120,7 @@
   image-rendering: pixelated;
   image-rendering: crisp-edges; 
   background-image: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png");
-  background-size: cover; /* or 'contain' depending on layout */
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   flex-grow: 1;
@@ -146,7 +139,6 @@
   padding-left: 10px;
   padding-top: 10px;
   flex: 1;
-
 }
 .cardInfo{
   width: 100%;
@@ -155,7 +147,6 @@
   align-items: center;
   gap: 10px;
 }
-
 .cardInfoContent{
   width: fit-content;
   height: fit-content;
@@ -169,28 +160,6 @@
   width: fit-content;
   font-weight: 700;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .CardContent{
   width: 100%;
   height: fit-content;
@@ -434,7 +403,6 @@
 .PlayAgainButton:hover{
   background-color: #a1a1a1;
 }
-
 .PlayAgainButtonRefresh{
   height: fit-content;
   width: fit-content;
@@ -462,8 +430,6 @@
 .PlayAgainButtonRefresh:hover{
   background-color: #a1a1a1;
 }
-
-
 .PlayAgainButtonSecond{
   height: fit-content;
   width: fit-content;
@@ -508,7 +474,6 @@
   background-color: white;
   overflow: auto;
 }
-
 @media (max-width: 700px){
   .PlayAgainButtonRefresh{
     top: 45px;

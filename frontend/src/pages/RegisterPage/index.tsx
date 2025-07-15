@@ -16,7 +16,7 @@ export default function RegisterPage(){
   const [username, setUsername] = useState('');
   const [loading, setLoading] = useState(false);
   
-
+  // Handle signup and do all the checks
   const handleSignUp = async () => {
     if (!isLoaded || !signUp) {
       console.error("Clerk is not loaded or signUp is unavailable.");
@@ -92,18 +92,15 @@ export default function RegisterPage(){
     }
   }
 
-
     return(
         <>
         <div className={styles.App}>
           <div className={styles.center}>
-
             <div className={styles.formBlock}>
               <div className={styles.formTitle}>
                 <p>Register</p>
               </div>
                 <form className={styles.registerForm} onSubmit={handleSubmit(handleSignUp)}>
-
                   <div className={styles.formSection}>
                     <label htmlFor="name">Name</label>
                     <div className={styles.inputContainer}>
@@ -112,7 +109,6 @@ export default function RegisterPage(){
                     </div>
                     {errors.name && <span>{errors.name.message}</span>}
                   </div>
-
                   <div className={styles.formSection}>
                     <label htmlFor="email">Email</label>
                     <div className={styles.inputContainer}>
@@ -121,7 +117,6 @@ export default function RegisterPage(){
                     </div>
                       {errors.email && <span>{errors.email.message}</span>}
                   </div>
-
                   <div className={styles.formSection}>
                     <label htmlFor="password">Password</label>
                     <div className={styles.inputContainer}>
@@ -130,7 +125,6 @@ export default function RegisterPage(){
                     </div>
                     {errors.password && <span>{errors.password.message}</span>}
                   </div>
-
                   <div className={styles.formSection}>
                     <label htmlFor="confirmPassword"> Confirm Password</label>
                     <div className={styles.inputContainer}>
@@ -142,13 +136,10 @@ export default function RegisterPage(){
                     <div id="clerk-captcha"></div>
                     <button className={styles.submitButton} type="submit">Submit</button>   
                 </form>
-
                 <div className={styles.actionSection}>
                   <p>Already have an account? <Link to="/login">Login</Link></p>
                 </div>
-
             </div>
-
             <div className={styles.backHome}>
               <Link to="/">
                 <div className={styles.backHomeCenter}>
@@ -162,5 +153,3 @@ export default function RegisterPage(){
         </>
     )
 }
-
-

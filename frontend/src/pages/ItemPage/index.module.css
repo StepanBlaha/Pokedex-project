@@ -18,6 +18,7 @@
   display: flex;
   flex-direction: row-reverse;
   justify-content: center;
+  flex-direction: column;
 }
 .mainContent{
   width: 100%;
@@ -32,7 +33,7 @@
   padding: 20px;
   gap: 10px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 @media (max-width: 1248px) {
   .mainBlock {

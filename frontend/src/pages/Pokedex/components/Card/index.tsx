@@ -7,10 +7,6 @@ import { useUser } from '@clerk/clerk-react';
 
 
 const Card = forwardRef<HTMLDivElement, CardProps>(({ name, id, type, caught = true, entries, onToggle }, ref)=>{
-    const [localEntries, setLocalEntries] = useState<number[]>(entries ?? []);
-    useEffect(() => {
-        setLocalEntries(entries ?? []);
-    }, [entries])
     const { user, isLoaded } = useUser(); // User auth data
     const [isHovering, setIsHovering] = useState(false)
     const [hoverBgUrl, setHoverBgUrl] = useState("")
@@ -46,7 +42,6 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({ name, id, type, caught = t
         <div className={styles.cardTitle}>
             <p style={{ color: `${pokemonTypeColors[type]} ` }} >{name}</p>
         </div>
-        
         {caught === true ? (
             <div className={styles.cardButton} style={{ backgroundColor: `${pokemonTypeColors[type]} ` }} onClick={()=>HandlePokedexChange(false)}>
                 <div className={styles.buttonCenter}>
@@ -60,7 +55,6 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({ name, id, type, caught = t
                 </div>
             </div>
         )}
-        
     </div>
     )
 })

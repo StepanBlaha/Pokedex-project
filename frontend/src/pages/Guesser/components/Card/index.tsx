@@ -27,6 +27,12 @@ export default function Card({data, backData, id, newId}: GuessCardProps){
     const handlePlayAgain = () => {
         newId();
     }
+    // Search pokemon data
+    const {data: searchedPokemon, refetch: searchPokemon, isFetching: isSearching, error: searchError} = useQuery({
+        queryKey: ["pokemonSearch", guess],
+        queryFn:()=> loadSearch(guess),
+        enabled: false,
+    })
 
     const handleGuess = async(e?: FormEvent, guessedName?: string) => {
         setSuggestOpen(false); // Close suggest list
@@ -51,21 +57,12 @@ export default function Card({data, backData, id, newId}: GuessCardProps){
         }
     }
 
-
-
-    const {data: searchedPokemon, refetch: searchPokemon, isFetching: isSearching, error: searchError} = useQuery({
-        queryKey: ["pokemonSearch", guess],
-        queryFn:()=> loadSearch(guess),
-        enabled: false,
-    })
     // Update state when data changes
     useEffect(() => {
-
         if(searchedPokemon?.searchedPokemon){
             setItems(searchedPokemon.searchedPokemon);
         }
     }, [searchedPokemon]);
-
 
     // Perform search when guess changes
     useEffect(() => {
@@ -203,9 +200,7 @@ export default function Card({data, backData, id, newId}: GuessCardProps){
                             <p className={g.toLowerCase() === data.name.toLowerCase() ? styles.CorrectGuess : ""}>{g}{g.toLowerCase() === data.name.toLowerCase() ? "✅" : ""}</p>
                         ))}
                     </div>
-
                 </div>
-
             </div>
         </>
     )

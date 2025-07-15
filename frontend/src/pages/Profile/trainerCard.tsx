@@ -7,14 +7,12 @@ import { getSprite } from "../../utils/sprites";
 import { checkAllBadges } from "../../utils/badges";
 import { loadFavourite, updateFavourite, loadPokemon, loadUsersPokemon, fetchAllPokemonInBatches } from "../../utils/fetch";
 
-
 type TrainerCardProps = {
     cardRef: React.Ref<HTMLDivElement>;
 };
 export default function TrainerCard( { cardRef }: TrainerCardProps){
     const { user, isLoaded } = useUser(); // User context
     const [page, setPage] = useState<number>(0); // Page for infinity scroll
-    const [typesOpen, setTypesOpen] = useState<boolean>(false); // Favourite type modal flag
     const [pokeOpen, setPokeOpen] = useState<boolean>(false); // Favourite pokemon modal flag
     const [items, setItems] = useState<Pokemon[]>([]); // Fetched pokemon
     const lastRef = useRef<HTMLDivElement | null>(null); // Last pokemon for infinity scroll
@@ -151,9 +149,6 @@ export default function TrainerCard( { cardRef }: TrainerCardProps){
                 )}
             </div>
         </div>   
-        
         </>
     )
 }
-
-

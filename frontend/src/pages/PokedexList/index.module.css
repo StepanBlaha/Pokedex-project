@@ -1,93 +1,36 @@
-html{
-    width: 100%;
-    height: 100%;
-    float: left;
-    zoom: 1.4; 
-}
-body{
-    width: 100%;
-    height: 100%;
-    float: left;
-
-}
-#root{
-    width: 100%;
-    height: 100%;
-    float: left;
-}
 .App{
-    width: 100%;
-    height: 100%;
-    float: left;
-    overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  float: left;
+  overflow-x: hidden;
 }
-
-
 .center{
-    width: 100%;
-    width: 100%;
-    height: fit-content;
-    float: left;
-
-    display: flex
-;
-    flex-wrap: wrap;
-    /* padding: 10px; */
-    box-sizing: border-box;
-    gap: 30px;
-    align-items: center;
-    align-content: center;
-    flex-direction: column;
-    gap: 3px;
-
+  width: 100%;
+  width: 100%;
+  height: fit-content;
+  float: left;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  gap: 30px;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+  gap: 3px;
 }
 .mainBlock{
-    width: 90%;
-    height: 100%;
- 
-   display: flex;
-   flex-direction: row-reverse;
-   justify-content: center;
-
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  flex-direction: column;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .mainContent{
-    width: 100%;
-    min-height: 800px;
-    float: left;
-    flex: 0 0 70%;
+  width: 100%;
+  min-height: 800px;
+  float: left;
+  flex: 0 0 70%;
 }
 .sideContent{
   min-height: 40px;
@@ -102,7 +45,6 @@ body{
   .mainBlock {
     flex-direction: column;
   }
-
   .mainContent,
   .sideContent {
     flex: 0 0 100%;
@@ -112,20 +54,16 @@ body{
     flex-wrap: wrap;
   }
 }
-
 @media (max-width: 700px) {
   .sideContent{
     flex-direction: column;
   }
 }
-
-
 .card{
   height: 60px;
   width: 200px;
   border: 1px solid;
 }
-
 .searchInput {
   --input-focus: #2d8cf0;
   --font-color: #323232;
@@ -170,23 +108,22 @@ body{
   padding: 10px 0px;
 }
 .TypeFilter{
-    --input-focus: #2d8cf0;
-    --font-color: #323232;
-    --font-color-sub: #666;
-    --bg-color: #fff;
-    --main-color: #323232;
-    background-color: var(--bg-color);
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--font-color);
-    padding: 5px 10px;
-    outline: none;
-    border: 3px solid black;
-    border-radius: 0.4em;
-    box-shadow: 0.2em 0.2em;
-    transition: 0.3s ease-out;
-    cursor: pointer;
-
+  --input-focus: #2d8cf0;
+  --font-color: #323232;
+  --font-color-sub: #666;
+  --bg-color: #fff;
+  --main-color: #323232;
+  background-color: var(--bg-color);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--font-color);
+  padding: 5px 10px;
+  outline: none;
+  border: 3px solid black;
+  border-radius: 0.4em;
+  box-shadow: 0.2em 0.2em;
+  transition: 0.3s ease-out;
+  cursor: pointer;
 }
 .TypeFilter svg{
   color: red;
@@ -199,9 +136,7 @@ body{
   border: 3px solid #7e7e7e;
   box-shadow: 0.4em 0.4em;
 }
-
 .Sort{
-
   background-color: white;
   font-size: 15px;
   font-weight: 600;

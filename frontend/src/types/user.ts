@@ -14,7 +14,6 @@ export interface User {
     role: string;
     password: string;
 }
-
 export interface userLevelResult{
     userId: string,
     xp: number

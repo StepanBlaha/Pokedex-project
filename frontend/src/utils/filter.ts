@@ -12,13 +12,13 @@ export const matchesFilters = (pokemon: Pokemon, filterData: filterTypes):boolea
             return false;
         }
     }
-
     // Check type (at least one matching type)
     if (filterData.type !== null && !pokemon.types.includes(filterData.type)) {
         return false;
     }
     return true;
 }
+// Check if filters are deeply equal
 export const isEqualFilters = (a: filterTypes, b: filterTypes): boolean => {
     return a.gen === b.gen && a.type === b.type;
 };

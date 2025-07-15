@@ -6,3 +6,8 @@ export type HandleFilterType = <K extends keyof filterTypes>(
     key: K,
     value: filterTypes[K] 
 ) => void;
+export interface FilterContextType {
+    filters: filterTypes,
+    loading: boolean
+    handleFilter: HandleFilterType;
+}

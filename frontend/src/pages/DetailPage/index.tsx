@@ -1,5 +1,5 @@
 import styles from "./index.module.css"
-import React, { useEffect, useState, Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from '@tanstack/react-query';
 import Spinner from "../../components/Spinner";
@@ -8,9 +8,8 @@ import Footer from "../../components/Footer";
 import { fetchPokemon, fetchPokemonBackData } from "../../utils/fetch";
 const Card = lazy(() => import('./components/Card'));
 
-
 export default function DetailPage(){
-    const { id } = useParams();
+    const { id } = useParams(); 
     const {data, refetch, isFetching, error} = useQuery({
         queryKey: ["pokemon"],
         queryFn:()=> fetchPokemon(Number(id)),
@@ -25,29 +24,26 @@ export default function DetailPage(){
     return(
         <>
         <div className={styles.App}>
-        <div className={styles.center}>
-            <Header/>
-            <div className={styles.mainBlock}>
-                <div className={styles.mainContent}>
-
-                    <div className={styles.backHomeDiv}>
-                        <Link to={"/pokemon"}>
-                            <div className={styles.backHome}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-move-left-icon lucide-move-left"><path d="M6 8L2 12L6 16"/><path d="M2 12H22"/></svg>
-                                <p>Back</p>
-                            </div>
-                        </Link>
-                    </div>
-
-                    <Suspense fallback={<Spinner />}>
-                        {data && backData && <Card data={data} backData={backData} id={id}/>}
-                    </Suspense>
+            <div className={styles.center}>
+                <Header/>
+                <div className={styles.mainBlock}>
+                    <div className={styles.mainContent}>
+                        <div className={styles.backHomeDiv}>
+                            <Link to={"/pokemon"}>
+                                <div className={styles.backHome}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-move-left-icon lucide-move-left"><path d="M6 8L2 12L6 16"/><path d="M2 12H22"/></svg>
+                                    <p>Back</p>
+                                </div>
+                            </Link>
+                        </div>
+                        <Suspense fallback={<Spinner />}>
+                            {data && backData && <Card data={data} backData={backData} id={id}/>}
+                        </Suspense>
                     </div>
                 </div>
                 <Footer/>
             </div>
         </div>
-        
         </>
     )
 }

@@ -1,27 +1,24 @@
-
-
-
 export interface Pokemon {
   id: number;
   name: string;
   sprite: string;
   types: string[];
 }
-
-
+export interface PokemonContextType {
+  pokemon: Pokemon[],
+  loading: boolean
+}
 export interface PokemonListResult {
   page: number;
   results: Pokemon[];
   }
   
-  export interface PokemonListProps{
-    data: Pokemon[];
-    userData?: number[];
-    lastCardRef: React.RefObject<HTMLDivElement | null>; 
-    onToggle?: (id: number, add: boolean) => void
+export interface PokemonListProps{
+  data: Pokemon[];
+  userData?: number[];
+  lastCardRef: React.RefObject<HTMLDivElement | null>; 
+  onToggle?: (id: number, add: boolean) => void
 }
-
-
 export interface PokemonDetailData {
   name: string;
   type: string;
@@ -33,7 +30,6 @@ export interface PokemonDetailData {
   ability: string;
   stats?: PokemonStat[]; 
 }
-
 export interface PokemonStat {
   base_stat: number;
   effort: number;
@@ -48,8 +44,6 @@ export interface PokemonDetailCardProps {
   backData:PokemonBackDetailData,
   id?: string
 }
-
-
 export interface PokemonBackDetailData{
   generation: string;
   shape: string;
@@ -67,10 +61,6 @@ export interface PokemonForm{
   name: string,
   url: string
 }
-
-
-
-
 export interface SearchedPokemon{
   types: string[],
   _id: string,
@@ -81,8 +71,6 @@ export interface SearchedPokemon{
 export interface SearchedPokemonList{
   searchedPokemon: SearchedPokemon[]
 }
-
-
 export interface UserPokedexRecord{
   pokemonIds: number[],
   userId: string

@@ -2,14 +2,12 @@ export interface ItemResult{
     page: number;
     results: ItemProps[];
 }
-  export interface ItemListProps{
+export interface ItemListProps{
     data: ItemProps[];
     lastCardRef: React.RefObject<HTMLDivElement | null>; 
 }
-
-
 export interface SearchedItem{
-  _id: string,
+    _id: string,
     category: string;
     cost: number;
     effect_entries: EffectEntry[] | [];
@@ -18,9 +16,8 @@ export interface SearchedItem{
     sprite: string;
 }
 export interface SearchedItemList{
-  searchedItems: SearchedItem[]
+    searchedItems: SearchedItem[]
 }
-
 export interface ItemProps{
     category: string;
     cost: number;
@@ -41,14 +38,12 @@ interface FlavorTextEntry{
     language: NamedResource;
     text: string;
     version_group: NamedResource;
-
 }
 interface EffectEntry{
     effect: string;
     language: NamedResource;
     short_effect: string;
 }
-
 // Sprite type
 interface Sprite{
     default: string | null

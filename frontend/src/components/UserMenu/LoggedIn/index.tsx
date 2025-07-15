@@ -1,24 +1,15 @@
 import styles from "./index.module.css"
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
-import { FavouriteRecord } from "../../../types/favourite"
-import axios from "axios"
 import { useUser } from "@clerk/clerk-react"
-// Load favourite data
-const loadFavourite = async(id: string, key: string) => {
-    const items = await axios.post<FavouriteRecord>(`http://localhost:5000/api/favourite/get`, {
-    userId: id,
-    key: key
-    });
-    return items.data.value
-}
+import { loadFavourite } from "../../../utils/fetch"
 
 type LoggedInMenuProps = {
     logout: () => void;
 };
 
 export default function LoggedInMenu({ logout }: LoggedInMenuProps) {
-    const { user, isLoaded } = useUser(); // User context
+    const { user } = useUser(); // User context
     const [favourite, setFavourite] = useState({
         Trainer:""
     })

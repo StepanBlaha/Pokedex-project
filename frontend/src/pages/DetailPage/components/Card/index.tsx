@@ -35,7 +35,6 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
     const [favourite, setFavourite] = useState({
         Pokemon:""
     })
-
     useEffect(()=>{
         if(data?.stats){
             const statNames = data.stats?.map(stat => stat.stat.name)
@@ -80,17 +79,17 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
             y: {
                 display: false, 
                 grid: {
-                  display: false
+                    display: false
                 }
-              },
-              x: {
+            },
+            x: {
                 grid: {
-                  display: false 
+                    display: false 
                 }
-              }
+            }
         }
     };
-  
+
     // Fallback for when backsprite doesnt exist
     useEffect(()=>{
         if(backData.back_sprite == null){
@@ -125,7 +124,6 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
 
     return(
         <div className={`${styles.card} ${flipped ? styles.flipped : ""}`}>
-
                 <div className={styles.front}>
                     <div className={styles.cardTitle}>
                         <div className={styles.cardTitleGroup}>
@@ -158,9 +156,7 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
                         )}
                         
                     </div>
-
                     <div className={styles.cardInformations}>
-
                         <div className={styles.cardInfo}>
                             <div className={styles.cardInfoTitle}  style={{ color: `${pokemonTypeColors[data.type]} ` }}>
                                 <p>Height</p>
@@ -169,7 +165,6 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
                                 <p>{data.height} cm</p>
                             </div>
                         </div>
-
                         <div className={styles.cardInfo}>
                             <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
                                 <p>Weight</p>
@@ -178,7 +173,6 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
                                 <p>{data.weight} kg</p>
                             </div>
                         </div>
-
                         <div className={styles.cardInfo}>
                             <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
                                 <p>Category</p>
@@ -187,7 +181,6 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
                                 <p>{data.category}</p>
                             </div>
                         </div>
-
                         <div className={styles.cardInfo}>
                             <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
                                 <p>Ability</p>
@@ -197,11 +190,9 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
                             </div>
                         </div>
                     </div>
-
                     <div className={styles.cardDescription}>
                         <p>{data.description}</p>
                     </div>
-
                     <div className={styles.cardStats}>
                         <div className={styles.statGraph} >
                             <BarChart data={barData} options={{
@@ -223,14 +214,12 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
                         </div>
                     </div>
                 </div>
-
                 <div className={styles.back}>
                     
                     <div className={styles.cardTitle}>
                             <h2>{data.name}</h2>
                         <div className={styles.cardType}>
                             <div className={styles.typeImage}  style={{ backgroundImage: `url(/assets/typeBanners/${data.type}.png` }}></div>
-
                         </div>
                             {showShiny === true ? (
                                 <div className={styles.cardImage} style={{ backgroundImage: `url(${backShiny})` }}></div>
@@ -238,9 +227,7 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
                                 <div className={styles.cardImage} style={{ backgroundImage: `url(${backData.back_sprite})` }}></div>
                             )}
                     </div>
-
                     <div className={styles.cardInformationsBack}>
-
                         <div className={styles.cardInfo}>
                             <div className={styles.cardInfoTitle}  style={{ color: `${pokemonTypeColors[data.type]} ` }}>
                                 <p>Shape</p>
@@ -249,7 +236,6 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
                                 <p>{backData.shape}</p>
                             </div>
                         </div>
-
                         <div className={styles.cardInfo}>
                             <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
                                 <p>Color</p>
@@ -258,7 +244,6 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
                                 <p>{backData.color}</p>
                             </div>
                         </div>
-
                         <div className={styles.cardInfo}>
                             <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
                                 <p>Generation</p>
@@ -267,7 +252,6 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
                                 <p>{generationMap[backData.generation]}</p>
                             </div>
                         </div>
-
                         <div className={styles.cardInfo}>
                             <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
                                 <p>Base Happiness</p>
@@ -276,7 +260,6 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
                                 <p>{backData.happiness}</p>
                             </div>
                         </div>
-
                         <div className={styles.cardInfo}>
                             <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
                                 <p>Capture rate</p>
@@ -285,7 +268,6 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
                                 <p>{backData.capture_rate}</p>
                             </div>
                         </div>
-
                         <div className={styles.cardInfo}>
                             <div className={styles.cardInfoTitle} style={{ color: `${pokemonTypeColors[data.type]} ` }}>
                                 <p>Species</p>
@@ -294,13 +276,10 @@ export default function Card({data, backData, id}: PokemonDetailCardProps){
                                 <p>{backData.species}</p>
                             </div>
                         </div>
-
                     </div>
-
                     <div className={styles.cardEvolutions}>
                         <EvolutionList evolutions={backData.evolution_chain} title_color={pokemonTypeColors[data.type]}/>
                     </div>
-
                 </div>
             
             <Button onClick={()=>setFlipped(!flipped)} className={styles.flipButton}   style={{ backgroundColor: `${pokemonTypeColors[data.type]} ` }}>

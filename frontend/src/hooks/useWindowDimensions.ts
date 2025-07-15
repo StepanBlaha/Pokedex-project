@@ -1,13 +1,10 @@
 import { useState, useEffect } from 'react';
-
+// Get window dimensions
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
-  return {
-    width,
-    height
-  };
+  return { width, height};
 }
-
+// Window dimensions hook
 export default function useWindowDimensions() {
   const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
 

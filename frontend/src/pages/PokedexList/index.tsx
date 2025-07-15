@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import axios from "axios";
 import { useQuery } from '@tanstack/react-query';
 import List from "./components/List";
-import { Pokemon, PokemonListResult, SearchedPokemon, SearchedPokemonList } from "../../types/pokemon";
+import { Pokemon } from "../../types/pokemon";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { usePokemon } from "../../context/pokemonContext";
@@ -138,9 +138,7 @@ export default function PokedexList(){
         <div className={styles.App}>
           <div className={styles.center}>
               <Header/>
-
               <div className={styles.mainBlock}>
-
                   <div className={styles.sideContent}>
                     <input 
                     type="text" 
@@ -166,7 +164,6 @@ export default function PokedexList(){
                         {sort === null && <Minus/>}
                       </div>
                   </div>
-
                   <div className={styles.mainContent}>
                       <List data={sortedItems} lastCardRef={lastRef}/>
                     
@@ -176,7 +173,6 @@ export default function PokedexList(){
                         </div>
                         )}
                   </div>
-
               </div>
               <Footer/>
           </div>
@@ -184,5 +180,3 @@ export default function PokedexList(){
         </>
     )
 }
-
-

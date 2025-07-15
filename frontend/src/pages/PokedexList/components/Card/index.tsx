@@ -33,7 +33,6 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({ name, id, type }, ref)=>{
         <div className={styles.cardTitle}>
             <p style={{ color: `${pokemonTypeColors[type]} ` }} >{name}</p>
         </div>
-        
         <Link to={`/pokemon/${id}`}>
             <div className={styles.cardButton} style={{ backgroundColor: `${pokemonTypeColors[type]} ` }}>
                 <div className={styles.buttonCenter}>
@@ -41,7 +40,6 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({ name, id, type }, ref)=>{
                 </div>
             </div>
         </Link>
-
     </div>
     )
 })

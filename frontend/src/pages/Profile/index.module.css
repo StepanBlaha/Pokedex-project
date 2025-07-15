@@ -1,20 +1,3 @@
-html{
-    width: 100%;
-    height: 100%;
-    float: left;
-    zoom: 1.4; 
-}
-body{
-    width: 100%;
-    height: 100%;
-    float: left;
-
-}
-#root{
-    width: 100%;
-    height: 100%;
-    float: left;
-}
 .App{
     width: 100%;
     height: 100%;
@@ -57,7 +40,6 @@ body{
     .mainBlock {
         flex-direction: column;
     }
-
     .mainContent,
     .sideContent {
         flex: 0 0 100%;
@@ -71,8 +53,6 @@ body{
     min-height: 400px;
     display: flex;
     flex-direction: column;
-
-
     border-radius: 0.6em;
     border: 5px solid black;
     box-shadow: 0.0em 0.2em;
@@ -94,7 +74,7 @@ body{
     padding: 20px;
     background-position: 17%;
     background-position: 0px -144px;
-        background-position: 0px -21vw;
+    background-position: 0px -21vw;
 }
 @media (max-width: 700px) {
     .ProfileHeader{
@@ -103,7 +83,7 @@ body{
 }
 @media (min-width: 1400px) {
     .ProfileHeader{
-            background-position: 0px -290px;
+        background-position: 0px -290px;
     }
 }
 .ProfileName{
@@ -114,16 +94,15 @@ body{
     margin: 0;
     text-align: left;
     filter: drop-shadow(2px 4px 6px rgb(0, 0, 0));
-  text-shadow:
-    -2px -2px 0 black,
-     2px -2px 0 black,
-    -2px  2px 0 black,
-     2px  2px 0 black,
-    0px  -2px 0 black,
-    0px   2px 0 black,
-    -2px  0px 0 black,
-     2px  0px 0 black;
-/*puvodne no outline a cerny text*/
+    text-shadow:
+        -2px -2px 0 black,
+        2px -2px 0 black,
+        -2px  2px 0 black,
+        2px  2px 0 black,
+        0px  -2px 0 black,
+        0px   2px 0 black,
+        -2px  0px 0 black,
+        2px  0px 0 black;
 }
 .TrainerLevel{
     width: 100%;
@@ -175,7 +154,6 @@ body{
     right: -10px;
     filter: drop-shadow(2px 4px 6px black);
 }
-
 .ProfileContent{
     width: 100%;
     height: fit-content;
@@ -185,7 +163,6 @@ body{
     padding: 20px;
     padding-top: 0;
 }
-
 .Favourite{
     width: 100%;
     height: fit-content;
@@ -255,7 +232,6 @@ body{
     margin: 0;
     text-align: left;
 }
-
 .pokeballItem{
     background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png);
     width: 40px;
@@ -296,9 +272,6 @@ body{
     background-size: cover;
     z-index: 1;
 }
-
-
-
 .PokemonSelect{
     width: fit-content;
     height: 300px;
@@ -336,7 +309,6 @@ body{
     padding: 8px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-
     max-width: 80vw;
     display: flex;
     flex-wrap: wrap;
@@ -457,11 +429,6 @@ body{
     cursor: pointer;
     transition: 0.3s ease-out;
 }
-
-
-
-
-
 .TrainerSelect{
     height: 300px;
     overflow-y: auto;
@@ -478,7 +445,6 @@ body{
     border-radius: 0.6em;
     border: 5px solid black;
     box-shadow: 0.0em 0.2em;
-    /*padding-top: 8px;*/
     display: flex;
     flex-direction: column;
     scrollbar-width: none;
@@ -558,7 +524,6 @@ body{
 .ShowTrainerCard{
     width: fit-content;
     height: fit-content;
-
     z-index: 1;;
     padding: 4px;
     border: 2px solid;
@@ -618,26 +583,6 @@ body{
     align-items: center;
     cursor: pointer;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .link{
     height: fit-content;
     width: fit-content;
@@ -655,51 +600,31 @@ body{
     transition: color 0.2s ease-in;
     z-index: 1;
 }
-
 .link a::after {
     content: '';
     position: absolute;
     left: 0;
-    bottom: -5px; /* adjust based on spacing */
+    bottom: -5px;
     width: 0%;
     height: 3px;
     background-color: black;
     transition: width 0.3s ease;
 }
-
 .link a:hover::after {
     width: 100%;
 }
 .link a.active::after {
-  width: 100%;
-
+    width: 100%;
 }
-
-
 #PokedexLink::after{
     background-color: rgb(238, 129, 48);
 }
-/*
-#PokedexLink:hover a{
-    color: red;
-}
-    */
 #ItemLink::after{
     background-color: rgb(122, 199, 76);
 }
-/*
-#ItemLink:hover a{
-    color: green;
-}
-    */
 #MoveLink::after{
     background-color: rgb(99, 144, 240);
 }
-/*
-#MoveLink:hover a{
-    color: blue;
-}
-*/
 .link svg{
     position: absolute;
     top: 2px;
@@ -719,15 +644,6 @@ body{
         justify-content: space-between;
     }
 }
-
-
-
-
-
-
-
-
-
 .TrainerExpCard{
     width: 100%;
     max-width: 800px;
@@ -817,7 +733,7 @@ body{
     display: flex;
     background-position: center;
     position: absolute;
-        bottom: -21px;
+    bottom: -21px;
     left: -23%;
     filter: drop-shadow(2px 4px 6px black);
 }
@@ -892,8 +808,6 @@ body{
 .DownloadLoader span{
     color: #f6e652;
 }
-
-
 .Level{
     cursor: pointer;
     position: relative;
@@ -937,16 +851,12 @@ body{
     top: -40px;
     width: fit-content;
     white-space: nowrap;
-
     top: -3%;
     left: 115%;
-
-
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
     transform: translateX(-0%) translateY(-87%) scale(1);
-
 }
 .tooltipLevel::before {
     position: absolute;

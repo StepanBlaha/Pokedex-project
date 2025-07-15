@@ -22,7 +22,7 @@ import { loadFavourite, updateFavourite, loadPokemon, fetchAllPokemonInBatches, 
 
 export default function Profile(){
     const [ userXp, setUserXp ] = useState<number>(0); // User xp
-    const { height, width } = useWindowDimensions(); // Window size
+    const { width } = useWindowDimensions(); // Window size
     const { user, isLoaded } = useUser(); // User context
     const [page, setPage] = useState<number>(0); // Page for infinity scroll
     const [typesOpen, setTypesOpen] = useState<boolean>(false); // Favourite type modal flag
@@ -158,8 +158,6 @@ export default function Profile(){
         <div className={styles.App}>
             <div className={styles.center}>
                 <Header/>
-
-
                 <div className={styles.mainBlock}>
                     <div className={styles.mainContent}>
                         {card ? (
@@ -227,7 +225,6 @@ export default function Profile(){
                                         </div>
                                     )}
                                 </div>
-
                                 <div className={styles.ProfileContent}>
                                     <div className={styles.Badges}>
                                         {userPokemon !== undefined && userPokemon.length >0 && (
@@ -246,24 +243,14 @@ export default function Profile(){
                                             </>
                                         )}
                                     </div>
-
                                     <div className={styles.TrainerLevel}>
                                         <p className={styles.Level}>
                                             lvl {Math.floor( userXp / 1000)}
-                                            {
-                                                /*
-                                            <span className={styles.textLevel}>
-                                                <span className={styles.tooltipLevel}>Gain levels by playig guess the pokemon</span>
-                                            </span>
-                                                 */
-                                            }
                                         </p>
-                                        
                                         <div className={styles.TrainerLevelBar}>
                                             <div className={styles.LevelBar} style={{width: `${((userXp % 1000) / 1000) * 100}%`, backgroundColor: `${favourite.Type !== undefined ? pokemonTypeColors[favourite.Type] : "#969696"}`}}></div>
                                         </div>
                                     </div>
-
                                     <div className={styles.Favourite}>
                                         {pokeOpen && (
                                             <div className={styles.PokemonSelect}>
@@ -278,14 +265,12 @@ export default function Profile(){
                                                 </>
                                             )}
                                         </div>
-
                                         <div className={styles.FavGroup}>
                                             <div className={styles.FavEdit} onClick={()=>setPokeOpen(!pokeOpen)}>
                                                 <PencilLine />
                                             </div>
                                         </div>
                                     </div>
-
                                     <div className={styles.Favourite}>
                                         {typesOpen && (
                                             <div className={styles.TypeSelect}>
@@ -313,14 +298,12 @@ export default function Profile(){
                                                 </>
                                             )}
                                         </div>
-
                                         <div className={styles.FavGroup}>
                                             <div className={styles.FavEdit} onClick={()=>setTypesOpen(!typesOpen)}>
                                                 <PencilLine />
                                             </div>
                                         </div>
                                     </div>
-
                                     <div className={styles.PokedexLink}>
                                         <div className={`${styles.pokedexItem}`}></div>
                                             <div className={styles.link}>
@@ -330,17 +313,12 @@ export default function Profile(){
                                                 <p>{userPokemon?.length}/1025</p>
                                             </div>
                                     </div>
-
                                 </div>
                                 <div className={styles.TrainerCardButonWrap}>
                                     <div className={styles.ShowTrainerCard} onClick={()=>setCard(true)}>
                                         <IdCard />
                                     </div>
                                 </div>
-
-                                
-
-
                             </div>
                         )}
                     </div>
@@ -351,5 +329,3 @@ export default function Profile(){
         </>
     )
 }
-
-

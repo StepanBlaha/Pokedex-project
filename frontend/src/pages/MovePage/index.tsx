@@ -7,13 +7,12 @@ import Footer from "../../components/Footer";
 import { Moves } from "../../types/moves";
 import { loadMoves, loadSearchMoves } from "../../utils/fetch";
 
-
 export default function MovePage(){
   // States and refs
-  const [inputValue, setInputValue] = useState("")
-  const [items, setItems] = useState<Moves[]>([]);
-  const [page, setPage] = useState<number>(0)
-  const lastRef = useRef<HTMLDivElement | null>(null); 
+  const [inputValue, setInputValue] = useState(""); // Input value
+  const [items, setItems] = useState<Moves[]>([]); // Moves
+  const [page, setPage] = useState<number>(0); // Current page
+  const lastRef = useRef<HTMLDivElement | null>(null); // Last move ref
   const [ sort, setSort ] = useState<"asc" | "desc" | null>(null); // Sort state
   const {data, refetch, isFetching, error} = useQuery({
     queryKey: ["moves", page],
@@ -48,9 +47,7 @@ export default function MovePage(){
           setPage((prev) => prev + 1); 
         }
       },
-      {
-        threshold: 0.5, 
-      });
+      { threshold: 0.5, });
 
       // Set observer
       const current = lastRef.current;
@@ -86,26 +83,12 @@ export default function MovePage(){
   }, [inputValue]);
 // This is for the search ----------------------------------------------------------
 
-  // Handle sorting items
-  /*
-  const sortedItems = (() => {
-    if (sort === "asc") {
-      return [...items].sort((a, b) => a.name.localeCompare(b.name));
-    }
-    if (sort === "desc") {
-      return [...items].sort((a, b) => b.name.localeCompare(a.name));
-    }
-    return items; // untouched
-  })();
-*/
     return(
         <>
         <div className={styles.App}>
           <div className={styles.center}>
               <Header/>
-
               <div className={styles.mainBlock}>
-                
                   <div className={styles.sideContent}>
                     <input 
                     type="text" 
@@ -114,26 +97,7 @@ export default function MovePage(){
                     className={styles.searchInput}
                     placeholder="Tackle..."
                     />
-                    {/*
-                    
-                    <div className={styles.Sort} onClick={() => {
-                        if (sort === "desc") {
-                          setSort(null);
-                        } else if (sort === "asc") {
-                          setSort("desc");
-                        } else {
-                          setSort("asc");
-                        }
-                      }}>
-                        A
-                        {sort === 'asc' && <ChevronUp/>}
-                        {sort === 'desc' && <ChevronDown/>}
-                        {sort === null && <Minus/>}
-                      </div>
-                    
-                    */}
                   </div>
-
                   <div className={styles.mainContent}>
                     <List data={items} lastCardRef={lastRef}/>
                     {isFetching && (
@@ -142,7 +106,6 @@ export default function MovePage(){
                       </div>
                       )}
                   </div>   
-
               </div>
               <Footer/>
           </div>

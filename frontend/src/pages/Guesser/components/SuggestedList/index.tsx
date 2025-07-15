@@ -7,7 +7,6 @@ export interface GuessListProps{
     onClose: ()=>void
 }
 
-
 export default function List({ data, onSelect, onClose }: GuessListProps){
     // Load the cards
     const cardList = data

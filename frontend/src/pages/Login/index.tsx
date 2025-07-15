@@ -1,9 +1,10 @@
 import styles from "./index.module.css"
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from "react-router-dom";
-import { registerFormData, loginFormData, User } from "../../types/user";
+import { loginFormData } from "../../types/user";
 import { useForm } from "react-hook-form";
 import { useSignIn } from "@clerk/clerk-react";
+
 export default function LoginPage(){
     const { signIn, setActive, isLoaded } = useSignIn();
     const {register, handleSubmit, formState: {errors, isSubmitting}, setError,} = useForm<loginFormData>();
@@ -11,7 +12,7 @@ export default function LoginPage(){
     const [ password, setPassword] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
 
-
+    // Handle login
     const onSubmit = async()=>{
         // Make sure signin exists
         if (!signIn) {
@@ -37,22 +38,17 @@ export default function LoginPage(){
             // Stop loading
             setLoading(false)
         }
-        
-
     }
+
     return(
         <>
         <div className={styles.App}>
             <div className={styles.center}>
-
             <div className={styles.formBlock}>
                 <div className={styles.formTitle}>
                 <p>Login</p>
-                
                 </div>
                 <form className={styles.registerForm} onSubmit={handleSubmit(onSubmit)}>
-
-
                     <div className={styles.formSection}>
                     <label htmlFor="email">Email</label>
                     <div className={styles.inputContainer}>
@@ -61,7 +57,6 @@ export default function LoginPage(){
                     </div>
                         {errors.email && <span>{errors.email.message}</span>}
                     </div>
-
                     <div className={styles.formSection}>
                     <label htmlFor="password">Password</label>
                     <div className={styles.inputContainer}>
@@ -70,17 +65,12 @@ export default function LoginPage(){
                     </div>
                     {errors.password && <span>{errors.password.message}</span>}
                     </div>
-
-
                     <button className={styles.submitButton} type="submit">Submit</button>   
                 </form>
-
                 <div className={styles.actionSection}>
                     <p>Don`t have an account? <Link to="/register">Register</Link></p>
                 </div>
-
             </div>
-
             <div className={styles.backHome}>
                 <Link to="/">
                     <div className={styles.backHomeCenter}>
@@ -95,5 +85,3 @@ export default function LoginPage(){
         </>
     )
 }
-
-

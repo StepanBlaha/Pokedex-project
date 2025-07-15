@@ -1,23 +1,18 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { defaultFilters } from "../constants/filters";
-import { filterTypes, HandleFilterType } from "../types/filter";
-
-interface FilterContextType {
-    filters: filterTypes,
-    loading: boolean
-    handleFilter: HandleFilterType;
-}
+import { filterTypes, HandleFilterType, FilterContextType } from "../types/filter";
 
 const FilterContext = createContext<FilterContextType | undefined>(undefined);
 
-
 export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
+    // Filter data
     const [ filters, setFilters ]= useState<filterTypes>(() => {
         const saved = sessionStorage.getItem("PokelogFilterData");
         return saved ? JSON.parse(saved) : defaultFilters;
     });
+    // Loading flag
     const [loading, setLoading] = useState<boolean>(true); 
-
+    // Handle filters
     const handleFilter: HandleFilterType = (key, value) =>{
         setFilters((prev) => {
             const updated = { ...prev, [key]: value };
@@ -25,8 +20,6 @@ export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
             return updated;
         });
     }
-
-
 
     return(
         <FilterContext.Provider value={{filters, loading, handleFilter}}>

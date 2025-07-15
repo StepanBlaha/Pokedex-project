@@ -18,12 +18,11 @@ import { isEqualFilters } from "../../utils/filter";
 import { pokemonTypes } from "../../constants/types";
 import { ChevronUp, ChevronDown, Minus } from "lucide-react";
 
-
 export default function Pokedex(){
     const [inputValue, setInputValue] = useState(""); // Search bar value
     const [items, setItems] = useState<Pokemon[]>([]); // Search result
     const [page, setPage] = useState<number>(0) // Current infinity scroll page
-    const lastRef = useRef<HTMLDivElement | null>(null); 
+    const lastRef = useRef<HTMLDivElement | null>(null); // Last pokemon ref
     const { user, isLoaded } = useUser(); // User auth data
     const [ userPokedex, setUserPokedex] = useState<number[]>([]); // Users pokedex
     const { filters, handleFilter } = useFilter(); // Filter data
@@ -65,28 +64,20 @@ export default function Pokedex(){
         if (!lastRef.current) return;
         if (data?.results) {
         const observer = new IntersectionObserver((entries) => {
-            // Entries contains list of observed items
-            // isInteracting is true if item is on screen
             if (entries[0].isIntersecting && !isFetching) {
-            console.log('Fetching more data...');
-            setPage((prev) => prev + 1); 
+                console.log('Fetching more data...');
+                setPage((prev) => prev + 1); 
             }
         },
-        {
-            threshold: 0.5, 
-        });
-
+        { threshold: 0.5, });
         // Set observer
         const current = lastRef.current;
         observer.observe(current);
-
         // Cleanup observer when the component unmounts or updates
         return () => {
             if (current) observer.unobserve(current);
         };
         }
-        // Run when isFetching or items changes
-        // Items - to make sure it loads after the initial load
     }, [items, isFetching]); 
 
     // Load more posts when page is updated
@@ -99,15 +90,15 @@ export default function Pokedex(){
 // This is for the search ----------------------------------------------------------
     useEffect(() => {
         if (inputValue !== "") {
-        searchPokemon();
-        // For searching purposes
-        setPage(1);   
+            searchPokemon();
+            // For searching purposes
+            setPage(1);   
         } else {
-        // Reset the search
-        if(page !== 0){
-            setItems([]);    
-            setPage(0);        
-        }
+            // Reset the search
+            if(page !== 0){
+                setItems([]);    
+                setPage(0);        
+            }
         }
     }, [inputValue]);
 // This is for the search ----------------------------------------------------------
@@ -128,7 +119,7 @@ export default function Pokedex(){
         }
     };
 
-     // Handle which list to show
+    // Handle which list to show
     const filteredItems = (() => {
         // If searching
         if (inputValue !== "" && searchedPokemon?.searchedPokemon) {
@@ -165,10 +156,7 @@ export default function Pokedex(){
             <div className={styles.App}>
             <div className={styles.center}>
                 <Header/>
-
-
                 <div className={styles.mainBlock}>
-
                     <div className={styles.sideContent}>
                         <input 
                         type="text" 
@@ -195,7 +183,6 @@ export default function Pokedex(){
                         </div>
                         <p>{userPokedex?.length}/1025</p>
                     </div>
-
                     <div className={styles.mainContent}>
                         <List 
                         data={sortedItems} 
@@ -210,7 +197,6 @@ export default function Pokedex(){
                             </div>
                         )}
                     </div>
-
                 </div>
                 <Footer/>
             </div>

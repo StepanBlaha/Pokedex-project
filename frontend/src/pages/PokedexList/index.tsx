@@ -1,5 +1,6 @@
 import styles from "./index.module.css"
 import React, { useEffect, useState, useRef } from 'react';
+import axios from "axios";
 import { useQuery } from '@tanstack/react-query';
 import List from "./components/List";
 import { Pokemon, PokemonListResult, SearchedPokemon, SearchedPokemonList } from "../../types/pokemon";
@@ -12,7 +13,7 @@ import { defaultFilters } from "../../constants/filters";
 import { useFilter } from "../../context/filterContext";
 import { matchesFilters } from "../../utils/filter";
 import { genList } from "../../constants/gens";
-import { loadSearch, loadPokemon } from "../../utils/fetch";
+import { loadPokemon, loadSearch } from "../../utils/fetch";
 import { isEqualFilters } from "../../utils/filter";
 
 export default function PokedexList(){
@@ -47,7 +48,7 @@ export default function PokedexList(){
 
   // Effect for the infinity scroll - maybe create custom hook
   useEffect(() => {
-    if(filters !== defaultFilters) return; 
+    if(!isEqualFilters(filters, defaultFilters)) return; 
     if (!lastRef.current) return;
     if (data?.results) {
       const observer = new IntersectionObserver((entries) => {
@@ -98,6 +99,20 @@ export default function PokedexList(){
   }, [inputValue]);
 // This is for the search ----------------------------------------------------------
 
+  // Handle which list to show
+  const filteredItems = (() => {
+    // search + filters
+    if (inputValue !== "" && searchedPokemon?.searchedPokemon) {
+      const searchResults = searchedPokemon.searchedPokemon;
+      return !isEqualFilters(filters, defaultFilters) ? searchResults.filter(pok => matchesFilters(pok, filters)) : searchResults;
+    }
+    // filters
+    if (!isEqualFilters(filters, defaultFilters)) {
+      return pokemon.filter(pok => matchesFilters(pok, filters));
+    }
+    // all
+    return items; 
+  })();
 
     return(
         <>
@@ -120,12 +135,8 @@ export default function PokedexList(){
                   </div>
 
                   <div className={styles.mainContent}>
-                    {!isEqualFilters(filters, defaultFilters) ? (
-                      <List data={pokemon.filter(pok => matchesFilters(pok, filters))} lastCardRef={lastRef}/>
-                    ):(
-                      <List data={items} lastCardRef={lastRef}/>
-
-                    )}
+                      <List data={filteredItems} lastCardRef={lastRef}/>
+                    
                       {isFetching && (
                         <div className={styles.Loader}>
                           <p>Loading more...</p>

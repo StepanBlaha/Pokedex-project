@@ -59,6 +59,7 @@ export default function Pokedex(){
 
   // Effect for the infinity scroll - maybe create custom hook
     useEffect(() => {
+        if(!isEqualFilters(filters, defaultFilters)) return; 
         if (!lastRef.current) return;
         if (data?.results) {
         const observer = new IntersectionObserver((entries) => {
@@ -125,6 +126,21 @@ export default function Pokedex(){
         }
     };
 
+     // Handle which list to show
+    const filteredItems = (() => {
+        // search + filters
+        if (inputValue !== "" && searchedPokemon?.searchedPokemon) {
+            const searchResults = searchedPokemon.searchedPokemon;
+            return !isEqualFilters(filters, defaultFilters) ? searchResults.filter(pok => matchesFilters(pok, filters)) : searchResults;
+        }
+        // filters
+        if (!isEqualFilters(filters, defaultFilters)) {
+            return pokemon.filter(pok => matchesFilters(pok, filters));
+        }
+        // all
+        return items; 
+    })();
+
     return(
         <>
             <div className={styles.App}>
@@ -148,22 +164,13 @@ export default function Pokedex(){
                     </div>
 
                     <div className={styles.mainContent}>
-                        {!isEqualFilters(filters, defaultFilters) ? (
-                            <List 
-                            data={pokemon.filter(pok => matchesFilters(pok, filters))} 
-                            lastCardRef={lastRef} 
-                            userData={userPokedex}
-                            onToggle={handleToggle}
-                            />
-                        ):(
-                            <List 
-                            data={items} 
-                            lastCardRef={lastRef} 
-                            userData={userPokedex}
-                            onToggle={handleToggle}
-                            />
-
-                        )}
+                        <List 
+                        data={filteredItems} 
+                        lastCardRef={lastRef} 
+                        userData={userPokedex}
+                        onToggle={handleToggle}
+                        />
+                        
                         {isFetching && (
                             <div className={styles.Loader}>
                                 <p>Loading more...</p>

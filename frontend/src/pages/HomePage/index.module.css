@@ -83,6 +83,7 @@
 .HeroTitle h2{
     margin: 0;
     font-size: 54px;
+    font-size: clamp(40px, 8vw, 54px);
     font-weight: 700;
     width: fit-content;
 }

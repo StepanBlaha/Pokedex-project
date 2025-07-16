@@ -92,6 +92,7 @@
     line-height: 50px;
     font-weight: 700;
     margin: 0;
+    z-index: 2;
     text-align: left;
     filter: drop-shadow(2px 4px 6px rgb(0, 0, 0));
     text-shadow:

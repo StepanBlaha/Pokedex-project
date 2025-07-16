@@ -574,3 +574,19 @@
 .Fav:hover .textFav {
   display: flex;
 }
+@media(max-width: 500px){
+  .cardTitleGroup{
+    justify-content: space-between;
+  }
+  .Fav{
+    display: none;
+  }
+}
+@media(max-width: 650px){
+  .cardImage{
+    position: unset;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+}

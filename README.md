@@ -103,8 +103,8 @@ Change ```REACT_APP_CLERK_PUBLISHABLE_KEY``` for your own clerk key
 Change ```MONGODB_URI``` for your own mongo db key
 
 ## ☁️ Deployment
-- Frontent deployed at: [Pokelog frontend](pokelog-production-1f5e.up.railway.app)
-- Backend deployed at: [Pokelog backend](pokelog-production.up.railway.app)
+- Frontent deployed at: [Pokelog frontend](https://pokelog-production-1f5e.up.railway.app)
+- Backend deployed at: [Pokelog backend](https://pokelog-production.up.railway.app)
 
 ## 📸 Screenshots
 <details>

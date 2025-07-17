@@ -44,12 +44,58 @@
 - [Clerk](https://clerk.dev/) account if you're using Clerk for auth
 
 ### Installation
-
 ```bash
 git clone https://github.com/StepanBlaha/Pokedex-project
 cd Pokedex-project
+```
+#### Setup backend
+```
+cd backend 
+npm install
+# or
+yarn install
+```
+#### Setup frontend
+```
+cd frontend 
 npm install
 # or
 yarn install
 ```
 
+## 🛠️ Tech Stack
+- React
+- Typescript
+- Clerk (Authentication & User Management)
+- React Router
+- CSS Modules
+- Chart.js
+- MongoDB
+
+## Deployment
+
+
+# 📸 Screenshots
+<details> <summary>Click to expand</summary>
+📱 Pokédex list page
+  ![Pokedex page](Resourcer/pokedex.png)<br>
+📘 Pokémon details page
+  ![Detail page](Resourcer/detail.png)<br>
+🧑 Trainer profile with badge progress
+  ![Profile page](Resourcer/profile.png)<br>
+🎮 Guess the Pokémon minigame
+  ![Guess page](Resourcer/guess.png)<br>
+</details>
+
+## 🙌 Contributing
+Contributions are welcome! Feel free to fork this project and submit a pull request.
+To contribute:
+
+- Fork the repo
+- Create your branch: git checkout -b feature/your-feature-name
+- ommit your changes: git commit -m "Add your feature"
+- Push to the branch: git push origin feature/your-feature-name
+- Open a pull request
+
+## 📜 License
+This project is open-source and available under the MIT License. See `LICENSE.txt` for more information. 

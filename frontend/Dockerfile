@@ -1,20 +1,13 @@
-# Use official Node.js LTS image
-FROM node:18
-
-# Set working directory inside container
+# Step 1: Build the React app
+FROM node:18 AS build
 WORKDIR /app
-
-# Copy package.json and package-lock.json first (for caching)
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install
-
-# Copy all frontend source code
 COPY . .
+RUN npm install
+RUN npm run build
 
-# Expose the port your frontend dev server uses (usually 3000)
-EXPOSE 3000
-
-# Start the frontend dev server
-CMD ["npm", "start"]
+# Step 2: Serve with a static file server
+FROM node:18
+WORKDIR /app
+RUN npm install -g serve
+COPY --from=build /app/build /app/build
+CMD ["serve", "-s", "build", "-l", "3000"]

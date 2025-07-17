@@ -46,8 +46,8 @@
 
 ### Installation
 ```bash
-git clone https://github.com/StepanBlaha/Pokedex-project
-cd Pokedex-project
+git clone https://github.com/StepanBlaha/Pokelog
+cd Pokelog
 ```
 #### Setup backend
 ```
@@ -136,4 +136,4 @@ Have questions, feedback, or want to contribute? Feel free to reach out!
 - 🧑‍💻 Author: [StepanBlaha](https://stepanblaha.com)
 - ✉️ Email: [stepa15.b@gmail.com](mailto:stepa15.b@gmail.com)
 - 🐙 GitHub: [StepanBlaha](https://github.com/StepanBlaha)
-- 🌐 Project Link: [https://github.com/StepanBlaha/Pokedex-project](https://github.com/StepanBlaha/Pokedex-project)
+- 🌐 Project Link: [https://github.com/StepanBlaha/Pokelog](https://github.com/StepanBlaha/Pokelog)

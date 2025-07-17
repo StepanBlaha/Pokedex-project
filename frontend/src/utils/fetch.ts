@@ -15,7 +15,7 @@ export const loadPokemon = async (page: number) =>{
 // Function for fetching searched pokemon
 export const loadSearch = async(search: string) => {
     try {
-        const res = await axios.post<SearchedPokemonList>("${API_BASE_URL}/api/searchPokedex", {
+        const res = await axios.post<SearchedPokemonList>(`${API_BASE_URL}/api/searchPokedex`, {
         search: search
         });;
         return res.data;
@@ -58,7 +58,7 @@ export const updateFavourite = async(id: string, key: string, value: string | nu
 }
 // Function for loading all pokemon in batches
 export const fetchAllPokemonInBatches = async () => {
-    const cache = getCachedData("sb_pokemon");
+    const cache = getCachedData(`sb_pokemon`);
     if(cache !== null) return JSON.parse(cache);
     const limit = 100;
     let page = 0;
@@ -75,11 +75,11 @@ export const fetchAllPokemonInBatches = async () => {
             page++;
         }
         } catch (error) {
-        console.error("Error fetching batch:", error);
+        console.error(`Error fetching batch:`, error);
         hasMore = false;
         }
     }
-    localStorage.setItem("sb_pokemon", JSON.stringify(allResults))
+    localStorage.setItem(`sb_pokemon`, JSON.stringify(allResults))
     return allResults;
 }
 // Function for updating user xp
@@ -105,7 +105,7 @@ export const loadMoves = async (page: number) =>{
 // Function for fetching searched moves
 export const loadSearchMoves = async(search: string) => {
     try {
-        const res = await axios.post<SearchedMoveList>("${API_BASE_URL}/api/searchMoves", {
+        const res = await axios.post<SearchedMoveList>(`${API_BASE_URL}/api/searchMoves`, {
             search: search
         });
         return res.data;
@@ -121,7 +121,7 @@ export const loadItems = async (page: number) =>{
 // Function for fetching searched moves
 export const loadSearchItems = async(search: string) => {
     try {
-        const res = await axios.post<SearchedItemList>("${API_BASE_URL}/api/searchItems", {
+        const res = await axios.post<SearchedItemList>(`${API_BASE_URL}/api/searchItems`, {
             search: search
         });
         return res.data;

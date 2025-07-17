@@ -76,18 +76,12 @@ export default function Profile(){
     },[user])
     // Set favourite pokemon
     useEffect(() => {
-    console.log("Context Pokémon:", pokemon.length);
-    console.log("All Pokémon:", allPoke?.length);
-    console.log("Favourite ID:", favourite.Pokemon);
+        const hasData = (pokemon && pokemon.length > 0) || (allPoke && allPoke.length > 0);
+        if (!hasData || !favourite.Pokemon) return;
 
-    const list = pokemon.length > 0 ? pokemon : allPoke || [];
-    console.log("Using list length:", list.length);
-
-    if (list.length && favourite.Pokemon) {
-        const fp = list.find(item => String(item.id) === String(favourite.Pokemon));
-        console.log("Found favPoke:", fp);
+        const list = pokemon.length > 0 ? pokemon : allPoke;
+        const fp = list?.find(item => String(item.id) === String(favourite.Pokemon));
         setFavPoke(fp);
-    }
     }, [pokemon, allPoke, favourite.Pokemon]);
     useEffect(()=>{
         console.log(favPoke)

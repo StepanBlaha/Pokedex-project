@@ -42,6 +42,7 @@
 - Node.js (v18+ recommended)
 - npm or yarn
 - [Clerk](https://clerk.dev/) account if you're using Clerk for auth
+- MongoDB key
 
 ### Installation
 ```bash
@@ -80,25 +81,39 @@ npm run start
 - Chart.js
 - MongoDB
 
-## Deployment
+## ⚙️ Configuration
 
+### Frontend config
+Change ```REACT_APP_CLERK_PUBLISHABLE_KEY``` for your own clerk key
+
+### Backend config
+Change ```MONGODB_URI``` for your own mongo db key
+
+## ☁️ Deployment
+Frontent deployed at:
+Backend deployed at: 
 
 ## 📸 Screenshots
 <details>
   <summary>Click to expand</summary>
-  📱 Pokédex list page  
+  <br>
+  📱 **Pokédex list page** 
+  <br>
   <br>
   <img src="Resources/pokedex.png" alt="Pokedex page" width="600"/>
   <br><br>
-  📘 Pokémon details page  
+  📘 **Pokémon details page** 
+  <br>
   <br>
   <img src="Resources/detail.png" alt="Detail page" width="600"/>
   <br><br>
-  🧑 Trainer profile with badge progress  
+  🧑 **Trainer profile with badge progress**  
+  <br>
   <br>
   <img src="Resources/profile.png" alt="Profile page" width="600"/>
   <br><br>
-  🎮 Guess the Pokémon minigame  
+  🎮 **Guess the Pokémon minigame**  
+  <br>
   <br>
   <img src="Resources/guess.png" alt="Guess page" width="600"/>
 </details>
@@ -115,3 +130,10 @@ To contribute:
 
 ## 📜 License
 This project is open-source and available under the MIT License. See `LICENSE.txt` for more information. 
+
+## 📫 Contact
+Have questions, feedback, or want to contribute? Feel free to reach out!
+- 🧑‍💻 Author: [StepanBlaha](https://stepanblaha.com)
+- ✉️ Email: [stepa15.b@gmail.com](mailto:stepa15.b@gmail.com)
+- 🐙 GitHub: [StepanBlaha](https://github.com/StepanBlaha)
+- 🌐 Project Link: [https://github.com/StepanBlaha/Pokedex-project](https://github.com/StepanBlaha/Pokedex-project)

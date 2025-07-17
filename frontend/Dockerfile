@@ -1,13 +1,15 @@
-# Step 1: Build the React app
-FROM node:18 AS build
+# Stage 1: Build
+FROM node:18-alpine AS builder
 WORKDIR /app
-COPY . .
+COPY frontend/package.json frontend/package-lock.json ./
 RUN npm install
+COPY frontend/ ./
 RUN npm run build
 
-# Step 2: Serve with a static file server
-FROM node:18
+# Stage 2: Serve
+FROM node:18-alpine
 WORKDIR /app
 RUN npm install -g serve
-COPY --from=build /app/build /app/build
+COPY --from=builder /app/build ./build
+EXPOSE 3000
 CMD ["serve", "-s", "build", "-l", "3000"]

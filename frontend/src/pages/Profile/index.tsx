@@ -76,9 +76,9 @@ export default function Profile(){
     },[user])
     // Set favourite pokemon
     useEffect(()=>{
-        const favouritePoke = pokemon.find(item => Number(item.id) === Number(favoriteId)); // Favourite pokemons data
+        const favouritePoke = pokemon.find(item => Number(item.id) === Number(favourite.Pokemon)); // Favourite pokemons data
         setFavPoke(favouritePoke)
-    }, [pokemon, favoriteId])
+    }, [pokemon, favourite])
     useEffect(()=>{
         console.log(favPoke)
     }, [favPoke])

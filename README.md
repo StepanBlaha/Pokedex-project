@@ -84,7 +84,7 @@ npm run start
 
 
 ## 📸 Screenshots
-details>
+<details>
   <summary>Click to expand</summary>
   📱 Pokédex list page  
   <br>

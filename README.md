@@ -71,6 +71,19 @@ npm run dev
 ```
 npm run start
 ```
+### 🐳 Or use docker
+#### Build the containers
+```
+docker-compose build
+```
+#### Run the containers
+```
+docker-compose up
+```
+#### Stop the containers
+```
+docker-compose down
+```
 
 ## 🛠️ Tech Stack
 - React

@@ -1,27 +1,25 @@
 FROM node:18
 
-WORKDIR /app
-
-# Copy both frontend and backend
-COPY frontend ./frontend
-COPY backend ./backend
-
-# Install backend deps
+# Backend setup
 WORKDIR /app/backend
+COPY backend/package*.json ./
 RUN npm install
+COPY backend .
 
-# Install frontend deps
+# Frontend setup
 WORKDIR /app/frontend
+COPY frontend/package*.json ./
 RUN npm install
+COPY frontend .
 
-# Build frontend if needed
-# RUN npm run build --prefix frontend
-
-# Expose ports if necessary
+# Expose ports (Railway only exposes one port, so backend should listen on 0.0.0.0:PORT env variable)
 EXPOSE 3000
 EXPOSE 5000
 
-# Start both (you may need to install concurrently globally)
+# Run both backend and frontend concurrently
+WORKDIR /app
+
+# Use 'concurrently' package to run both at the same time (install globally)
 RUN npm install -g concurrently
 
-CMD concurrently "npm run dev --prefix backend" "npm run start --prefix frontend"
+CMD concurrently "cd backend && npm run dev" "cd frontend && npm run start"

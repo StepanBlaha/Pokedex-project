@@ -5,7 +5,7 @@ import { MoveListResult, SearchedMoveList } from "../types/moves"
 import { ItemResult, SearchedItemList } from "../types/items"
 import { getCachedData } from "./cache"
 import axios from "axios"
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const API_BASE_URL = "https://pokelog-production.up.railway.app";
 console.log(process.env.REACT_APP_API_BASE_URL)
 // Function for fetching the pokemon
 export const loadPokemon = async (page: number) =>{

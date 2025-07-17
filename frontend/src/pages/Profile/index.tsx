@@ -75,10 +75,11 @@ export default function Profile(){
         loadUsersData();
     },[user])
     // Set favourite pokemon
-    useEffect(()=>{
-        const favouritePoke = pokemon.find(item => Number(item.id) === Number(favourite.Pokemon)); // Favourite pokemons data
-        setFavPoke(favouritePoke)
-    }, [pokemon, favourite])
+    useEffect(() => {
+        if (!pokemon || pokemon.length === 0 || !favourite.Pokemon) return;
+        const favouritePoke = pokemon.find(item => Number(item.id) === Number(favourite.Pokemon));
+        setFavPoke(favouritePoke);
+    }, [pokemon, favourite.Pokemon]);
     useEffect(()=>{
         console.log(favPoke)
     }, [favPoke])
@@ -265,7 +266,10 @@ export default function Profile(){
                                             {favouritePokeSprite ? (<div className={`${styles.pokeballItem}`} style={{backgroundImage: `url(${favouritePokeSprite})`}}></div>):(<div className={`${styles.pokeballItem}`} ></div>)}
                                             {width > 700 && (
                                                 <>
-                                                    <p>Favourite Pokémon: {favPoke ? titleCaseWord(favPoke.name) : "Unknown"}</p>
+                                                    <p>
+                                                        Favourite Pokémon:{" "}
+                                                        {favPoke ? titleCaseWord(favPoke.name) : "Loading..."}
+                                                    </p>
                                                 </>
                                             )}
                                         </div>

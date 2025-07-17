@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { useEffect } from 'react';
 import AppRoutes from './routes';
 import { BrowserRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
@@ -7,7 +8,9 @@ import { ClerkProvider, RedirectToSignIn } from '@clerk/clerk-react';
 import { PokemonProvider } from './context/pokemonContext';
 import { FilterProvider } from './context/filterContext';
 
-console.log('Clerk Publishable Key:', process.env.REACT_APP_CLERK_PUBLISHABLE_KEY);
+useEffect(() => {
+  console.log('Clerk Publishable Key:', process.env.REACT_APP_CLERK_PUBLISHABLE_KEY);
+}, []);
 const PUBLISHABLE_KEY = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY ?? 'default_publishable_key';
 
 if (!PUBLISHABLE_KEY) {

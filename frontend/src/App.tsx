@@ -8,15 +8,15 @@ import { ClerkProvider, RedirectToSignIn } from '@clerk/clerk-react';
 import { PokemonProvider } from './context/pokemonContext';
 import { FilterProvider } from './context/filterContext';
 
-useEffect(() => {
-  console.log('Clerk Publishable Key:', process.env.REACT_APP_CLERK_PUBLISHABLE_KEY);
-}, []);
 const PUBLISHABLE_KEY = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY ?? 'default_publishable_key';
 
 if (!PUBLISHABLE_KEY) {
   throw new Error('Clerk Publishable Key is missing');
 }
 function App() {
+  useEffect(() => {
+  console.log('Clerk Publishable Key:', process.env.REACT_APP_CLERK_PUBLISHABLE_KEY);
+}, []);
   return (
       <>
 

@@ -18,6 +18,7 @@ const fetchAllPokemonInBatches = async () => {
 
     while (hasMore) {
         try {
+            console.log(API_BASE_URL)
         const res = await axios.get<PokemonListResult>(`${API_BASE_URL}/api/pokedex?page=${page}&limit=${limit}`);
         allResults = [...allResults, ...res.data.results];
         if (res.data.results.length < limit) {

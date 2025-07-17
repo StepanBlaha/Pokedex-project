@@ -5,15 +5,16 @@ import { MoveListResult, SearchedMoveList } from "../types/moves"
 import { ItemResult, SearchedItemList } from "../types/items"
 import { getCachedData } from "./cache"
 import axios from "axios"
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 // Function for fetching the pokemon
 export const loadPokemon = async (page: number) =>{
-    const res = await axios.get<PokemonListResult>(`http://localhost:5000/api/pokedex?page=${page}&limit=10`)
+    const res = await axios.get<PokemonListResult>(`${API_BASE_URL}/api/pokedex?page=${page}&limit=10`)
     return res.data
 }
 // Function for fetching searched pokemon
 export const loadSearch = async(search: string) => {
     try {
-        const res = await axios.post<SearchedPokemonList>("http://localhost:5000/api/searchPokedex", {
+        const res = await axios.post<SearchedPokemonList>("${API_BASE_URL}/api/searchPokedex", {
         search: search
         });;
         return res.data;
@@ -23,14 +24,14 @@ export const loadSearch = async(search: string) => {
 }
 // Function for fetching users pokedex
 export const loadUsersPokemon = async(id: string) => {
-    const items = await axios.post<UserPokedexRecord>(`http://localhost:5000/api/userpokedex/get`, {
+    const items = await axios.post<UserPokedexRecord>(`${API_BASE_URL}/api/userpokedex/get`, {
         userId: id,
     });
     return items.data.pokemonIds
 }
 // Function for updating users pokedex
 export const updateUserPokedex = async(id: string, entries: number[]) => {
-    const items = await axios.post<UserPokedexRecord>(`http://localhost:5000/api/userpokedex/update`, {
+    const items = await axios.post<UserPokedexRecord>(`${API_BASE_URL}/api/userpokedex/update`, {
         userId: id,
         entries: entries
     });
@@ -39,7 +40,7 @@ export const updateUserPokedex = async(id: string, entries: number[]) => {
 }
 // Function for loading users favourite data
 export const loadFavourite = async(id: string, key: string) => {
-    const items = await axios.post<FavouriteRecord>(`http://localhost:5000/api/favourite/get`, {
+    const items = await axios.post<FavouriteRecord>(`${API_BASE_URL}/api/favourite/get`, {
         userId: id,
         key: key
     });
@@ -47,7 +48,7 @@ export const loadFavourite = async(id: string, key: string) => {
 }
 // Function for updating users favourite data
 export const updateFavourite = async(id: string, key: string, value: string | number ) => {
-    const items = await axios.post<FavouriteRecord>(`http://localhost:5000/api/favourite/create`, {
+    const items = await axios.post<FavouriteRecord>(`${API_BASE_URL}/api/favourite/create`, {
         userId: id,
         key: key,
         value: value
@@ -65,7 +66,7 @@ export const fetchAllPokemonInBatches = async () => {
 
     while (hasMore) {
         try {
-        const res = await axios.get<PokemonListResult>(`http://localhost:5000/api/pokedex?page=${page}&limit=${limit}`);
+        const res = await axios.get<PokemonListResult>(`${API_BASE_URL}/api/pokedex?page=${page}&limit=${limit}`);
         allResults = [...allResults, ...res.data.results];
         if (res.data.results.length < limit) {
             hasMore = false; // no more pages
@@ -82,7 +83,7 @@ export const fetchAllPokemonInBatches = async () => {
 }
 // Function for updating user xp
 export const UpdateUserLevel = async (id: string, xp:number) =>{
-        const items = await axios.post<userLevelResult>(`http://localhost:5000/api/userlevel/create`, {
+        const items = await axios.post<userLevelResult>(`${API_BASE_URL}/api/userlevel/create`, {
         userId: id,
         xp: xp
     });
@@ -90,20 +91,20 @@ export const UpdateUserLevel = async (id: string, xp:number) =>{
 }
 // Function for getting user xp
 export const GetUserLevel = async (id: string) =>{
-        const items = await axios.post<userLevelResult>(`http://localhost:5000/api/userlevel/get`, {
+        const items = await axios.post<userLevelResult>(`${API_BASE_URL}/api/userlevel/get`, {
         userId: id
     });
     return items.data
 }
 // Function for fetching all moves
 export const loadMoves = async (page: number) =>{
-    const res = await axios.get<MoveListResult>(`http://localhost:5000/api/moves?page=${page}&limit=10`)
+    const res = await axios.get<MoveListResult>(`${API_BASE_URL}/api/moves?page=${page}&limit=10`)
     return res.data
 }
 // Function for fetching searched moves
 export const loadSearchMoves = async(search: string) => {
     try {
-        const res = await axios.post<SearchedMoveList>("http://localhost:5000/api/searchMoves", {
+        const res = await axios.post<SearchedMoveList>("${API_BASE_URL}/api/searchMoves", {
             search: search
         });
         return res.data;
@@ -113,13 +114,13 @@ export const loadSearchMoves = async(search: string) => {
 }
 // Function for fetching all moves
 export const loadItems = async (page: number) =>{
-    const items = await axios.get<ItemResult>(`http://localhost:5000/api/items?page=${page}&limit=10`)
+    const items = await axios.get<ItemResult>(`${API_BASE_URL}/api/items?page=${page}&limit=10`)
     return items.data
 }
 // Function for fetching searched moves
 export const loadSearchItems = async(search: string) => {
     try {
-        const res = await axios.post<SearchedItemList>("http://localhost:5000/api/searchItems", {
+        const res = await axios.post<SearchedItemList>("${API_BASE_URL}/api/searchItems", {
             search: search
         });
         return res.data;
@@ -129,7 +130,7 @@ export const loadSearchItems = async(search: string) => {
 }
 // Function for getting pokemon data based on id
 export const fetchPokemon = async (id: number) => {
-    const response = await fetch(`http://localhost:5000/api/pokemon/${id}`);
+    const response = await fetch(`${API_BASE_URL}/api/pokemon/${id}`);
     const pokemon = await response.json();
     return {
         name: pokemon.data.name,
@@ -145,7 +146,7 @@ export const fetchPokemon = async (id: number) => {
 };
 // Function for getting extra pokemon data based on id
 export const fetchPokemonBackData = async (id: number) => {
-    const response = await fetch(`http://localhost:5000/api/pokemon/back/${id}`);
+    const response = await fetch(`${API_BASE_URL}/api/pokemon/back/${id}`);
     const data = await response.json();
     return {
         generation: data.data.generation,

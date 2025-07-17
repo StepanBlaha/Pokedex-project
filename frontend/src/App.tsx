@@ -9,7 +9,11 @@ import { PokemonProvider } from './context/pokemonContext';
 import { FilterProvider } from './context/filterContext';
 
 const PUBLISHABLE_KEY = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY ?? 'default_publishable_key';
-
+if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
+  throw new Error('Missing Clerk Publishable Key in environment!');
+}else{
+  console.log(process.env.REACT_APP_CLERK_PUBLISHABLE_KEY)
+}
 if (!PUBLISHABLE_KEY) {
   throw new Error('Clerk Publishable Key is missing');
 }

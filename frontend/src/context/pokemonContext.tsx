@@ -2,7 +2,6 @@ import React, { createContext, useState, useEffect, useContext } from "react";
 import { PokemonListResult, Pokemon, PokemonContextType } from "../types/pokemon";
 import { getCachedData } from "../utils/cache";
 import axios from "axios";
-const API_BASE_URL = "https://pokelog-production.up.railway.app";
 const PokemonContext = createContext<PokemonContextType>({
     pokemon: [],
     loading: true
@@ -10,6 +9,8 @@ const PokemonContext = createContext<PokemonContextType>({
 
 // Load all pokemon
 const fetchAllPokemonInBatches = async () => {
+    const API_BASE_URL = "https://pokelog-production.up.railway.app";
+    console.log(API_BASE_URL)
     const cache = getCachedData("sb_pokemon");
     if(cache !== null) return JSON.parse(cache);
     const limit = 100;

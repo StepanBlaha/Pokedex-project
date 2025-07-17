@@ -22,6 +22,9 @@ body{
   height: 100%;
   float: left;
 }
+body {
+  font-family: 'Manrope', sans-serif;
+}
 
 
 @keyframes App-logo-spin {

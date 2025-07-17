@@ -6,6 +6,7 @@ import { ItemResult, SearchedItemList } from "../types/items"
 import { getCachedData } from "./cache"
 import axios from "axios"
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+console.log(process.env.REACT_APP_API_BASE_URL)
 // Function for fetching the pokemon
 export const loadPokemon = async (page: number) =>{
     const res = await axios.get<PokemonListResult>(`${API_BASE_URL}/api/pokedex?page=${page}&limit=10`)

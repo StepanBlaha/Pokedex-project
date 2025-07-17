@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# TODO
-- refactor
-=======
 # Pokélog
 
 **Pokélog** is a fan-made Pokémon web app designed for trainers, collectors, and fans! Dive into detailed Pokémon data, test your knowledge, track your progress, and showcase your journey with a customizable trainer card.
@@ -82,13 +78,13 @@ yarn install
 # 📸 Screenshots
 <details> <summary>Click to expand</summary>
 📱 Pokédex list page
-  ![Pokedex page](Resourcer/pokedex.png)<br>
+  ![Pokedex page](Resources/pokedex.png)<br>
 📘 Pokémon details page
-  ![Detail page](Resourcer/detail.png)<br>
+  ![Detail page](Resources/detail.png)<br>
 🧑 Trainer profile with badge progress
-  ![Profile page](Resourcer/profile.png)<br>
+  ![Profile page](Resources/profile.png)<br>
 🎮 Guess the Pokémon minigame
-  ![Guess page](Resourcer/guess.png)<br>
+  ![Guess page](Resources/guess.png)<br>
 </details>
 
 ## 🙌 Contributing
@@ -103,4 +99,3 @@ To contribute:
 
 ## 📜 License
 This project is open-source and available under the MIT License. See `LICENSE.txt` for more information. 
->>>>>>> 3e6b9dca77290563ba5e2faa26626b98dd4976d8

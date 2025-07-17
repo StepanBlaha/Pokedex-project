@@ -62,6 +62,14 @@ npm install
 # or
 yarn install
 ```
+#### Run backend
+```
+npm run dev
+```
+#### Run frontend
+```
+npm run start
+```
 
 ## 🛠️ Tech Stack
 - React
@@ -75,16 +83,24 @@ yarn install
 ## Deployment
 
 
-# 📸 Screenshots
-<details> <summary>Click to expand</summary>
-📱 Pokédex list page
-  ![Pokedex page](Resources/pokedex.png)<br>
-📘 Pokémon details page
-  ![Detail page](Resources/detail.png)<br>
-🧑 Trainer profile with badge progress
-  ![Profile page](Resources/profile.png)<br>
-🎮 Guess the Pokémon minigame
-  ![Guess page](Resources/guess.png)<br>
+## 📸 Screenshots
+details>
+  <summary>Click to expand</summary>
+  📱 Pokédex list page  
+  <br>
+  <img src="Resources/pokedex.png" alt="Pokedex page" width="600"/>
+  <br><br>
+  📘 Pokémon details page  
+  <br>
+  <img src="Resources/detail.png" alt="Detail page" width="600"/>
+  <br><br>
+  🧑 Trainer profile with badge progress  
+  <br>
+  <img src="Resources/profile.png" alt="Profile page" width="600"/>
+  <br><br>
+  🎮 Guess the Pokémon minigame  
+  <br>
+  <img src="Resources/guess.png" alt="Guess page" width="600"/>
 </details>
 
 ## 🙌 Contributing

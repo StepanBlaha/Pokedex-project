@@ -19,6 +19,7 @@ import { toPng } from 'html-to-image';
 import download from 'downloadjs';
 import { pokemonTypeColors } from "../../constants/types";
 import { loadFavourite, updateFavourite, loadPokemon, fetchAllPokemonInBatches, loadUsersPokemon, GetUserLevel, UpdateUserLevel } from "../../utils/fetch";
+import { usePokemon } from "../../context/pokemonContext";
 
 export default function Profile(){
     const [ userXp, setUserXp ] = useState<number>(0); // User xp
@@ -31,6 +32,7 @@ export default function Profile(){
     const lastRef = useRef<HTMLDivElement | null>(null); // Last pokemon for infinity scroll
     const [userPokemon, setUserPokemon] = useState<number[]>();
     const [downloadLoading, setDownloadLoading] = useState<boolean>(false);
+    const { pokemon} = usePokemon(); // All pokemon
     const [favourite, setFavourite] = useState({
         Type: "",
         Pokemon:"",
@@ -74,10 +76,9 @@ export default function Profile(){
     },[user])
     // Set favourite pokemon
     useEffect(()=>{
-        if (!allPoke || allPoke.length === 0) return;
-        const favouritePoke = allPoke.find(item => Number(item.id) === Number(favoriteId)); // Favourite pokemons data
+        const favouritePoke = pokemon.find(item => Number(item.id) === Number(favoriteId)); // Favourite pokemons data
         setFavPoke(favouritePoke)
-    }, [allPoke, favoriteId])
+    }, [pokemon, favoriteId])
     useEffect(()=>{
         console.log(favPoke)
     }, [favPoke])

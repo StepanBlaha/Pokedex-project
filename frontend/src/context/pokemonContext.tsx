@@ -1,7 +1,8 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { PokemonListResult, Pokemon, PokemonContextType } from "../types/pokemon";
 import { getCachedData } from "../utils/cache";
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+import axios from "axios";
+const API_BASE_URL = "https://pokelog-production.up.railway.app";
 const PokemonContext = createContext<PokemonContextType>({
     pokemon: [],
     loading: true
@@ -19,7 +20,7 @@ const fetchAllPokemonInBatches = async () => {
     while (hasMore) {
         try {
             console.log(API_BASE_URL)
-        const res = await axios.get<PokemonListResult>(`https://pokelog-production.up.railway.app/api/pokedex?page=${page}&limit=${limit}`);
+        const res = await axios.get<PokemonListResult>(`${API_BASE_URL}/api/pokedex?page=${page}&limit=${limit}`);
         allResults = [...allResults, ...res.data.results];
         if (res.data.results.length < limit) {
             hasMore = false; // no more pages

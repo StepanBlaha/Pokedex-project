@@ -78,6 +78,9 @@ export default function Profile(){
         const favouritePoke = allPoke.find(item => Number(item.id) === Number(favoriteId)); // Favourite pokemons data
         setFavPoke(favouritePoke)
     }, [allPoke, favoriteId])
+    useEffect(()=>{
+        console.log(favPoke)
+    }, [favPoke])
 
     // Load all pokemon
     useEffect(() => {

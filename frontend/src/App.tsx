@@ -8,7 +8,7 @@ import { ClerkProvider, RedirectToSignIn } from '@clerk/clerk-react';
 import { PokemonProvider } from './context/pokemonContext';
 import { FilterProvider } from './context/filterContext';
 
-const PUBLISHABLE_KEY = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY ?? 'default_publishable_key';
+const PUBLISHABLE_KEY = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY ?? 'pk_test_c2FmZS1nbGlkZXItMjAuY2xlcmsuYWNjb3VudHMuZGV2JA';
 if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
   throw new Error('Missing Clerk Publishable Key in environment!');
 }else{

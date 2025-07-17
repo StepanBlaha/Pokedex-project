@@ -1,16 +1,13 @@
-# Stage 1: Build React app
-FROM node:18-alpine as builder
+# Step 1: Build the React app
+FROM node:18 AS build
 WORKDIR /app
-COPY frontend/package*.json ./
+COPY . .
 RUN npm install
-COPY frontend/ ./
 RUN npm run build
 
-# Stage 2: Serve build
-FROM node:18-alpine
+# Step 2: Serve with a static file server
+FROM node:18
 WORKDIR /app
-# Use a lighter HTTP server instead of serve (uses less memory)
-RUN npm install -g http-server
-COPY --from=builder /app/build ./build
-EXPOSE 3000
-CMD ["http-server", "build", "-p", "3000"]
+RUN npm install -g serve
+COPY --from=build /app/build /app/build
+CMD ["serve", "-s", "build", "-l", "3000"]
